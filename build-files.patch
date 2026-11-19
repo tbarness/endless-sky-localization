@@ -1,0 +1,72 @@
+--- a/CMakeLists.txt	2026-11-08 03:09:23.783559771 +0000
++++ b/CMakeLists.txt	2026-11-08 03:09:23.784855518 +0000
+@@ -66,6 +66,7 @@
+ find_package(SDL2 CONFIG REQUIRED)
+ find_package(PNG REQUIRED)
+ find_package(JPEG REQUIRED)
++find_package(Freetype REQUIRED)
+ find_package(libavif REQUIRED)
+ if(NOT APPLE)
+ 	find_package(GLEW REQUIRED)
+@@ -166,7 +167,7 @@
+ endif()
+ 
+ # Link with the general libraries.
+-target_link_libraries(ExternalLibraries INTERFACE SDL2::SDL2 PNG::PNG JPEG::JPEG avif
++target_link_libraries(ExternalLibraries INTERFACE SDL2::SDL2 PNG::PNG JPEG::JPEG Freetype::Freetype avif
+ 	OpenAL::OpenAL ${MINIZIP_LIBRARIES} FLAC::FLAC++ "$<IF:$<CONFIG:Debug>,${LIBMAD_LIB_DEBUG},${LIBMAD_LIB_RELEASE}>")
+ 
+ # Link the needed OS-specific dependencies, if any.
+--- a/vcpkg.json	2026-11-08 03:09:23.783710354 +0000
++++ b/vcpkg.json	2026-11-08 03:09:23.784916926 +0000
+@@ -19,6 +19,10 @@
+ 					"name": "glew",
+ 					"platform": "!osx"
+ 				},
++				{
++					"name": "freetype",
++					"default-features": false
++				},
+ 				"libavif",
+ 				"libpng",
+ 				"libjpeg-turbo",
+--- a/source/CMakeLists.txt	2026-11-08 03:09:23.786063252 +0000
++++ b/source/CMakeLists.txt	2026-11-08 03:09:23.787177601 +0000
+@@ -460,6 +460,8 @@
+ 	text/DisplayText.h
+ 	text/Font.cpp
+ 	text/Font.h
++	text/FontFiles.cpp
++	text/FontFiles.h
+ 	text/FontSet.cpp
+ 	text/FontSet.h
+ 	text/Format.cpp
+--- a/docs/readme-developer.md	2026-11-08 03:09:23.788418048 +0000
++++ b/docs/readme-developer.md	2026-11-08 03:09:23.789564179 +0000
+@@ -49,7 +49,7 @@
+ Install [Homebrew](https://brew.sh). Once it is installed, use it to install the tools and libraries you will need:
+ 
+ ```bash
+-$ brew install cmake ninja mad libpng jpeg-turbo sdl2 minizip libavif catch2 flac
++$ brew install cmake ninja mad libpng jpeg-turbo freetype sdl2 minizip libavif catch2 flac
+ ```
+ 
+ **Note**: If you are on Apple Silicon (and want to compile for ARM), make sure that you are using ARM Homebrew!
+@@ -68,7 +68,7 @@
+ <summary>DEB-based distros</summary>
+ 
+ ```
+-g++ cmake ninja-build curl libsdl2-dev libpng-dev libjpeg-dev libavif-dev libgl1-mesa-dev libglew-dev libminizip-dev libopenal-dev libmad0-dev libflac++-dev uuid-dev
++g++ cmake ninja-build curl libsdl2-dev libpng-dev libjpeg-dev libfreetype-dev libavif-dev libgl1-mesa-dev libglew-dev libminizip-dev libopenal-dev libmad0-dev libflac++-dev uuid-dev
+ ```
+ If your CMake version is less than 3.31, you will also need
+ ```
+@@ -87,7 +87,7 @@
+ <summary>RPM-based distros</summary>
+ 
+ ```
+-gcc-c++ cmake ninja-build SDL2-devel libpng-devel libjpeg-turbo-devel libavif-devel mesa-libGL-devel glew-devel minizip-devel openal-soft-devel libmad-devel flac-devel libuuid-devel
++gcc-c++ cmake ninja-build SDL2-devel libpng-devel libjpeg-turbo-devel freetype-devel libavif-devel mesa-libGL-devel glew-devel minizip-devel openal-soft-devel libmad-devel flac-devel libuuid-devel
+ ```
+ If your CMake version is less than 3.31, you will also need
+ ```

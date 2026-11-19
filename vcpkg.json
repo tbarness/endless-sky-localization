@@ -20,6 +20,10 @@
 					"platform": "!osx"
 				},
 				"libavif",
+				{
+					"name": "freetype",
+					"default-features": false
+				},
 				"libpng",
 				"libjpeg-turbo",
 				{
@@ -43,24 +47,18 @@
 						"pipewire"
 					],
 					"platform": "linux"
-				}
-			]
-		},
-		"sdl2": {
-			"description": "Libraries needed when using sdl2.",
-			"dependencies": [
-				"sdl2"
-			]
-		},
-		"sdl3": {
-			"description": "Libraries needed when using sdl3.",
-			"dependencies": [
-				"sdl3"
+				},
+				"sdl2",
+				"pkgconf"
 			]
 		},
 		"steam-libs": {
 			"description": "System libraries not provided in the Steam Sniper Runtime.",
 			"dependencies": [
+				{
+					"name": "freetype",
+					"default-features": false
+				},
 				"libavif",
 				"libmad",
 				"catch2",

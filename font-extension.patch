@@ -1,0 +1,497 @@
+diff -ruN a/shaders/font.vert b/shaders/font.vert
+--- a/shaders/font.vert	2026-10-31 15:50:03.455234694 +0000
++++ b/shaders/font.vert	2026-10-31 15:50:03.458857968 +0000
+@@ -19,6 +19,9 @@
+ uniform vec2 position;
+ // The glyph to draw. (ASCII value - 32).
+ uniform int glyph;
++// The glyphs are laid out in a grid of this many columns and rows. The font's own
++// image is a single row of 98 glyphs; an extension image may have many rows.
++uniform vec2 grid;
+ // Aspect ratio of rendered glyph (unity by default).
+ uniform float aspect;
+ // Glyph size (in pixels).
+@@ -33,7 +36,9 @@
+ 
+ // Pick the proper glyph out of the texture.
+ void main() {
+-	texCoord = vec2((float(glyph) + corner.x) / 98.f, corner.y);
++	float column = mod(float(glyph), grid.x);
++	float row = floor(float(glyph) / grid.x);
++	texCoord = vec2(column + corner.x, row + corner.y) / grid;
+ 	vec2 pos = vert * glyphSize;
+ 	gl_Position = vec4((aspect * pos.x + position.x) * scale.x, (pos.y + position.y) * scale.y, 0.f, 1.f);
+ }
+diff -ruN a/source/text/Font.cpp b/source/text/Font.cpp
+--- a/source/text/Font.cpp	2026-10-31 15:50:03.453230131 +0000
++++ b/source/text/Font.cpp	2026-10-31 15:50:03.457393539 +0000
+@@ -18,6 +18,7 @@
+ #include "Alignment.h"
+ #include "../Color.h"
+ #include "DisplayText.h"
++#include "../Files.h"
+ #include "../GameData.h"
+ #include "../image/ImageBuffer.h"
+ #include "../image/ImageFileData.h"
+@@ -25,6 +26,7 @@
+ #include "../Preferences.h"
+ #include "../Screen.h"
+ #include "Truncate.h"
++#include "Utf8.h"
+ 
+ #include <algorithm>
+ #include <cmath>
+@@ -36,6 +38,10 @@
+ namespace {
+ 	bool showUnderlines = false;
+ 	const int KERN = 2;
++	// The cells of the extended glyph image are this many rows (of the 2x image, so keep it even)
++	// taller than the font, with the extra above, to leave room for accents. This must match
++	// EXT_TOP in utils/make_font_ext.py.
++	const int EXT_TOP = 8;
+ 
+ 	/// Shared VAO and VBO quad (0,0) -> (1,1)
+ 	GLuint vao = 0;
+@@ -45,12 +51,31 @@
+ 	GLint scaleI = 0;
+ 	GLint glyphSizeI = 0;
+ 	GLint glyphI = 0;
++	GLint gridI = 0;
+ 	GLint aspectI = 0;
+ 	GLint positionI = 0;
+ 
+ 	GLint vertI;
+ 	GLint cornerI;
+ 
++	// Find how wide the ink of a glyph cell is, and how far from the left of the cell it begins.
++	// A pixel counts as ink if it is at least 3/4 opaque, as when the kerning is calculated.
++	void Measure(const ImageBuffer &image, int x, int y, int w, int h, int &width, int &left)
++	{
++		width = 0;
++		left = w;
++		for(int row = y; row < y + h; ++row)
++		{
++			const uint32_t *pixels = image.Pixels() + row * image.Width() + x;
++			for(int i = 0; i < w; ++i)
++				if((pixels[i] & 0xFF000000) >= 0xC0000000)
++				{
++					left = min(left, i);
++					width = max(width, i + 1);
++				}
++		}
++	}
++
+ 	void EnableAttribArrays()
+ 	{
+ 		// Connect the xy to the "vert" attribute of the vertex shader.
+@@ -80,9 +105,18 @@
+ 	if(!image.Read(ImageFileData(imagePath)))
+ 		return;
+ 
+-	LoadTexture(image);
++	texture = LoadTexture(image);
+ 	CalculateAdvances(image);
+ 	SetUpShader(image.Width() / GLYPHS, image.Height());
++
++	// Measure the ink of each glyph, which is how the extended glyphs are spaced.
++	const int cellWidth = image.Width() / GLYPHS;
++	inkWidth.assign(GLYPHS, 0);
++	inkLeft.assign(GLYPHS, 0);
++	for(int i = 0; i < GLYPHS; ++i)
++		Measure(image, i * cellWidth, 0, cellWidth, image.Height(), inkWidth[i], inkLeft[i]);
++	LoadExtension(imagePath, image.Height());
++
+ 	widthEllipses = WidthRawString("...");
+ }
+ 
+@@ -143,6 +177,7 @@
+ 	}
+ 	glUniform2fv(scaleI, 1, scale);
+ 	glUniform2f(glyphSizeI, glyphWidth, glyphHeight);
++	glUniform2f(gridI, GLYPHS, 1.f);
+ 
+ 	GLfloat textPos[2] = {
+ 		static_cast<float>(x - 1.),
+@@ -152,15 +187,28 @@
+ 	bool underlineChar = false;
+ 	const int underscoreGlyph = max(0, min(GLYPHS - 1, '_' - 32));
+ 
+-	for(char c : str)
++	// Switch between drawing from the font's image and from its extension.
++	bool isExt = false;
++	const auto Use = [&](bool ext)
++	{
++		if(ext == isExt)
++			return;
++		isExt = ext;
++		glBindTexture(GL_TEXTURE_2D, ext ? extTexture : texture);
++		glUniform2f(glyphSizeI, ext ? extWidth : glyphWidth, ext ? extHeight : glyphHeight);
++		glUniform2f(gridI, ext ? extColumns : GLYPHS, ext ? extRows : 1.f);
++	};
++
++	for(size_t pos = 0; pos < str.size(); )
+ 	{
++		const char32_t c = Utf8::DecodeCodePoint(str, pos);
+ 		if(c == '_')
+ 		{
+ 			underlineChar = showUnderlines;
+ 			continue;
+ 		}
+ 
+-		int glyph = Glyph(c, isAfterSpace);
++		const int glyph = Glyph(c, isAfterSpace);
+ 		if(c != '"' && c != '\'')
+ 			isAfterSpace = !glyph;
+ 		if(!glyph)
+@@ -169,21 +217,25 @@
+ 			continue;
+ 		}
+ 
+-		glUniform1i(glyphI, glyph);
++		const bool ext = glyph >= GLYPHS;
++		Use(ext);
++		glUniform1i(glyphI, ext ? glyph - GLYPHS : glyph);
+ 		glUniform1f(aspectI, 1.f);
+ 
+-		textPos[0] += advance[previous * GLYPHS + glyph] + KERN;
+-		glUniform2fv(positionI, 1, textPos);
++		textPos[0] += Advance(previous, glyph) + KERN;
++		// Extended glyphs have extra room above them, so they are drawn that much higher.
++		glUniform2f(positionI, textPos[0], textPos[1] - (ext ? EXT_TOP / 2 : 0));
+ 
+ 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+ 
+ 		if(underlineChar)
+ 		{
++			Use(false);
+ 			glUniform1i(glyphI, underscoreGlyph);
+-			glUniform1f(aspectI, static_cast<float>(advance[glyph * GLYPHS] + KERN)
++			glUniform1f(aspectI, static_cast<float>(Advance(glyph, 0) + KERN)
+ 				/ (advance[underscoreGlyph * GLYPHS] + KERN));
+ 
+-			glUniform2fv(positionI, 1, textPos);
++			glUniform2f(positionI, textPos[0], textPos[1]);
+ 
+ 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+ 			underlineChar = false;
+@@ -207,7 +259,7 @@
+ 
+ int Font::Width(const string &str, char after) const
+ {
+-	return WidthRawString(str.c_str(), after);
++	return WidthRawString(str, after);
+ }
+ 
+ 
+@@ -216,7 +268,7 @@
+ {
+ 	int width = -1;
+ 	const string truncText = TruncateText(text, width);
+-	return width < 0 ? WidthRawString(truncText.c_str(), after) : width;
++	return width < 0 ? WidthRawString(truncText, after) : width;
+ }
+ 
+ 
+@@ -242,23 +294,56 @@
+ 
+ 
+ 
+-int Font::Glyph(char c, bool isAfterSpace) noexcept
++// Get the glyph number for a character. The extended glyphs are numbered from GLYPHS.
++int Font::Glyph(char32_t c, bool isAfterSpace) const noexcept
+ {
++	if(c >= 0x80)
++	{
++		// Curly quotes and the no-break space use glyphs that the font already has.
++		switch(c)
++		{
++			case 0x00A0: return 0;
++			case 0x2018: return 96;
++			case 0x2019: return '\'' - 32;
++			case 0x201C: return 97;
++			case 0x201D: return '"' - 32;
++		}
++		// Anything else is drawn from the extension, or as a space if there is none.
++		const auto it = extGlyphs.find(c);
++		return it == extGlyphs.end() ? 0 : it->second;
++	}
++
+ 	// Curly quotes.
+ 	if(c == '\'' && isAfterSpace)
+ 		return 96;
+ 	if(c == '"' && isAfterSpace)
+ 		return 97;
+ 
+-	return max(0, min(GLYPHS - 3, c - 32));
++	return max(0, min(GLYPHS - 3, static_cast<int>(c) - 32));
+ }
+ 
+ 
+ 
+-void Font::LoadTexture(ImageBuffer &image)
++// How far to move after drawing the glyph "previous" before drawing the glyph "next".
++int Font::Advance(int previous, int next) const noexcept
+ {
+-	glGenTextures(1, &texture);
+-	glBindTexture(GL_TEXTURE_2D, texture);
++	// The main font has a table of pairs, which is tuned to look good.
++	if(previous < GLYPHS && next < GLYPHS)
++		return advance[previous * GLYPHS + next];
++	// There is no table for extended glyphs, but this is within a pixel of what the table says: the
++	// width of the previous glyph, less the gap that the next glyph has at its left (up to 4).
++	if(!previous)
++		return 0;
++	return (inkWidth[previous] - (next ? min(inkLeft[next], 4) : 0)) / 2;
++}
++
++
++
++GLuint Font::LoadTexture(ImageBuffer &image)
++{
++	GLuint id = 0;
++	glGenTextures(1, &id);
++	glBindTexture(GL_TEXTURE_2D, id);
+ 
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+@@ -267,6 +352,62 @@
+ 
+ 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, image.Width(), image.Height(), 0,
+ 		GL_RGBA, GL_UNSIGNED_BYTE, image.Pixels());
++	return id;
++}
++
++
++
++// Load the extended glyphs, if this font has any.
++void Font::LoadExtension(const filesystem::path &imagePath, int baseHeight)
++{
++	extGlyphs.clear();
++	inkWidth.resize(GLYPHS);
++	inkLeft.resize(GLYPHS);
++
++	// "ubuntu14r.png" has "ubuntu14r-ext.png" (the glyphs) and "ubuntu14r-ext.txt" (their characters).
++	filesystem::path atlas = imagePath;
++	atlas.replace_filename(imagePath.stem().string() + "-ext.png");
++	filesystem::path characters = atlas;
++	characters.replace_extension(".txt");
++	if(!Files::Exists(atlas) || !Files::Exists(characters))
++		return;
++
++	ImageBuffer image;
++	if(!image.Read(ImageFileData(atlas)))
++		return;
++
++	// Each cell is as wide as the font is tall (as in the 2x images), and EXT_TOP rows taller.
++	const int cellWidth = baseHeight;
++	const int cellHeight = baseHeight + EXT_TOP;
++	const int columns = image.Width() / cellWidth;
++	const int rows = image.Height() / cellHeight;
++	if(columns < 1 || rows < 1)
++		return;
++
++	// The n-th character in the list is the n-th cell, counting along each row in turn.
++	const string text = Files::Read(characters);
++	const size_t capacity = static_cast<size_t>(columns) * rows;
++	for(size_t pos = 0; pos < text.size() && inkWidth.size() - GLYPHS < capacity; )
++	{
++		const char32_t c = Utf8::DecodeCodePoint(text, pos);
++		if(c == '\n' || c == '\r' || Utf8::IsBOM(c))
++			continue;
++
++		const int cell = inkWidth.size() - GLYPHS;
++		int width;
++		int left;
++		Measure(image, (cell % columns) * cellWidth, (cell / columns) * cellHeight, cellWidth, cellHeight, width, left);
++		extGlyphs.emplace(c, GLYPHS + cell);
++		// A blank cell, such as a full-width space, is as wide as the cell.
++		inkWidth.push_back(width ? width : cellWidth);
++		inkLeft.push_back(left);
++	}
++
++	extTexture = LoadTexture(image);
++	extWidth = cellWidth * .5f;
++	extHeight = cellHeight * .5f;
++	extColumns = columns;
++	extRows = rows;
+ }
+ 
+ 
+@@ -377,6 +518,7 @@
+ 		colorI = shader->Uniform("color");
+ 		scaleI = shader->Uniform("scale");
+ 		glyphSizeI = shader->Uniform("glyphSize");
++		gridI = shader->Uniform("grid");
+ 		glyphI = shader->Uniform("glyph");
+ 		aspectI = shader->Uniform("aspect");
+ 		positionI = shader->Uniform("position");
+@@ -389,29 +531,33 @@
+ 
+ 
+ 
+-int Font::WidthRawString(const char *str, char after) const noexcept
++int Font::WidthRawString(const string &str, char after) const noexcept
+ {
+ 	int width = 0;
+ 	int previous = 0;
+ 	bool isAfterSpace = true;
+ 
+-	for( ; *str; ++str)
++	for(size_t pos = 0; pos < str.size(); )
+ 	{
+-		if(*str == '_')
++		const char32_t c = Utf8::DecodeCodePoint(str, pos);
++		// Like a C string, the text ends at a null character.
++		if(!c)
++			break;
++		if(c == '_')
+ 			continue;
+ 
+-		int glyph = Glyph(*str, isAfterSpace);
+-		if(*str != '"' && *str != '\'')
++		const int glyph = Glyph(c, isAfterSpace);
++		if(c != '"' && c != '\'')
+ 			isAfterSpace = !glyph;
+ 		if(!glyph)
+ 			width += space;
+ 		else
+ 		{
+-			width += advance[previous * GLYPHS + glyph] + KERN;
++			width += Advance(previous, glyph) + KERN;
+ 			previous = glyph;
+ 		}
+ 	}
+-	width += advance[previous * GLYPHS + max(0, min(GLYPHS - 1, after - 32))];
++	width += Advance(previous, max(0, min(GLYPHS - 1, after - 32)));
+ 
+ 	return width;
+ }
+@@ -430,7 +576,7 @@
+ 	switch(layout.truncate)
+ 	{
+ 		case Truncate::NONE:
+-			width = WidthRawString(str.c_str());
++			width = WidthRawString(str);
+ 			return str;
+ 		case Truncate::FRONT:
+ 			return TruncateFront(str, width);
+@@ -449,7 +595,7 @@
+ 	return TruncateEndsOrMiddle(str, width,
+ 		[](const string &str, int charCount)
+ 		{
+-			return str.substr(0, charCount) + "...";
++			return str.substr(0, Utf8::CodePointStart(str, charCount)) + "...";
+ 		});
+ }
+ 
+@@ -460,7 +606,7 @@
+ 	return TruncateEndsOrMiddle(str, width,
+ 		[](const string &str, int charCount)
+ 		{
+-			return "..." + str.substr(str.size() - charCount);
++			return "..." + str.substr(Utf8::CodePointStart(str, str.size() - charCount));
+ 		});
+ }
+ 
+@@ -471,7 +617,8 @@
+ 	return TruncateEndsOrMiddle(str, width,
+ 		[](const string &str, int charCount)
+ 		{
+-			return str.substr(0, (charCount + 1) / 2) + "..." + str.substr(str.size() - charCount / 2);
++			return str.substr(0, Utf8::CodePointStart(str, (charCount + 1) / 2)) + "..."
++				+ str.substr(Utf8::CodePointStart(str, str.size() - charCount / 2));
+ 		});
+ }
+ 
+@@ -480,7 +627,7 @@
+ string Font::TruncateEndsOrMiddle(const string &str, int &width,
+ 	function<string(const string &, int)> getResultString) const
+ {
+-	int firstWidth = WidthRawString(str.c_str());
++	int firstWidth = WidthRawString(str);
+ 	if(firstWidth <= width)
+ 	{
+ 		width = firstWidth;
+@@ -495,7 +642,7 @@
+ 	{
+ 		// Think "how many chars to take from both ends, omitting in the middle".
+ 		int nextChars = (low + high) / 2;
+-		int nextWidth = WidthRawString(getResultString(str, nextChars).c_str());
++		int nextWidth = WidthRawString(getResultString(str, nextChars));
+ 		if(nextWidth <= width)
+ 		{
+ 			if(nextChars > workingChars)
+diff -ruN a/source/text/Font.h b/source/text/Font.h
+--- a/source/text/Font.h	2026-10-31 15:50:03.453180774 +0000
++++ b/source/text/Font.h	2026-10-31 15:50:03.457107604 +0000
+@@ -22,6 +22,8 @@
+ #include <filesystem>
+ #include <functional>
+ #include <string>
++#include <unordered_map>
++#include <vector>
+ 
+ class Color;
+ class DisplayText;
+@@ -32,8 +34,12 @@
+ 
+ // Class for drawing text in OpenGL. Each font is based on a single image with
+ // glyphs for each character in ASCII order (not counting control characters).
+-// The kerning between characters is automatically adjusted to look good. At the
+-// moment only plain ASCII characters are supported, not Unicode.
++// The kerning between characters is automatically adjusted to look good.
++//
++// Other characters (accents, CJK, ...) come from an optional second image, which
++// is found next to the first: "ubuntu14r.png" may have "ubuntu14r-ext.png", a grid
++// of glyph cells, and "ubuntu14r-ext.txt", which lists the characters in the same
++// order as the cells. Both are written by utils/make_font_ext.py. Text is UTF-8.
+ class Font {
+ public:
+ 	Font() noexcept = default;
+@@ -61,12 +67,14 @@
+ 
+ 
+ private:
+-	static int Glyph(char c, bool isAfterSpace) noexcept;
+-	void LoadTexture(ImageBuffer &image);
++	int Glyph(char32_t c, bool isAfterSpace) const noexcept;
++	int Advance(int previous, int next) const noexcept;
++	GLuint LoadTexture(ImageBuffer &image);
++	void LoadExtension(const std::filesystem::path &imagePath, int baseHeight);
+ 	void CalculateAdvances(ImageBuffer &image);
+ 	void SetUpShader(float glyphW, float glyphH);
+ 
+-	int WidthRawString(const char *str, char after = ' ') const noexcept;
++	int WidthRawString(const std::string &str, char after = ' ') const noexcept;
+ 
+ 	std::string TruncateText(const DisplayText &text, int &width) const;
+ 	std::string TruncateBack(const std::string &str, int &width) const;
+@@ -91,4 +99,15 @@
+ 	static const int GLYPHS = 98;
+ 	int advance[GLYPHS * GLYPHS] = {};
+ 	int widthEllipses = 0;
++
++	// The extended glyphs. Their numbers follow those of the main font: GLYPHS is the first.
++	GLuint extTexture = 0;
++	GLfloat extWidth = 0.f;
++	GLfloat extHeight = 0.f;
++	GLfloat extColumns = 1.f;
++	GLfloat extRows = 1.f;
++	std::unordered_map<char32_t, int> extGlyphs;
++	// For every glyph: the width of its ink, and the gap before it, in image pixels.
++	std::vector<int> inkWidth;
++	std::vector<int> inkLeft;
+ };
+diff -ruN a/source/text/WrappedText.cpp b/source/text/WrappedText.cpp
+--- a/source/text/WrappedText.cpp	2026-10-31 15:50:03.453657804 +0000
++++ b/source/text/WrappedText.cpp	2026-10-31 15:50:03.457488590 +0000
+@@ -240,7 +240,8 @@
+ 
+ 	for(string::iterator it = text.begin(); it != text.end(); ++it)
+ 	{
+-		const char c = *it;
++		// Unsigned, so that the bytes of a UTF-8 character are not mistaken for whitespace.
++		const unsigned char c = *it;
+ 
+ 		// Whitespace signals a word end - mark it and wrap the text if needed.
+ 		if(c <= ' ' && traversingWord)
