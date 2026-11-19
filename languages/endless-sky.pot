@@ -1,0 +1,718 @@
+# Endless Sky translation template.
+msgid ""
+msgstr ""
+"Project-Id-Version: Endless Sky\n"
+"POT-Creation-Date: 2026-10-21 21:14+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language-Name: \n"
+
+#: data/_ui/interfaces.txt:247
+msgid "CPU: calculating..."
+msgstr ""
+
+#: data/_ui/interfaces.txt:251
+msgid "GPU: calculating..."
+msgstr ""
+
+#: data/_ui/interfaces.txt:255
+msgid "MEM: calculating..."
+msgstr ""
+
+#: data/_ui/interfaces.txt:279
+msgid "Cancel order"
+msgstr ""
+
+#. Button hotkey: e. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:326
+msgid "_Enter Ship"
+msgstr ""
+
+#. Button hotkey: g. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:332 data/_ui/interfaces.txt:489 data/_ui/interfaces.txt:567 data/_ui/interfaces.txt:1124
+msgid "_Gamerules"
+msgstr ""
+
+#. Button hotkey: n. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:336 data/_ui/interfaces.txt:531
+msgid "_New Pilot"
+msgstr ""
+
+#. Button hotkey: r. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:340
+msgid "_Reload Pilot"
+msgstr ""
+
+#. Button hotkey: m. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:345
+msgid "_Manage Pilots..."
+msgstr ""
+
+#. Button hotkey: q. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:350
+msgid "_Quit"
+msgstr ""
+
+#. Button hotkey: p. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:353
+msgid "_Preferences..."
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:360
+msgid "L_anguages"
+msgstr ""
+
+#: data/_ui/interfaces.txt:374
+msgid "pilot:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:382
+msgid "ship:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:390 data/_ui/interfaces.txt:444
+msgid "planet:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:398 data/_ui/interfaces.txt:450
+msgid "system:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:406 data/_ui/interfaces.txt:456
+msgid "credits:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:412 data/_ui/interfaces.txt:438
+msgid "date:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:418
+msgid "playtime:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:432
+msgid "name:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:462
+msgid "debt:"
+msgstr ""
+
+#. Button hotkey: b. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:479 data/_ui/interfaces.txt:556
+msgid "_Back to Menu"
+msgstr ""
+
+#. Button hotkey: s. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:483
+msgid "_Start Game"
+msgstr ""
+
+#. Button hotkey: d. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:535
+msgid "_Delete"
+msgstr ""
+
+#. Button hotkey: o. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:542
+msgid "_Open Saves"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:547
+msgid "_Add Snapshot"
+msgstr ""
+
+#: data/_ui/interfaces.txt:551
+msgid "Remove"
+msgstr ""
+
+#. Button hotkey: l. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:560
+msgid "_Load Game"
+msgstr ""
+
+#. Button hotkey: c. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:582 data/_ui/interfaces.txt:637 data/_ui/interfaces.txt:681 data/_ui/interfaces.txt:730
+msgid "_Controls"
+msgstr ""
+
+#. Button hotkey: s. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:586 data/_ui/interfaces.txt:642 data/_ui/interfaces.txt:686 data/_ui/interfaces.txt:735
+msgid "_Settings"
+msgstr ""
+
+#. Button hotkey: p. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:591 data/_ui/interfaces.txt:646 data/_ui/interfaces.txt:691 data/_ui/interfaces.txt:740
+msgid "_Plugins"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:596 data/_ui/interfaces.txt:651 data/_ui/interfaces.txt:695 data/_ui/interfaces.txt:745
+msgid "_Audio"
+msgstr ""
+
+#: data/_ui/interfaces.txt:602 data/_ui/interfaces.txt:1135 data/_ui/interfaces.txt:1193
+msgid "Additional info"
+msgstr ""
+
+#. Button hotkey: n. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:618 data/_ui/interfaces.txt:660 data/_ui/interfaces.txt:1151 data/_ui/interfaces.txt:2631
+msgid "_Next"
+msgstr ""
+
+#. Button hotkey: r. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:624 data/_ui/interfaces.txt:666 data/_ui/interfaces.txt:1157
+msgid "P_revious"
+msgstr ""
+
+#. Button hotkey: o. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:700
+msgid "_Open Plugins"
+msgstr ""
+
+#: data/_ui/interfaces.txt:704
+msgid "Restart to apply changes"
+msgstr ""
+
+#: data/_ui/interfaces.txt:709
+msgid "Installed Plugins:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:751
+msgid "Music"
+msgstr ""
+
+#: data/_ui/interfaces.txt:781
+msgid "UI"
+msgstr ""
+
+#: data/_ui/interfaces.txt:811
+msgid "Anti-Missiles"
+msgstr ""
+
+#: data/_ui/interfaces.txt:841
+msgid "Weapons"
+msgstr ""
+
+#: data/_ui/interfaces.txt:871
+msgid "Engines"
+msgstr ""
+
+#: data/_ui/interfaces.txt:901
+msgid "Afterburners"
+msgstr ""
+
+#: data/_ui/interfaces.txt:931
+msgid "Hyperdrives"
+msgstr ""
+
+#: data/_ui/interfaces.txt:961
+msgid "Explosions"
+msgstr ""
+
+#: data/_ui/interfaces.txt:991
+msgid "Scans"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1021
+msgid "Environment"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1051
+msgid "Alerts"
+msgstr ""
+
+#. Button hotkey: b. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1083 data/_ui/interfaces.txt:1121 data/_ui/interfaces.txt:1169
+msgid "_Back to Menu..."
+msgstr ""
+
+#. Button hotkey: p. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1129 data/_ui/interfaces.txt:1177
+msgid "_Presets"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1182
+msgid "Gamerule Presets:"
+msgstr ""
+
+#. Button hotkey: t. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1653 data/_ui/interfaces.txt:1758
+msgid "_Trading"
+msgstr ""
+
+#. Button hotkey: j. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1663 data/_ui/interfaces.txt:1768
+msgid "_Job Board"
+msgstr ""
+
+#. Button hotkey: i. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1673 data/_ui/interfaces.txt:1778 data/_ui/interfaces.txt:2599
+msgid "Player _Info"
+msgstr ""
+
+#. Button hotkey: b. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1683 data/_ui/interfaces.txt:1788
+msgid "_Bank"
+msgstr ""
+
+#. Button hotkey: s. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1703 data/_ui/interfaces.txt:1808
+msgid "_Shipyard"
+msgstr ""
+
+#. Button hotkey: o. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1713 data/_ui/interfaces.txt:1818
+msgid "_Outfitter"
+msgstr ""
+
+#. Button hotkey: h. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1723 data/_ui/interfaces.txt:1828
+msgid "_Hire Crew"
+msgstr ""
+
+#. Button hotkey: d. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1734 data/_ui/interfaces.txt:1839
+msgid "_Depart"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1903
+msgid "item"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1906
+msgid "value"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1909
+msgid "size"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1913 data/_ui/interfaces.txt:2323
+msgid "cargo space free:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1920
+msgid "crew"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1923
+msgid "attack"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1926
+msgid "defense"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1930
+msgid "your ship:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1943
+msgid "enemy ship:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1956
+msgid "capture odds (attacking):"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1962 data/_ui/interfaces.txt:1975
+msgid "expected casualties:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:1969
+msgid "survival odds (defending):"
+msgstr ""
+
+#. Button hotkey: t. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1983
+msgid "_Take"
+msgstr ""
+
+#. Button hotkey: d/x. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1988 data/_ui/interfaces.txt:2384 data/_ui/interfaces.txt:2439 data/_ui/interfaces.txt:2618
+msgid "_Done"
+msgstr ""
+
+#. Button hotkey: c. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1993
+msgid "Attempt _Capture"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:1998
+msgid "_Attack"
+msgstr ""
+
+#. Button hotkey: D. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2003
+msgid "_Defend"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2011 data/_ui/interfaces.txt:2108
+msgid "flagship"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2015 data/_ui/interfaces.txt:2112
+msgid "entire fleet"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2019 data/_ui/interfaces.txt:2116
+msgid "salary"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2028 data/_ui/interfaces.txt:2125
+msgid "bunks"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2038 data/_ui/interfaces.txt:2135
+msgid "required crew"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2051 data/_ui/interfaces.txt:2148
+msgid "extra crew"
+msgstr ""
+
+#. Button hotkey: h. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2064 data/_ui/interfaces.txt:2161
+msgid "_Hire"
+msgstr ""
+
+#. Button hotkey: f. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2071 data/_ui/interfaces.txt:2168
+msgid "_Fire"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2081 data/_ui/interfaces.txt:2178
+msgid "passenger space"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2091 data/_ui/interfaces.txt:2188
+msgid "passengers"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2098 data/_ui/interfaces.txt:2195
+msgid "(Extra crew for your flagship increases your odds of capturing ships,"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2100 data/_ui/interfaces.txt:2197
+msgid "and once you capture a ship you need crew members to serve on it.)"
+msgstr ""
+
+#. Button hotkey: u. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2213 data/_ui/interfaces.txt:2251
+msgid "B_uy All"
+msgstr ""
+
+#. Button hotkey: e. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2220 data/_ui/interfaces.txt:2258
+msgid "S_ell All"
+msgstr ""
+
+#. Button hotkey: m. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2227 data/_ui/interfaces.txt:2265
+msgid "Sell _Minables"
+msgstr ""
+
+#. Button hotkey: f. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2234 data/_ui/interfaces.txt:2272
+msgid "Sell Out_fits"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2289 data/_ui/interfaces.txt:2306
+msgid "Pay _All"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2328
+msgid "passenger space:"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2333
+msgid "today's date:"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2339
+msgid "_Accept Mission"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2344
+msgid "Abort"
+msgstr ""
+
+#. Button hotkey: s. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2354 data/_ui/interfaces.txt:2409
+msgid "_Shipyards"
+msgstr ""
+
+#. Button hotkey: o. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2360 data/_ui/interfaces.txt:2415
+msgid "_Outfitters"
+msgstr ""
+
+#. Button hotkey: i. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2366 data/_ui/interfaces.txt:2421
+msgid "M_issions"
+msgstr ""
+
+#. Button hotkey: p. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2372 data/_ui/interfaces.txt:2427
+msgid "_Ports"
+msgstr ""
+
+#. Button hotkey: t. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2378 data/_ui/interfaces.txt:2433
+msgid "S_tars"
+msgstr ""
+
+#. Button hotkey: f. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2390 data/_ui/interfaces.txt:2445
+msgid "_Find"
+msgstr ""
+
+#. Button hotkey: +. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2396 data/_ui/interfaces.txt:2451
+msgid "_+"
+msgstr ""
+
+#. Button hotkey: -. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2400 data/_ui/interfaces.txt:2455
+msgid "_-"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2514 data/_ui/interfaces.txt:2519
+msgid "Available job; can accept"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2524 data/_ui/interfaces.txt:2529
+msgid "Too little space to accept"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2534 data/_ui/interfaces.txt:2539
+msgid "Active job; go here to complete"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2544 data/_ui/interfaces.txt:2549
+msgid "Has unfinished requirements"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2554 data/_ui/interfaces.txt:2559
+msgid "System of importance"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2596
+msgid "Ship Info"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2608
+msgid "_Ship Info"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2610
+msgid "Player Info"
+msgstr ""
+
+#. Button hotkey: m. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2621
+msgid "_Missions..."
+msgstr ""
+
+#. Button hotkey: l. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2625
+msgid "_Logbook..."
+msgstr ""
+
+#. Button hotkey: p. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2634
+msgid "_Previous"
+msgstr ""
+
+#. Button hotkey: k. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2642
+msgid "Par_k"
+msgstr ""
+
+#. Button hotkey: k. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2650
+msgid "Unpar_k"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2657
+msgid "Disown"
+msgstr ""
+
+#. Button hotkey: c. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2665
+msgid "Dump _Cargo"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2673
+msgid "Park _All"
+msgstr ""
+
+#. Button hotkey: a. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2679
+msgid "Unpark _All"
+msgstr ""
+
+#. Button hotkey: c. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2685
+msgid "Park Lo_cal"
+msgstr ""
+
+#. Button hotkey: c. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2691
+msgid "Unpark Lo_cal"
+msgstr ""
+
+#. Button hotkey: v. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2697
+msgid "Sa_ve Order"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2733
+msgid "Clear"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2738
+msgid "(The message log is empty.)"
+msgstr ""
+
+#. Button hotkey: b. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2758
+msgid "Offer _Bribe"
+msgstr ""
+
+#. Button hotkey: b. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2763
+msgid "Pay _Bribe"
+msgstr ""
+
+#. Button hotkey: t. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2769
+msgid "Demand _Tribute"
+msgstr ""
+
+#. Button hotkey: t. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2773
+msgid "Relinquish _Tribute"
+msgstr ""
+
+#. Button hotkey: h. Keep a "_" in front of that letter if it appears in the
+#. translation. Otherwise add it at the end, like "Quit (_Q)".
+#: data/_ui/interfaces.txt:2778
+msgid "Ask For _Help"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2816
+msgid "Has no shipyard"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2819
+msgid "Has shipyard"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2822
+msgid "Sells this ship"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2825
+msgid "Ship parked here"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2830 data/_ui/interfaces.txt:2844
+msgid "Has no outfitter"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2833 data/_ui/interfaces.txt:2847
+msgid "Has outfitter"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2836
+msgid "Sells this outfit"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2839
+msgid "Outfit in storage"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2850
+msgid "Mine this here"
+msgstr ""
+
+#: data/_ui/interfaces.txt:2853
+msgid "Mineral in storage"
+msgstr ""
+

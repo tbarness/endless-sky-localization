@@ -1,0 +1,2363 @@
+# Translation file converted from XLIFF
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Endless Sky"
+msgstr "Endless Sky"
+
+msgid "You grew up on New Boston, an uninteresting world in the Dirt Belt. You've dreamed of owning a starship ever since your first visit to the spaceport. After years of working at a textile mill, you've saved enough credits to apply for a pilot's license from the Republic. Now you must take out a loan on your first ship..."
+msgstr "你在尘带一个平淡无奇的星球——新波士顿长大。自从第一次去太空港，你就梦想着拥有一艘宇宙飞船。在纺织厂工作多年后，你终于攒够了信用点，可以向共和国申请驾驶执照。现在，你必须贷款购买自己的第一艘飞船……"
+
+msgid "Finally scraped together enough money to buy a pilot's license. The interest on the mortgage for my starship is exorbitant."
+msgstr "终于凑够钱买下驾驶执照。购船贷款的利息高得离谱。"
+
+msgid "Factions"
+msgstr "势力"
+
+msgid "Republic"
+msgstr "共和国"
+
+msgid "Hundreds of years ago, the independent territories in different parts of human space agreed to join together into a single democratic government, with Earth as its capital. The rise of the Republic ushered in a long period of peace and prosperity in human history."
+msgstr "数百年前，人类星域各处的独立领地同意联合起来，组成一个以地球为首都的民主政府。共和国的建立，为人类历史开启了一段漫长的和平繁荣时期。"
+
+msgid "Representation in the Republic Parliament is based on population. That means that some individual \"Paradise Worlds\" have more representatives than entire regions of space like the Dirt Belt that are more sparsely settled."
+msgstr "共和国议会的席位按照人口分配。这意味着，某些“乐园诸星”中的单个星球，拥有的议员甚至比尘带这类人口稀疏的整个区域还多。"
+
+msgid "Syndicate"
+msgstr "辛迪加"
+
+msgid "The Syndicate is a megacorporation, the largest employer in human space. People who cannot find steady work elsewhere flock to the Syndicate factory worlds, where they are almost guaranteed to find a job. Although the Syndicate is technically part of the Republic, Syndicate worlds are governed directly by the corporation."
+msgstr "辛迪加是一家巨型企业，也是人类星域最大的雇主。在其他地方找不到稳定工作的人纷纷涌向辛迪加的工厂星球，在那里几乎肯定能找到工作。辛迪加名义上属于共和国，但旗下星球由公司直接统治。"
+
+msgid "The Syndicate is a central part of the Republic's economy, but they are also well known for selling shoddy products and for doing damage to the environment on the worlds they control. Their treatment of workers is questionable, and their opposition to organized labor is legendary. Some Syndicate factory towns have even been accused of human rights abuses."
+msgstr "辛迪加是共和国经济的重要支柱，但也以出售劣质产品、破坏旗下星球环境而闻名。公司对待工人的方式饱受质疑，反对工人组织的态度更是人尽皆知。一些辛迪加工厂城镇甚至被指控侵犯人权。"
+
+msgid "Pirates"
+msgstr "海盗"
+
+msgid "In poorer and more remote star systems, where the Navy seldom patrols, pirate attacks on merchant ships are frequent. Pirates are also known to attack large, unguarded convoys of freighters even in more populated areas. Most pirate fleets come from lawless worlds on the outskirts of human space."
+msgstr "在贫穷偏远、海军很少巡逻的星系，商船经常遭到海盗袭击。即使在人口较多的地区，海盗也会攻击没有护卫的大型货船队。大多数海盗舰队来自人类星域边缘那些无法无天的星球。"
+
+msgid "The bank's architecture is what you would have called \"futuristic\" back when you dreamed that the future would be less squalid than the present: story above story of curves and spires and balconies, all in gleaming metal. A doorman stands by each of the heavy glass doors. You are wearing your very best clothes, but you feel shabby next to them."
+msgstr "银行的建筑风格，正是你以前会称为“未来派”的样子。那时你还梦想着，未来不会像眼下一样贫困肮脏：层层叠叠的曲线、尖塔和阳台，全由闪亮的金属构成。每扇厚重的玻璃门旁都站着一名门童。你穿上了自己最好的衣服，在他们身边却仍显得寒酸。"
+
+msgid "Deep Desire"
+msgstr "深域之愿"
+
+msgid "Birthday Surprise"
+msgstr "生日惊喜"
+
+msgid "Escaping Squalor"
+msgstr "逃离贫困"
+
+msgid "Hai Origins"
+msgstr "Hai 起源"
+
+msgid "Passenger to "
+msgstr "搭载乘客前往"
+
+msgid "This old-timer captain offered to ride along with you to "
+msgstr "这位老船长提出搭你的船前往"
+
+msgid "stock up on medical goods"
+msgstr "采购一些医疗用品"
+
+msgid "While they don't sell much here compared to on the big manufacturing worlds"
+msgstr "虽然这里的商品不像大型制造业星球那么多"
+
+msgid "Getting some basic instructions on making a living as a merchant from an old captain named James."
+msgstr "一位名叫詹姆斯的老船长，正在传授一些靠经商谋生的基本知识。"
+
+msgid "Minor People"
+msgstr "其他人物"
+
+msgid "James"
+msgstr "詹姆斯"
+
+msgid "An old man who accompanied you on your first few jobs as a starship captain."
+msgstr "一位老人，在你初当宇宙飞船船长、接下最初几份委托时与你同行。"
+
+msgid "Transport family to "
+msgstr "将一家人送往"
+
+msgid "Bring your new friend James, along with this large family, to "
+msgstr "将你的新朋友詹姆斯和这一大家子送往"
+
+msgid "When you meet up with James in the spaceport, he says, \"Hi there, "
+msgstr "你在太空港与詹姆斯碰面时，他说：“你好啊，"
+
+msgid "You begin strolling through the spaceport, walking briskly in order to keep warm and wondering if it might be worth investing in a good winter coat for visiting planets like this one. Eventually you find James. He has an entire family in tow: a young couple, an elderly woman, and three children who range in age from probably about three or four up to twelve or thirteen."
+msgstr "你开始在太空港里逛，快步走着让自己暖和一点，心里琢磨着，为了造访这样的星球，是否值得买件好冬衣。你终于找到了詹姆斯。他带着一大家子：一对年轻夫妇、一位老妇人，还有三个孩子，年纪大概从三四岁到十二三岁不等。"
+
+msgid "Along the journey, you learned that the family you are transporting are named the Hendersons, and that they are moving to "
+msgstr "途中，你得知这家人姓亨德森。他们搬去"
+
+msgid "Tourists to "
+msgstr "搭载游客前往"
+
+msgid "These tourists will pay you "
+msgstr "这些游客愿意付"
+
+msgid "It doesn't take you long to find James in the "
+msgstr "你很快就在"
+
+msgid "As you make the final landing descent to the surface of "
+msgstr "当你开始向"
+
+msgid "Bring James to "
+msgstr "将詹姆斯送往"
+
+msgid "Bring James to "
+msgstr "将詹姆斯送往"
+
+msgid "When you meet up with James in the spaceport, he says, \"Hi there, "
+msgstr "你在太空港与詹姆斯碰面时，他说：“你好啊，"
+
+msgid "you've"
+msgstr "你已经"
+
+msgid "Dropped James off on Hestia after running a few missions with him. Met a few spoiled tourists and got to visit Earth along the way."
+msgstr "和詹姆斯一起完成几个任务后，将他送到了赫斯提亚。途中遇到几位养尊处优的游客，还游览了地球。"
+
+msgid "He currently resides on Hestia, having retired from life as a merchant captain."
+msgstr "他如今住在赫斯提亚，已经结束了商船船长的生涯，退休养老。"
+
+msgid "Delivery to "
+msgstr "运货前往"
+
+msgid "Travel with your new friend James to "
+msgstr "与你的新朋友詹姆斯一同前往"
+
+msgid "vaccines"
+msgstr "疫苗"
+
+msgid "The spaceport on "
+msgstr ""
+
+msgid "Rush delivery to "
+msgstr "加急运货前往"
+
+msgid "This shipment of "
+msgstr "这批"
+
+msgid "raw eel"
+msgstr "生鳗鱼"
+
+msgid "As you walk through the spaceport, James sees you from a distance and waves you over. As you approach, the smell of raw fish overwhelms you. \"I've found another job for you,\" he says."
+msgstr "你在太空港里走着，詹姆斯远远看见你，招手让你过去。走近时，一股生鱼的腥味扑面而来。“我又给你找了份委托。”他说。"
+
+msgid "Drop James off on "
+msgstr "将詹姆斯送到"
+
+msgid "Dropped James off on Hestia after running a few missions with him. Ship still smells like fish."
+msgstr "和詹姆斯一起完成几个任务后，将他送到了赫斯提亚。船里还是一股鱼腥味。"
+
+msgid "Escort convoy to "
+msgstr "护送船队前往"
+
+msgid "Escort a merchant convoy to "
+msgstr "与你的新朋友詹姆斯一起，护送一支商船队前往"
+
+msgid "Bloodletter"
+msgstr "放血者号"
+
+msgid "Hand of Fate"
+msgstr "命运之手"
+
+msgid "Horn of Plenty"
+msgstr "丰饶之角"
+
+msgid "Morning Light"
+msgstr "晨光号"
+
+msgid "his"
+msgstr "他的"
+
+msgid "he's"
+msgstr "他已经"
+
+msgid "he is"
+msgstr "他是"
+
+msgid "You find James standing on a landing pad underneath a large freighter, chatting with a man you assume is the captain. \"There you are!\" he says. \"Captain Eldred here says his two ships have been having trouble with pirates ever since they left the Rim ten days ago, and he's looking for an escort to get them safely to Gemstone. Are you interested?\""
+msgstr "你发现詹姆斯站在一艘大型货船下方的着陆平台上，和一个你猜是船长的男人聊天。“你可来了！”他说，“这位埃尔德雷德船长说，他的两艘船自从十天前离开边缘星域后，就一直受到海盗骚扰。他想找人护航，确保他们安全到达宝石星。你有兴趣吗？”"
+
+msgid "Deliver "
+msgstr "避开海盗袭击，将"
+
+msgid "gemstones"
+msgstr "宝石"
+
+msgid "Hammer of Thor"
+msgstr "雷神之锤"
+
+msgid "she"
+msgstr "她"
+
+msgid "Hammer"
+msgstr "雷神之锤"
+
+msgid "ten"
+msgstr "十"
+
+msgid "Mine asteroids in "
+msgstr "在"
+
+msgid "Go to the "
+msgstr "前往"
+
+msgid "When you meet up with James in the spaceport, he says, \"Hi there, "
+msgstr "你在太空港与詹姆斯碰面时，他说：“你好啊，"
+
+msgid "Marshall"
+msgstr "马歇尔"
+
+msgid "he"
+msgstr "他"
+
+msgid "You've reached "
+msgstr "你已经到达"
+
+msgid "Silicon"
+msgstr "硅"
+
+msgid "Dropped James off on Hestia after running a few missions with him. Escort duty is a risky business."
+msgstr "和詹姆斯一起完成几个任务后，将他送到了赫斯提亚。护航真是个危险的行当。"
+
+msgid "With some trepidation, you give the shipyard owner your money and take your new ship for a test drive, piloting it out of the shipyard and onto a spare landing pad by the spaceport. Then you get out and look the ship over a bit more closely. You are busy polishing out a few rust spots with a piece of steel wool when an old man in grease-stained coveralls walks up."
+msgstr "你有些忐忑地把钱交给造船厂老板，驾驶新船试航，从船厂开到太空港旁一个空着的着陆平台上。随后你下船，更仔细地打量它。正忙着用钢丝绒打磨几处锈斑时，一位穿着沾满油渍工作服的老人走了过来。"
+
+msgid "As you land on "
+msgstr "你在"
+
+msgid "The spaceport on "
+msgstr ""
+
+msgid "As you are piloting your ship down to land on "
+msgstr "你驾驶飞船向"
+
+msgid "You drop off the shipment of "
+msgstr "你在"
+
+msgid "By now, your entire ship smells like brine and raw fish, but as best you can tell the fish is still fresh enough to eat. The dock workers on "
+msgstr "现在，整艘船都弥漫着盐水和生鱼的气味，不过据你判断，这些鱼应该还新鲜，能吃。"
+
+msgid "Your cargo has loomed silently in your hold for the last few days, but as far as you can tell, the samples are still safely contained. The dock workers on "
+msgstr "这几天，那批货一直静静待在货舱里，让人隐隐不安。不过据你判断，样本仍被安全封存着。"
+
+msgid "Your cargo has loomed silently in your hold for the last few days, but the radiation alarms in your ship's hold haven't let out a squeak. The dock workers on "
+msgstr "这几天，那批货一直静静待在货舱里，让人隐隐不安，不过货舱中的辐射警报器始终没有响过。"
+
+msgid "You find James talking with a group of miners, who seem to be old acquaintances of his. As you approach, he says, \"Well guys, here comes my ride. I should probably say goodbye.\" They head back off to do their work. \"Every time I land here,\" says James, \"I'm amazed that this station hasn't been wiped out yet by a meteorite. Can you imagine spending your life here?\""
+msgstr "你发现詹姆斯正和一群矿工聊天，他们似乎都是老相识。你走近时，他说：“好了，各位，我的船来了，该告辞了。”他们回去继续工作。“每次在这里着陆，”詹姆斯说，“我都惊讶这个空间站居然还没被陨石砸毁。你能想象一辈子待在这里吗？”"
+
+msgid "The captain of the "
+msgstr ""
+
+msgid "You find James in the spaceport bar, talking with a woman wearing a business suit. The expression on James' face is growing increasingly concerned as she speaks. Seeing you come in, he waves to you and you join them at the table."
+msgstr "你在太空港的酒吧找到詹姆斯，他正和一位穿职业装的女士交谈。随着她说下去，他脸上的忧色越来越重。看见你进来，他招了招手，你便走到他们桌边坐下。"
+
+msgid "You end up finding James in a bar talking to a woman in a military uniform. \"Nice to see you, "
+msgstr "你最后在一家酒吧找到了詹姆斯，他正和一位穿军装的女士交谈。“很高兴见到你，"
+
+msgid "For a planet so close to the Paradise Worlds, "
+msgstr "虽然距离乐园诸星这么近，"
+
+msgid "You find James in the spaceport bar, talking with a man wearing a business suit. The expression on James' face is growing increasingly concerned as he speaks. Seeing you come in, he waves to you and you join them at the table."
+msgstr "你在太空港酒吧里找到詹姆斯，他正和一个穿西装的男人交谈。随着对方说下去，詹姆斯脸上的忧色越来越重。看见你进来，他招了招手，你便走到他们桌边坐下。"
+
+msgid "As you land on "
+msgstr "你在"
+
+msgid "You find James waiting for you just outside the spaceport bar. Against the steady patter of micrometeorites against the roof he tells you, \"Working here on "
+msgstr "你发现詹姆斯就在太空港酒吧门外等你。微陨石不断敲打屋顶，噼啪作响。他对你说：“在"
+
+msgid "Similar to Delve, "
+msgstr "和德尔夫一样，"
+
+msgid "The world of "
+msgstr ""
+
+msgid "Once you've landed, you meet up with James and he asks you, \"What did you think of mining?\""
+msgstr "着陆后，你和詹姆斯碰面。他问你：“觉得采矿怎么样？”"
+
+msgid "You find James sitting at the spaceport's tiny bar, sipping a beer while watching the large displays that show the landing pads and the irrigated fields beyond. The displays are supposed to make the underground building feel less claustrophobic."
+msgstr "你发现詹姆斯坐在太空港的小酒吧里，一边喝啤酒，一边看着大型显示屏。屏上显示着着陆平台和远处灌溉农田的景象，为的是让这座地下建筑不那么压抑。"
+
+msgid "As you check over the specs of your brand new "
+msgstr "最后一次查看崭新的"
+
+msgid "You prepare to board your new ship and take it for a test flight, only to find it is an automated drone that lacks a crew compartment entirely! Unless you want to try strapping yourself on the outside of the hull, you'll need to sell off your drone and buy a proper spacefaring vessel."
+msgstr "你准备登上新船试飞，却发现它是一架自动无人机，根本没有船员舱！除非你想把自己绑在船体外面，否则得卖掉无人机，买艘真正适合载人航行的飞船。"
+
+msgid "Food"
+msgstr "食品"
+
+msgid "Clothing"
+msgstr "服装"
+
+msgid "Metal"
+msgstr "金属"
+
+msgid "Plastic"
+msgstr "塑料"
+
+msgid "Equipment"
+msgstr "设备"
+
+msgid "Medical"
+msgstr "医疗用品"
+
+msgid "Industrial"
+msgstr "工业用品"
+
+msgid "Electronics"
+msgstr "电子产品"
+
+msgid "Heavy Metals"
+msgstr "重金属"
+
+msgid "Luxury Goods"
+msgstr "奢侈品"
+
+msgid "Garbage"
+msgstr "垃圾"
+
+msgid "Construction"
+msgstr "建筑材料"
+
+msgid "Illegal Substances"
+msgstr "违禁品"
+
+msgid "Highly Illegal Substances"
+msgstr "严重违禁品"
+
+msgid "Illegal Cargo"
+msgstr "违禁货物"
+
+msgid "Highly Illegal Cargo"
+msgstr "严重违禁货物"
+
+msgid "void sprite parts"
+msgstr "虚空精灵零件"
+
+msgid "Military"
+msgstr "军用物资"
+
+msgid "Ship Systems"
+msgstr "飞船系统组件"
+
+msgid "Ship Alloys"
+msgstr "船用合金"
+
+msgid "frozen aid"
+msgstr "frozen aid"
+
+msgid "flames aid"
+msgstr "flames aid"
+
+msgid "_Enter Ship"
+msgstr "登船(_E)"
+
+msgid "_Gamerules"
+msgstr "游戏规则(_G)"
+
+msgid "_New Pilot"
+msgstr "新建驾驶员(_N)"
+
+msgid "_Reload Pilot"
+msgstr "重新加载驾驶员(_R)"
+
+msgid "_Manage Pilots..."
+msgstr "管理驾驶员(_M)…"
+
+msgid "_Quit"
+msgstr "退出(_Q)"
+
+msgid "_Preferences..."
+msgstr "偏好设置(_P)…"
+
+msgid "pilot:"
+msgstr "驾驶员："
+
+msgid "ship:"
+msgstr "飞船："
+
+msgid "planet:"
+msgstr "行星："
+
+msgid "system:"
+msgstr "星系："
+
+msgid "credits:"
+msgstr "信用点："
+
+msgid "date:"
+msgstr "日期："
+
+msgid "playtime:"
+msgstr "游戏时长："
+
+msgid "name:"
+msgstr "名称："
+
+msgid "debt:"
+msgstr "债务："
+
+msgid "_Back to Menu"
+msgstr "返回菜单(_B)"
+
+msgid "_Start Game"
+msgstr "开始游戏(_S)"
+
+msgid "_Delete"
+msgstr "删除(_D)"
+
+msgid "_Open Saves"
+msgstr "打开存档(_O)"
+
+msgid "_Add Snapshot"
+msgstr "添加存档快照(_A)"
+
+msgid "__Remove"
+msgstr "移除(__R)"
+
+msgid "_Load Game"
+msgstr "加载游戏(_L)"
+
+msgid "_Controls"
+msgstr "控制(_C)"
+
+msgid "_Settings"
+msgstr "设置(_S)"
+
+msgid "_Plugins"
+msgstr "插件(_P)"
+
+msgid "_Audio"
+msgstr "音频(_A)"
+
+msgid "Additional info"
+msgstr "附加信息"
+
+msgid "Press '_x' over controls to unbind them. Controls can share the same keybind."
+msgstr "将指针移到控制项上，按“_x”解除绑定。多个控制项可以使用同一个按键绑定。"
+
+msgid "_Next"
+msgstr "下一页(_N)"
+
+msgid "P_revious"
+msgstr "上一页(_r)"
+
+msgid "_Open Plugins"
+msgstr "打开插件(_O)"
+
+msgid "Restart to apply changes"
+msgstr "重启以应用更改"
+
+msgid "Installed Plugins:"
+msgstr "已安装的插件："
+
+msgid "Music"
+msgstr "音乐"
+
+msgid "UI"
+msgstr "用户界面"
+
+msgid "Anti-Missiles"
+msgstr "反导"
+
+msgid "Weapons"
+msgstr "武器"
+
+msgid "Engines"
+msgstr "引擎"
+
+msgid "Afterburners"
+msgstr "加力燃烧器"
+
+msgid "Hyperdrives"
+msgstr "超空间引擎"
+
+msgid "Explosions"
+msgstr "爆炸"
+
+msgid "Scans"
+msgstr "扫描"
+
+msgid "Environment"
+msgstr "环境"
+
+msgid "Alerts"
+msgstr "警报"
+
+msgid "_Back to Menu..."
+msgstr "返回菜单(_B)…"
+
+msgid "_Presets"
+msgstr "预设(_P)"
+
+msgid "Press '_x' over a rule to reset it to the value from the chosen preset."
+msgstr "将指针移到规则上，按“_x”将其重置为所选预设的值。"
+
+msgid "Gamerule Presets:"
+msgstr "游戏规则预设："
+
+msgid "Click the checkbox next to a preset to activate it."
+msgstr "点击预设旁的复选框以启用。"
+
+msgid "_Trading"
+msgstr "交易(_T)"
+
+msgid "_Job Board"
+msgstr "委托公告板(_J)"
+
+msgid "Player _Info"
+msgstr "玩家信息(_I)"
+
+msgid "_Bank"
+msgstr "银行(_B)"
+
+msgid "_Shipyard"
+msgstr "造船厂(_S)"
+
+msgid "_Outfitter"
+msgstr "装备商店(_O)"
+
+msgid "_Hire Crew"
+msgstr "雇佣船员(_H)"
+
+msgid "_Depart"
+msgstr "出发(_D)"
+
+msgid "flagship"
+msgstr "旗舰"
+
+msgid "entire fleet"
+msgstr "整支舰队"
+
+msgid "salary"
+msgstr "薪资"
+
+msgid "bunks"
+msgstr "床位"
+
+msgid "required crew"
+msgstr "所需船员"
+
+msgid "extra crew"
+msgstr "额外船员"
+
+msgid "_Hire"
+msgstr "雇佣(_H)"
+
+msgid "_Fire"
+msgstr "解雇(_F)"
+
+msgid "passenger space"
+msgstr "载客空间"
+
+msgid "passengers"
+msgstr "乘客"
+
+msgid "(Extra crew for your flagship increases your odds of capturing ships,"
+msgstr "（旗舰的额外船员越多，夺取飞船的成功率就越高，"
+
+msgid "and once you capture a ship you need crew members to serve on it.)"
+msgstr "而夺船成功后，也需要船员到新船上任职。）"
+
+msgid "Commodity"
+msgstr "商品"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Profit"
+msgstr "利润"
+
+msgid "In Hold"
+msgstr "货舱内"
+
+msgid "free:"
+msgstr "空余："
+
+msgid "__B_uy All"
+msgstr "全部购买(__B_u)"
+
+msgid "__S_ell All"
+msgstr "全部出售(__S_e)"
+
+msgid "Sell __Mi_nables"
+msgstr "出售矿物(__M_n)"
+
+msgid "Sell Out_fits"
+msgstr "出售装备(_f)"
+
+msgid "Pay _All"
+msgstr "全部偿还(_A)"
+
+msgid "cargo space free:"
+msgstr "空余货舱空间："
+
+msgid "passenger space:"
+msgstr "载客空间："
+
+msgid "today's date:"
+msgstr "今日日期："
+
+msgid "_Accept Mission"
+msgstr "接受任务(_A)"
+
+msgid "__Abort"
+msgstr "放弃(__A)"
+
+msgid "_Shipyards"
+msgstr "造船厂(_S)"
+
+msgid "_Outfitters"
+msgstr "装备商店(_O)"
+
+msgid "M_issions"
+msgstr "任务(_i)"
+
+msgid "_Ports"
+msgstr "太空港(_P)"
+
+msgid "S_tars"
+msgstr "恒星(_t)"
+
+msgid "_Done"
+msgstr "完成(_D)"
+
+msgid "_Find"
+msgstr "查找(_F)"
+
+msgid "_+"
+msgstr "_+"
+
+msgid "_-"
+msgstr "_-"
+
+msgid "Available job; can accept"
+msgstr "可接取的委托"
+
+msgid "Too little space to accept"
+msgstr "空间不足，无法接受"
+
+msgid "Active job; go here to complete"
+msgstr "进行中的委托；前往此处完成"
+
+msgid "Has unfinished requirements"
+msgstr "仍有未满足的条件"
+
+msgid "System of importance"
+msgstr "重要星系"
+
+msgid "Ship Info"
+msgstr "飞船信息"
+
+msgid "_Ship Info"
+msgstr "飞船信息(_S)"
+
+msgid "Player Info"
+msgstr "玩家信息"
+
+msgid "_Missions..."
+msgstr "任务(_M)…"
+
+msgid "_Logbook..."
+msgstr "航行日志(_L)…"
+
+msgid "_Previous"
+msgstr "上一个(_P)"
+
+msgid "Par_k"
+msgstr "停泊(_k)"
+
+msgid "Unpar_k"
+msgstr "解除停泊(_k)"
+
+msgid "__Disown"
+msgstr "放弃所有权(__D)"
+
+msgid "_Rename"
+msgstr "重命名(_R)"
+
+msgid "Dump _Cargo"
+msgstr "丢弃货物(_C)"
+
+msgid "_Jettison"
+msgstr "抛弃(_J)"
+
+msgid "Park _All"
+msgstr "全部停泊(_A)"
+
+msgid "Unpark _All"
+msgstr "全部解除停泊(_A)"
+
+msgid "Park Lo_cal"
+msgstr "停泊本地飞船(_c)"
+
+msgid "Unpark Lo_cal"
+msgstr "解除本地飞船停泊(_c)"
+
+msgid "Sa_ve Order"
+msgstr "保存排序(_v)"
+
+msgid "Hide less _important messages"
+msgstr "隐藏次要消息(_i)"
+
+msgid "_Clear"
+msgstr "清空(_C)"
+
+msgid "(The message log is empty.)"
+msgstr "（消息记录为空。）"
+
+msgid "Offer _Bribe"
+msgstr "提出贿赂(_B)"
+
+msgid "Pay _Bribe"
+msgstr "支付贿赂(_B)"
+
+msgid "Demand _Tribute"
+msgstr "索取贡金(_T)"
+
+msgid "Relinquish _Tribute"
+msgstr "放弃贡金(_T)"
+
+msgid "Ask For _Help"
+msgstr "请求帮助(_H)"
+
+msgid "This is the bank. Here, you can apply for new mortgages, if your income and credit history allows it. The bank is also a good place to get an overview of your daily expenses: mortgage payments, crew salaries, etc."
+msgstr "这里是银行。如果收入和信用记录允许，你可以申请新的船贷。在这里也能查看每日支出的概况，例如船贷还款额、船员薪资等。"
+
+msgid "Paying off a mortgage early means you pay less interest to the bank, but it is sometimes wiser to instead use your money to buy a bigger ship which can earn you more income."
+msgstr "提前还清船贷，能少付些利息。不过有时，把钱拿去买艘更大的船、赚取更多收入，反而更明智。"
+
+msgid "When entering a credit value at the bank, you can put in an exact number, or use the suffixes K, M, B, and T as shorthand for thousands, millions, billions, and trillions. For example, entering a value such as \"100k\" would count as 100,000 credits."
+msgstr "在银行输入信用点金额时，可以输入完整数字，也可以用 K、M、B、T 分别代表千、百万、十亿和万亿。例如，输入“100k”就表示 100,000 信用点。"
+
+msgid "Entering a number that is higher than what you or the bank have available will default to the maximum available value. For example, entering \"1m\" to pay off a 100,000 credit loan will completely pay off the loan without giving extra, should you have available credits."
+msgstr "如果输入的金额超过你或银行可提供的数额，系统会自动采用最大可用金额。例如，偿还一笔 100,000 信用点的贷款时输入“1m”，只要你的信用点足够，就会恰好还清贷款，不会多付。"
+
+msgid "Uh-oh! You just died. The universe can be a dangerous place for new captains!"
+msgstr "糟糕！你死了。对新手船长来说，宇宙可很危险！"
+
+msgid "Fortunately, your game is automatically saved every time you leave a planet. To load your most recent saved game, press "
+msgstr "好在每次离开行星时，游戏都会自动保存。要加载最近的存档，按"
+
+msgid "Your ship just got disabled! Before an enemy ship finishes you off, you should find someone to help you."
+msgstr "你的飞船失去行动能力了！在敌船补上致命一击之前，赶快找人帮忙。"
+
+msgid "Press "
+msgstr "按"
+
+msgid "If the ship that disabled you is still hanging around, you might need to hail them first and bribe them to leave you alone."
+msgstr "如果击伤你的飞船仍在附近，可能得先呼叫它，花钱打点，让它放过你。"
+
+msgid "Hiring extra crew is only helpful if you plan on capturing enemy ships. Each crew member other than yourself is paid 100 credits per day. Larger ships require more than one crew member, but you will automatically hire the minimum number of crew when you buy those ships."
+msgstr "只有打算夺取敌船时，雇佣额外船员才有用。除你之外，每名船员每天领取 100 信用点薪资。较大的飞船需要多名船员，不过购买时会自动雇齐最低所需人数。"
+
+msgid "Crew members take up space that can otherwise be used for passengers."
+msgstr "船员会占用原本可以搭载乘客的空间。"
+
+msgid "Taking on jobs is a safe way to earn money. Special missions are offered in the Spaceport; more mundane jobs are posted on the Job Board. Most special missions are only offered once: if you turn one down, it will not be offered to you again."
+msgstr "接委托是稳妥的赚钱办法。特殊任务在太空港提供，普通委托则发布在委托公告板上。多数特殊任务只会出现一次：拒绝后，就不会再向你提供。"
+
+msgid "The payment for a job depends on how far you must travel and how much you are carrying. Jobs that have a time limit pay extra, but you are paid nothing if you miss the deadline."
+msgstr "委托报酬取决于航程和运输量。有时限的委托报酬更高，但错过截止日期就一分钱也拿不到。"
+
+msgid "As you gain a reputation for skill in combat, new jobs will become available, including escorting convoys and bounty hunting."
+msgstr "随着你的战斗名声提升，会出现新的委托，包括护送船队和赏金狩猎。"
+
+msgid "There's nothing out here. The only way to get to another star system is by jumping through hyperspace. Unless you are out of fuel, you can jump by pressing "
+msgstr "这外面什么也没有。前往其他星系的唯一办法，就是通过超空间跃迁。只要燃料没用完，按"
+
+msgid "At any time, you can return to the main menu by pressing "
+msgstr "随时按"
+
+msgid "You seem to be lost. The universe is a big and complicated place, and no one is going to hold your hand out here. You might want to review the key controls (press "
+msgstr "你好像迷路了。宇宙庞大而复杂，这里没人会手把手带着你。可以再看看按键操作，弄清该怎么做：按"
+
+msgid "The void between the stars is cold and empty. Your ship, a tiny oasis of warmth, drifts alone out here illuminated only by the distant light of cold, uncaring suns. The distances between the stars are vast, beyond what the human mind can grasp; you could spend your whole life drifting out here and never reach another star."
+msgstr "群星之间的虚空寒冷而空旷。你的飞船像一小片温暖的绿洲，独自漂流其间，只有远处那些冰冷、漠然的恒星投来微光。星与星之间的距离，广阔得超出人类理解；你可以在这里漂泊一生，却始终到不了另一颗恒星。"
+
+msgid "Or, you could press "
+msgstr "或者，你可以按"
+
+msgid "Out here in the endless sky, you have the freedom to do whatever you want in your tiny new spaceship. Become the captain of a merchant fleet. Or a bounty hunter. Discover strange alien societies and powerful new technology."
+msgstr "在这片无尽星空里，你可以驾驶小小的新飞船，自由追求任何生活。成为商船队的船长，或赏金猎人，发现奇异的外星社会和强大的新技术。"
+
+msgid "Or if you want, you can just keep drifting here in empty space. Unless you've been ignoring all these messages, you already know that you can jump to another star system by selecting it in the map (which you bring up by pressing "
+msgstr "当然，如果愿意，也可以继续在空无一物的太空里漂流。除非你一直无视这些消息，否则应该已经知道：按"
+
+msgid "The hum of your ship's engine is the only sound you hear. As you have traveled farther and farther away from the center of this star system, even the occasional plink of micrometeorites against your hull has stopped. Deep space is utterly quiet and strangely beautiful. A different captain might grow bored out here, but you find yourself content and at peace."
+msgstr "你只能听见飞船引擎的低鸣。随着距离星系中心越来越远，连微陨石偶尔敲击船体的轻响都消失了。深空寂静无声，美得奇异。别的船长也许会觉得无聊，你却感到满足而安宁。"
+
+msgid "Or maybe you're just really, really bad at figuring out how to play this game."
+msgstr "也可能，你只是特别、特别不擅长弄明白这个游戏怎么玩。"
+
+msgid "You slip deeper and deeper into the zen-like calm of outer space. The Tao which can be spoken is not the true Tao. The game that must be played is not the true game. You let go of all desire: your desire to press "
+msgstr "你越来越深地沉入外太空禅意般的宁静。道可道，非常道。游可游，非常游。你放下一切欲望：不再想按"
+
+msgid "The void whispers its secret to your soul: outer space, it says, is not about lasers or explosions. It is not about fighting space pirates or saving the galaxy. No, the true message of the void is the utter loneliness you have found while drifting here: one tiny speck of warmth, insignificant compared to the vasty nothingness between the stars and the trillions upon trillions of souls of proud humans and inscrutable aliens whom you will never meet."
+msgstr "虚空向你的灵魂低语，诉说它的秘密：太空的意义，不在于激光或爆炸，不在于迎战太空海盗，也不在于拯救银河。虚空真正要告诉你的，是漂流至此时体会到的彻底孤独：一粒微不足道的温暖尘埃，面对星际间无边的虚无，以及无数你永远不会遇见的骄傲人类与莫测外星生灵。"
+
+msgid "The inner voice urging you to do something, anything rather than just continuing to drift here, falls silent..."
+msgstr "心底那个催促你做点什么、随便什么都好、别再继续漂流的声音，终于沉寂了……"
+
+msgid "This map shows all the star systems you know about and the hyperspace links between them. You can use the map to plot a hyperspace course by clicking on the system you want to travel to. To initiate a jump to that system, close the map and press "
+msgstr "这张地图显示你已知的全部星系，以及连接它们的跃迁通道。点击目的星系，就能规划跃迁航线。关闭地图，按"
+
+msgid "You can also press F to search the map for a specific system or planet."
+msgstr "也可以按 F，在地图中搜索指定星系或行星。"
+
+msgid "As you explore more of the galaxy, the star map will quickly become a very powerful tool. Clicking on a distant system will automatically plot the quickest route to it. You can Shift+click on systems to plot a route between them, or Control+click to select a system without setting a route to it."
+msgstr "随着探索的区域扩大，星图会很快成为强大的工具。点击远方星系，会自动规划最快路线。按住 Shift 点击各星系，可规划途经它们的航线；按住 Control 点击，则只选中星系，不设置航线。"
+
+msgid "There are many other useful modes the map can be set to. Click on one of the buttons in the lower right corner to learn more."
+msgstr "地图还可以切换为许多实用模式。点击右下角的按钮了解更多。"
+
+msgid "The ports panel shows you where systems with spaceports are, as well as a plethora of other information. Clicking on the name of the system, the government of the system, the lines under the name of each planet, or any trade commodity will color the map differently, the key to which can be seen on the right side of the screen."
+msgstr "太空港面板显示哪些星系设有太空港，以及许多其他信息。点击星系名、所属政府、各行星名称下方的条目或任一贸易商品，地图就会采用不同颜色显示，图例位于屏幕右侧。"
+
+msgid "Clicking the name of a planet, or clicking on a planet in the orbit map on the right side of the screen, will show that planet's description if you have visited it already. Clicking a planet on the orbit map will also tell your autopilot to land on that planet after you have arrived at that system at the end of your jump path."
+msgstr "点击行星名称，或右侧轨道图中的行星，如果曾经造访，就会显示该行星的介绍。在轨道图中点击行星，还会让自动驾驶在你沿跃迁路径到达目标星系后，自动降落到该行星。"
+
+msgid "Right-clicking on a location in the orbit map will send your escorts to that location in the selected system."
+msgstr "右键点击轨道图上的位置，会命令随行船前往所选星系的该位置。"
+
+msgid "The shipyard and outfitter map panels respectively display the ships and outfits sold on any planets that you have seen. Ships and outfits are displayed in categories which can be collapsed by clicking on the category name. Using Shift+click on a category name will collapse or uncollapse all the categories at once."
+msgstr "造船厂与装备商店地图面板，分别显示你见过的行星所出售的飞船和装备。飞船与装备按类别展示，点击类别名称可以折叠。按住 Shift 点击类别名称，可以一次折叠或展开全部类别。"
+
+msgid "Each ship or outfit can be clicked on, displaying that item's stats while also highlighting any planets where it is sold. Using Shift+click on a ship or outfit after you already have one selected will display that item's stats side by side with the previously selected item."
+msgstr "点击飞船或装备，可查看其参数，同时高亮出售该物品的行星。已经选中一件物品时，按住 Shift 再点击另一艘飞船或另一件装备，可并排比较两者参数。"
+
+msgid "You can also press F to search the shipyard and outfitter maps for a specific ship or outfit."
+msgstr "也可以按 F，在造船厂或装备商店地图中搜索指定飞船或装备。"
+
+msgid "The starry map mode displays the stars on the system map. This can also be enabled by pressing T. The stars present in a system affect the amount of solar power and solar wind available for use by solar collectors and ramscoops respectively."
+msgstr "恒星地图模式会在星系地图上显示恒星，按 T 也能开启。星系中的恒星，分别决定太阳能收集器可利用的太阳能，以及燃料收集器可利用的恒星风。"
+
+msgid "The galaxy can be a dangerous place! Pirates raid some systems more frequently or in greater strength than others, and a poorly defended convoy risks attracting them in many systems. To get an idea of the relative danger of different systems, click on the alert icon next to the system name."
+msgstr "银河系可不安全！有些星系的海盗袭击更频繁，或规模更大；防御薄弱的船队在许多星系都会招来海盗。点击星系名称旁的警报图标，就能了解各星系的相对危险程度。"
+
+msgid "The player info panel contains a wide variety of information about your pilot, including their net worth, combat rating, salary, and licenses."
+msgstr "玩家信息面板包含驾驶员的各种资料，例如净资产、战斗评级、薪资和许可证。"
+
+msgid "It also contains a list of all ships you currently own. Clicking on a ship and then going to the ship info tab, or double clicking on it, will bring up more information about that ship."
+msgstr "这里也列出你当前拥有的全部飞船。选中一艘船后切换至“飞船信息”页，或直接双击该船，就能查看详细资料。"
+
+msgid "Your pilot's logbook and current missions can be accessed by clicking on the buttons below the panel."
+msgstr "点击面板下方的按钮，可以查看驾驶员的航行日志和当前任务。"
+
+msgid "The player info panel can be brought up at any time by pressing "
+msgstr "随时按"
+
+msgid "The ship info tab lets you view detailed information about ships in your fleet at any time. This includes any information you could see at a shipyard or outfitter, as well as the cargo and passengers distributed among each ship."
+msgstr "“飞船信息”页让你随时查看舰队各船的详细资料。这里包含造船厂或装备商店里能看到的所有信息，以及各船分配到的货物和乘客。"
+
+msgid "Ships can be renamed in this panel by clicking on the ship's name. While landed on a planet, you are able to change how guns and turrets are arranged by dragging the name of a weapon to another gun or turret location. While in flight, you are able to jettison individual pieces of cargo by clicking on the name of the cargo."
+msgstr "点击面板中的飞船名称，可以重命名。在行星上着陆时，可以把武器名称拖到其他固定炮或炮塔的位置，调整武器布局。飞行中点击货物名称，则可以逐项抛弃货物。"
+
+msgid "Welcome to the sky! To travel to another star system, press "
+msgstr "欢迎来到星空！要前往另一星系，按"
+
+msgid "Your ship does not jump until you release the jump key. Once you have escorts, you can hold the key to get them ready to jump, then release it to have them all jump simultaneously."
+msgstr "松开跃迁键后，飞船才会跃迁。有随行船后，可以按住此键让它们做好准备，再松开，让所有船同时跃迁。"
+
+msgid "When you reach a new system, you can press "
+msgstr "抵达新星系后，可以按"
+
+msgid "Also, don't worry about crashing into asteroids or other ships; your ship will fly safely below or above them."
+msgstr "另外，不用担心撞上小行星或其他飞船，你的船会安全地从它们上方或下方飞过。"
+
+msgid "Here, you can buy new equipment for your ship. Your ship has a limited amount of \"outfit space,\" and most outfits use up some of that space."
+msgstr "这里可以买到飞船的新装备。每艘船的“装备空间”有限，大多数装备都会占用其中一部分。"
+
+msgid "Some types of outfits have other requirements as well. For example, only some of your outfit space can be used for engines or weapons; this is your ship's \"engine capacity\" and \"weapon capacity.\" Guns and missile launchers also require a free \"gun port,\" and turrets require a free \"turret mount.\" Also, missiles can only be bought if you have the right launcher installed."
+msgstr "有些装备还有其他要求。例如，装备空间只有一部分可用于引擎或武器，分别称为“引擎容量”和“武器容量”。固定炮和导弹发射器还需要空闲的“固定武器挂点”，炮塔需要空闲的“炮塔挂点”。另外，只有安装了相应发射器，才能购买对应导弹。"
+
+msgid "Use your scroll wheel or click and drag, to scroll the view."
+msgstr "使用滚轮，或按住鼠标拖动，即可滚动视图。"
+
+msgid "As in the trading and shipyard panels, you can hold down Shift, Control, or Alt to buy, sell, or move 5, 20, or 500 of an outfit at once, or multiple keys for larger amounts."
+msgstr "和交易、造船厂面板一样，按住 Shift、Control 或 Alt，可以一次购买、出售或移动 5、20 或 500 件装备；同时按住多个键可处理更多数量。"
+
+msgid "You can also press F to search the outfitter for a specific item."
+msgstr "也可以按 F，在装备商店中搜索指定物品。"
+
+msgid "Here, you can buy new ships."
+msgstr "这里可以买到新飞船。"
+
+msgid "As in the trading and outfitter panels, you can hold down Shift, Control, or Alt to buy 5, 20, or 500 ships at once, or multiple keys for larger amounts."
+msgstr "和交易、装备商店面板一样，按住 Shift、Control 或 Alt，可以一次购买 5、20 或 500 艘飞船；同时按住多个键可购买更多。"
+
+msgid "You can use the shortcuts B to Buy, S to Sell the ship and outfits, and R to sell the ship and retain the outfits if the planet has an outfitter."
+msgstr "可以使用快捷键 B 购买飞船，S 连同装备一起出售飞船；如果行星上有装备商店，按 R 可出售飞船并保留装备。"
+
+msgid "You can also press F to search the shipyard for a specific ship."
+msgstr "也可以按 F，在造船厂中搜索指定飞船。"
+
+msgid "Sometimes you may want to buy outfits directly into your cargo hold instead of having them installed."
+msgstr "有时，你可能想购买装备后直接装进货舱，而不是安装到船上。"
+
+msgid "You can use the following keyboard shortcuts or the buttons to move outfits around:"
+msgstr "可以使用以下快捷键或按钮移动装备："
+
+msgid "- \"B\" to buy and install outfits"
+msgstr "- 按“B”购买并安装装备"
+
+msgid "- \"S\" to sell outfits from cargo, planetary storage, or your ship (in that order)"
+msgstr "- 按“S”出售装备，依次优先取自货舱、行星仓库或飞船"
+
+msgid "- \"I\" to install outfits from cargo and/or storage (in that order)"
+msgstr "- 按“I”安装装备，依次优先取自货舱和仓库"
+
+msgid "- \"U\" to uninstall outfits from your ship and leave them in planetary storage, or unload outfits from cargo to planetary storage (in that order)"
+msgstr "- 按“U”从飞船卸下装备并存入行星仓库，或把货舱内的装备卸入行星仓库，按上述顺序优先处理"
+
+msgid "- \"C\" to move outfits from planetary storage and/or the outfitter (after paying) and move them into cargo"
+msgstr "- 按“C”把行星仓库中的装备和／或从装备商店付费购买的装备放进货舱"
+
+msgid "- \"R\" to move outfits from your cargo hold (if any are there) or else to uninstall to planetary storage"
+msgstr "- 按“R”移出货舱中的装备；若货舱中没有，则把已安装的装备卸入行星仓库"
+
+msgid "Outfits that are in your cargo hold can be installed at any outfitter without cost."
+msgstr "货舱中的装备，可以在任意装备商店免费安装。"
+
+msgid "Using planetary storage can be useful for if you want to shuffle outfits between ships, store outfits for future use, or simply try different outfits."
+msgstr "想在飞船间调配装备、储存备用装备，或尝试不同配置时，行星仓库都很有用。"
+
+msgid "Outfits that are in planetary storage or cargo can be installed without cost."
+msgstr "存放在行星仓库或货舱里的装备，都可以免费安装。"
+
+msgid "If you sell an outfit at an outfitter, then you can immediately buy it back for the same price that you sold it, so long as you do not leave the planet."
+msgstr "在装备商店出售装备后，只要没有离开该行星，就能立刻以原出售价格买回来。"
+
+msgid "This means that you do not necessarily need to worry about uninstalling outfits into planetary storage when you are changing outfits around."
+msgstr "因此，更换装备时，不一定非要先把装备卸入行星仓库。"
+
+msgid "Oops! You just ran out of fuel in an uninhabited star system. Fortunately, other ships are willing to help you."
+msgstr "糟糕！你在一个无人星系里耗尽燃料了。幸好，其他飞船愿意帮忙。"
+
+msgid "Press "
+msgstr "按"
+
+msgid "This is the trading panel. Earn money by buying commodities at a low price in one system, and selling at a higher price elsewhere. To view your map of commodity prices in other systems, press "
+msgstr "这里是交易面板。你可以在一个星系低价买入商品，再到其他地方高价出售赚钱。按"
+
+msgid "You can buy 5 tons at once by holding down Shift, 20 by holding down Control, 500 by holding down Alt, or larger amounts at a time by holding down two keys at once, or even all three."
+msgstr "按住 Shift 可一次购买 5 吨，按住 Control 为 20 吨，按住 Alt 为 500 吨；同时按住其中两个键，甚至三个键，可购买更多。"
+
+msgid "Sell other items in your cargo hold with the buttons to the left. \"Sell Minables\" sells materials mined from asteroids and other space debris. \"Sell Outfits\" sells all the other outfits present in cargo hold."
+msgstr "使用左侧按钮，出售货舱中的其他物品。“出售矿物”会出售从小行星和其他太空碎片中开采的材料，“出售装备”会出售货舱中的所有其他装备。"
+
+msgid "This ship is disabled and needs your help to patch them up! Pressing "
+msgstr "这艘飞船失去行动能力了，需要你帮忙修理！按"
+
+msgid "You've enabled controlling your ship with your mouse."
+msgstr "你已启用鼠标控制飞船。"
+
+msgid "The nose of your ship will always turn toward your mouse pointer."
+msgstr "船头会持续朝向鼠标指针。"
+
+msgid "Right mouse click will fire primary weapons."
+msgstr "点击鼠标右键发射主武器。"
+
+msgid "The \"go to and hold\" command is remapped from the right mouse button to the middle one."
+msgstr "“前往并守候”指令已从鼠标右键改为鼠标中键。"
+
+msgid "Shuttle"
+msgstr "穿梭机"
+
+msgid "Transport"
+msgstr "运输船"
+
+msgid "Although Betelgeuse Shipyards produces other ship models as well, the majority of their profits come from sales of the Shuttle. This versatile ship serves equally well as a passenger transport or a cargo courier. It also happens to be the cheapest ship you can buy which is capable of hyperspace travel."
+msgstr "参宿四造船厂虽然也生产其他型号，但大部分利润都来自穿梭机。这种多用途飞船既能载客，也能运货，而且是能进行超空间旅行的飞船中最便宜的一款。"
+
+msgid "Sparrow"
+msgstr "麻雀"
+
+msgid "Interceptor"
+msgstr "截击机"
+
+msgid "Classified as an interceptor rather than a fighter because it has its own hyperdrive instead of needing to be carried inside a larger ship, the Tarazed Sparrow is the smallest and cheapest combat ship available. Because of its limited cargo and passenger space, the primary way for a Sparrow pilot to pay the bills is to upgrade the weapons and hunt pirates... or become one. In either case, it is a perilous way to earn a living."
+msgstr "Tarazed 麻雀拥有自己的超空间引擎，不需要搭载在大船内，因此被归为截击机而不是战斗机。它是市面上最小、最便宜的战斗飞船。由于货舱和载客空间有限，麻雀驾驶员要养活自己，主要得升级武器，追捕海盗……或者自己当海盗。不管哪一种，都是危险的谋生方式。"
+
+msgid "Star Barge"
+msgstr "星际驳船"
+
+msgid "Light Freighter"
+msgstr "轻型货船"
+
+msgid "The Syndicate CT-50 Star Barge is little more than a cluster of cargo containers with an engine at one end and a cockpit on the other. It is a slow and ugly ship, but it can carry enough cargo to earn its captain a steady income even in parts of the galaxy where it is hard to find passengers to carry or courier missions."
+msgstr "辛迪加 CT-50 星际驳船，基本就是一堆货柜，一端装引擎，另一端装驾驶舱。它又慢又丑，但载货量够大，即使在难找乘客或运输委托的星区，也能为船长带来稳定收入。"
+
+msgid "The number of people (passengers or crew) your ship can hold."
+msgstr "飞船能容纳的人数，包括乘客和船员。"
+
+msgid "Tons of cargo (commodities, mission cargo, and plundered outfits) this ship can carry."
+msgstr "飞船能搭载的货物吨数，包括商品、任务货物和掠夺的装备。"
+
+msgid "Cost, in credits. If you have sold any used (depreciated) items today, you can buy them back for the same price you sold them for."
+msgstr "价格，单位为信用点。如果今天出售过折旧的二手物品，可以按原出售价格买回。"
+
+msgid "Total hull strength. Ships with a higher hull strength are able to take more damage as a proportion of their total strength before being disabled; the smallest of ships are disabled when their hull strength drops below about 45%, while very large ships are disabled at close to 10%."
+msgstr "船体总耐久。船体耐久越高，失去行动能力前可承受的损伤比例越大。最小的飞船在耐久降至约 45% 以下时便会失去行动能力，而非常大的飞船可支撑到接近 10%。"
+
+msgid "Mass, in tons. A ship's mass determines how fast it turns and accelerates and its maximum heat before overheating."
+msgstr "质量，单位为吨。飞船质量决定转向速度、加速度，以及过热前能承受的最大热量。"
+
+msgid "Changes the number of crew members this ship requires by this amount."
+msgstr "按此数值改变飞船所需的船员人数。"
+
+msgid "Total shield strength. Most weapons cannot damage your hull until your shields are depleted. Some weapon effects, such as heat damage, become more severe once shields are down."
+msgstr "护盾总强度。大多数武器只有在护盾耗尽后，才能伤害船体。护盾消失后，某些武器效果，例如热量伤害，会变得更加严重。"
+
+msgid "Buy from the outfitter and install onto the currently selected ship(s)."
+msgstr "从装备商店购买，并安装到当前选中的飞船上。"
+
+msgid "Hold Shift, Control, or Alt to buy 5, 20, or 500 outfits at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次购买 5、20 或 500 件装备。组合按住这些键可处理更多数量。"
+
+msgid "Sell from cargo, storage, or the currently selected ship(s), in that order."
+msgstr "出售装备，依次优先取自货舱、仓库或当前选中的飞船。"
+
+msgid "Hold Shift, Control, or Alt to sell 5, 20, or 500 outfits at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次出售 5、20 或 500 件装备。组合按住这些键可处理更多数量。"
+
+msgid "Install on the currently selected ship(s) from cargo or storage, in that order."
+msgstr "将装备安装到当前选中的飞船上，依次优先取自货舱或仓库。"
+
+msgid "Hold Shift, Control, or Alt to install 5, 20, or 500 outfits at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次安装 5、20 或 500 件装备。组合按住这些键可处理更多数量。"
+
+msgid "Uninstall from the currently selected ship(s) to cargo if there is space or to storage if there isn't."
+msgstr "从当前选中的飞船卸下装备；货舱有空间就放入货舱，否则存入仓库。"
+
+msgid "Hold Shift, Control, or Alt to uninstall 5, 20, or 500 outfits at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次卸下 5、20 或 500 件装备。组合按住这些键可处理更多数量。"
+
+msgid "Transfer the outfit from planetary storage to cargo if possible. Otherwise, buy it from the outfitter."
+msgstr "优先将装备从行星仓库移到货舱；若无法如此，则从装备商店购买。"
+
+msgid "Hold Shift, Control, or Alt to move 5, 20, or 500 outfits at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次移动 5、20 或 500 件装备。组合按住这些键可处理更多数量。"
+
+msgid "Move the outfit from cargo, the currently selected ship(s), or the outfitter into planetary storage, in that order."
+msgstr "将装备移入行星仓库，依次优先取自货舱、当前选中的飞船或装备商店。"
+
+msgid "Hold Shift, Control, or Alt to store 5, 20, or 500 outfits at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次存放 5、20 或 500 件装备。组合按住这些键可处理更多数量。"
+
+msgid "Buy this ship."
+msgstr "购买这艘飞船。"
+
+msgid "Hold Shift, Control, or Alt to buy 5, 20, or 500 ships at once. Hold a combination of these keys for larger amounts."
+msgstr "按住 Shift、Control 或 Alt，一次购买 5、20 或 500 艘飞船。组合按住这些键可处理更多数量。"
+
+msgid "Sell the selected ships and their outfits."
+msgstr "连同装备一起出售选中的飞船。"
+
+msgid "Sell the hulls of the selected ships, but retain the outfits in storage."
+msgstr "出售选中飞船的船体，但将装备保留在仓库中。"
+
+msgid "Earth"
+msgstr "地球"
+
+msgid "The ancestral home world of humanity, Earth has a population twice that of any other inhabited planet. Sprawling cities cover large portions of its surface, many of them overcrowded and dangerous. Some people work to scrape together enough money to leave, while at the same time others, born on distant worlds, make a pilgrimage of sorts to see this planet that once cradled the entirety of the human species."
+msgstr "地球是人类的母星，人口是其他任何有人居住的行星的两倍。蔓延的城市覆盖了大部分地表，其中许多拥挤而危险。有些人努力工作，只为凑够钱离开；与此同时，出生在遥远星球的人，却怀着近乎朝圣的心情，前来看看这颗曾孕育全人类的星球。"
+
+msgid "The ancestral home world of humanity, as well as your own birthplace, Earth has a population twice that of any other planet. Sprawling cities cover its surface, many of them overcrowded and dangerous. Some people work to scrape together enough money to leave, while others, born on distant worlds, make a pilgrimage of sorts to see this planet that once cradled the entirety of the human species."
+msgstr "地球既是人类的母星，也是你的出生地，人口是其他任何行星的两倍。蔓延的城市覆盖地表，其中许多拥挤而危险。有些人努力工作，只为凑够钱离开；另一些出生在遥远星球的人，却怀着近乎朝圣的心情，前来看看这颗曾孕育全人类的星球。"
+
+msgid "Earth's spaceport is a series of massive buildings; the gaps between them form narrow concrete canyons a hundred stories deep. From a distance it has the appearance of a bustling termite mound."
+msgstr "地球太空港由一系列巨型建筑组成，建筑之间的缝隙形成百层楼深的狭窄混凝土峡谷。远看就像一座忙碌的白蚁丘。"
+
+msgid "Gemstone"
+msgstr "宝石星"
+
+msgid "Gemstone is a hot and unpleasant world, mostly due to a smoggy atmosphere high in methane. Much of the surface is covered in rugged mountains, making ground transport very difficult. However, the powerful tectonic forces here have created rich deposits of diamonds, emeralds, and sapphires, which are mined for use in jewelry and certain electronic components."
+msgstr "宝石星炎热而令人不适，主要因为大气中甲烷含量高，烟雾浓重。大部分地表覆盖着崎岖山脉，地面运输十分困难。不过，强烈的地质构造活动形成了丰富的钻石、祖母绿和蓝宝石矿藏，可用于珠宝和某些电子元件。"
+
+msgid "The spaceport is perched on top of a peak in an older and more stable mountain range. The landing pads here are used both by starships and by the helicopters that bring cargo to and from the mines. Overhead, helicopters fly by carrying heavy loads dangling from cables. A few low concrete buildings serve as warehouses, and on the far end of the port, where an explosion would do the least damage if a sudden, severe earthquake struck, large steel tanks hold deuterium for refueling ships. Asphalt roads with flimsy guard rails connect the landing pads to the warehouses."
+msgstr "太空港建在一片较古老、较稳定山脉的峰顶。着陆平台既供宇宙飞船使用，也供往返矿场运输货物的直升机使用。头顶上，直升机吊着沉重货物飞过。几座低矮的混凝土建筑用作仓库；港口最远端，大型钢罐储存着给飞船补充的氘，万一突发强震引起爆炸，那里造成的损失最小。铺有沥青、护栏简陋的道路连接着平台和仓库。"
+
+msgid "Heartland"
+msgstr "腹地星"
+
+msgid "Heartland is a pleasant world, with a geography mostly consisting of low hills, plains, and oceans. The farms here produce bountiful crops, and as a result it has drawn tens of millions of settlers. Many of them now work in factories or assembly lines, in which most of the farm equipment used here and in the surrounding systems is built."
+msgstr "腹地星环境宜人，地形主要是低矮丘陵、平原和海洋。农场收成丰厚，吸引了数千万定居者。许多人如今在工厂和装配线上工作，生产本地及周边星系使用的大部分农业设备。"
+
+msgid "The spaceport is a cluster of low buildings. At the center of the port is a special, taller building with glass walls on all sides. It houses the tractor showroom. The farmers visiting the showroom look about as excited as you do when touring a large and well-appointed shipyard. There are tractors with rubber wheels, spiked wheels, and tracks; with plows, combines, balers, and chaser bins; tractors barely big enough to sit on and tractors the size of a small freighter. It's somewhat overwhelming."
+msgstr "太空港由一群低矮建筑组成，中央有座稍高的特别建筑，四面都是玻璃墙，里面是拖拉机展厅。参观的农民兴奋得就像你逛大型豪华造船厂时一样。这里有橡胶轮、钉轮和履带式拖拉机，有配犁、联合收割机、打捆机和运粮车的型号；有的小得只能坐下一个人，有的大得像轻型货船。实在令人目不暇接。"
+
+msgid "Hestia"
+msgstr "赫斯提亚"
+
+msgid "In the distant past, Hestia was a nearly lifeless ice world. It is now a subtropical paradise, one of the great victories from the heyday of planetary engineering back when the galactic economy had more money to spare for terraforming."
+msgstr "很久以前，赫斯提亚还是一颗几乎没有生命的冰冻星球。如今，它已成为亚热带乐园，是行星工程鼎盛时期的一大成就。那时银河经济还有更多余力投入行星改造。"
+
+msgid "Hestia has two separate spaceports. The port where rich residents and their visitors arrive and depart is private, owned by a local company. Here in the public spaceport, no attempt has been made at impressive architecture: everything is spare and utilitarian, with floors of bare concrete. There are a few trucks and forklifts carrying cargo, but the streets that connect the landing pads are mostly full of people on foot, walking toward the customs building."
+msgstr "赫斯提亚有两座独立的太空港。富裕居民及其访客使用的是本地公司所有的私人港口。你所在的公共太空港，则完全没有炫耀建筑的意思：一切简朴实用，地面是裸露混凝土。有几辆卡车和叉车运送货物，不过连接各着陆平台的街道上，大多是步行前往海关大楼的人。"
+
+msgid "Ingot"
+msgstr "铸锭星"
+
+msgid "Ingot is a volcanic moon, totally unsuitable for life but rich in metal. The miners who work here must spend all their time inside pressurized buildings."
+msgstr "铸锭星是一颗火山卫星，完全不适合生命生存，却富含金属。在这里工作的矿工，必须始终待在加压建筑内。"
+
+msgid "In this spaceport, ships dock inside a hangar whose ceiling protects them from meteorite impacts. The hangar is not pressurized, so there are also landing tubes that connect to each of the visiting ships. Many of the people inside are carrying emergency oxygen masks in case a sudden impact ruptures the building."
+msgstr "这里的飞船停靠在机库内，由顶棚抵挡陨石撞击。机库没有加压，因此每艘来访飞船都通过登船通道连接。建筑里很多人随身带着应急氧气面罩，以防突如其来的撞击造成破损。"
+
+msgid "New Boston"
+msgstr "新波士顿"
+
+msgid "New Boston is a completely unremarkable world. Most of its land is wet and marshy, and the coastal regions are prone to flooding. The planet's economy is largely agricultural; some of the farms here grow food for export to Earth and elsewhere, but most farmland is dedicated to fiber crops, destined for processing in the textile mills of the spaceport city."
+msgstr "新波士顿是一颗毫不起眼的星球。大部分陆地潮湿多沼泽，沿海容易遭遇洪水。经济以农业为主，部分农场种植粮食出口到地球等地，但大多数农田种的是纤维作物，送往太空港城市的纺织厂加工。"
+
+msgid "New Boston is a completely unremarkable world... except, of course, for the fact that you happen to have been born here."
+msgstr "新波士顿是一颗毫不起眼的星球……当然，除了你恰好出生在这里。"
+
+msgid "Someday New Boston may be a prosperous enough planet to afford a better spaceport, but not yet. Many of the concrete landing pads have sunk into the muddy soil over the years since they were poured, and are now tilted and uneven."
+msgstr "也许有一天，新波士顿会富裕到能修建更好的太空港，但现在还不行。许多混凝土着陆平台自浇筑以来，逐年陷入泥地，如今已经倾斜不平。"
+
+msgid "New Boston's shabby spaceport is about as basic as a spaceport can be. Many of the concrete landing pads are tilted and uneven, sunken into the muddy soil over time, and you have to be careful when touching down."
+msgstr "新波士顿破旧的太空港，简陋得不能再简陋。许多混凝土着陆平台随着时间陷入泥地，倾斜不平，降落时必须格外小心。"
+
+msgid "New China"
+msgstr "新中国"
+
+msgid "In the very early days of hyperspace travel, most settlers chose to put down roots within a few jumps of Earth, because until more fuel depots were built, colonies farther out would seldom be visited by cargo ships. As a result, a lot of effort was put into terraforming and developing worlds that would have been passed over by most colonists today."
+msgstr "超空间旅行刚起步时，大多数定居者选择在离地球几次跃迁的范围内落脚。更多燃料补给站建成之前，较远的殖民地很少有货船造访。因此，人们花费大量心力，改造开发那些如今多数殖民者看都不会看的星球。"
+
+msgid "The \"new port\" here was built several centuries ago, when the grand but impractical spaceport built by the original settlers had deteriorated to the point where it was no longer usable. This port is much simpler by comparison: just a ring of landing pads of various sizes around a large central building with ten levels of warehouse space accessible by freight elevator."
+msgstr "这里的“新港”建于几个世纪前。当初定居者修建的宏伟却不实用的太空港，早已破败得无法继续使用。相比之下，新港简单得多：不同大小的着陆平台围成一圈，中央是一座大型建筑，内部十层仓储空间由货运电梯连接。"
+
+msgid "New Greenland"
+msgstr "新格陵兰"
+
+msgid "New Greenland was first settled about six hundred years ago, at the peak of the \"Turf Wars\" era where most planets were controlled by powerful corporations and their struggles often turned into outright warfare with privately owned fleets and armies. The people who came to New Greenland were looking for a world so marginal and undesirable that they could live here in peace without being caught in the crossfire."
+msgstr "新格陵兰约六百年前首次有人定居，当时正值“地盘争夺战”的高峰。多数星球被强大企业控制，它们之间的争斗经常演变成由私人舰队和军队参加的全面战争。来到新格陵兰的人，只想找到一颗足够偏僻、足够没人要的星球，好安稳生活，不被卷入战火。"
+
+msgid "The spaceport is near the equator, but it is still cold enough that there is always some snow on the ground."
+msgstr "太空港靠近赤道，却依然冷得地上常年积雪。"
+
+msgid "New Sahara"
+msgstr "新撒哈拉"
+
+msgid "New Sahara is mostly desert and savanna, with very little precipitation."
+msgstr "新撒哈拉大多是沙漠和稀树草原，降水极少。"
+
+msgid "The spaceport consists of a few large concrete slabs, each big enough for a dozen small ships or a pair of Bulk Freighters to land on. Farther away are fields of solar panels and the factories that they power. The spaceport buildings themselves, however, are underground, where less energy is needed to keep the air cool. Light pipes bring sunlight down from the surface to illuminate the subterranean storage caverns and living quarters, while keeping the searing heat of the sunlight out."
+msgstr "太空港由几块巨大的混凝土平台组成，每块都够十几艘小船或两艘大型货船着陆。远处是一片片太阳能板，以及由它们供电的工厂。太空港建筑本身却位于地下，在那里降温耗能更少。导光管把地表阳光引入地下仓库洞穴和生活区，提供照明，同时隔绝灼热的日晒。"
+
+msgid "Arcturus"
+msgstr "大角星"
+
+msgid "Cor Caroli"
+msgstr "Cor Caroli"
+
+msgid "Merak"
+msgstr "Merak"
+
+msgid "Phecda"
+msgstr "Phecda"
+
+msgid "Rutilicus"
+msgstr "Rutilicus"
+
+msgid "Sol"
+msgstr "太阳系"
+
+msgid "Talita"
+msgstr "Talita"
+
+msgid "Tania Australis"
+msgstr "Tania Australis"
+
+msgid "Turais"
+msgstr "Turais"
+
+msgid "You have died."
+msgstr "你已死亡。"
+
+msgid "No Pilot Loaded"
+msgstr "未加载驾驶员"
+
+msgid "First name:"
+msgstr "名："
+
+msgid "Last name:"
+msgstr "姓："
+
+msgid "No Ship Selected"
+msgstr "未选择飞船"
+
+msgid "You have:"
+msgstr "你拥有："
+
+msgid "Fleet Capacity:"
+msgstr "舰队容量："
+
+msgid "_Buy"
+msgstr "购买(_B)"
+
+msgid "_Sell"
+msgstr "出售(_S)"
+
+msgid "Sell H_ull"
+msgstr "出售船体(_u)"
+
+msgid "_Leave"
+msgstr "离开(_L)"
+
+msgid "Quantity:"
+msgstr "数量："
+
+msgid "Buying this ship requires a special license. You will probably need to complete some sort of mission to get one."
+msgstr "购买这艘飞船需要特殊许可证。你可能得先完成某种任务才能获得。"
+
+msgid "your current ship"
+msgstr "你当前的飞船"
+
+msgid "some of your ships"
+msgstr "你的部分飞船"
+
+msgid "You do not have enough credits to buy this ship. If you want to buy it, you must sell "
+msgstr "你的信用点不足，无法购买这艘飞船。若想购买，必须先出售 "
+
+msgid " first."
+msgstr "。"
+
+msgid "You do not have enough credits to buy this ship, because it will cost you an extra "
+msgstr "你的信用点不足，无法购买这艘飞船，因为还需额外花费 "
+
+msgid " credits to buy the necessary licenses. Consider checking if the bank will offer you a loan."
+msgstr " 信用点购买必要的许可证。可以看看银行是否愿意提供贷款。"
+
+msgid "You do not have enough credits to buy this ship. Consider checking if the bank will offer you a loan."
+msgstr "你的信用点不足，无法购买这艘飞船。可以看看银行是否愿意提供贷款。"
+
+msgid "Note: you will need to pay "
+msgstr "注意：你需要支付 "
+
+msgid "Enter a name for your brand new "
+msgstr "为你崭新的飞船命名："
+
+msgid "! (Or leave it blank to use a randomly chosen name.)"
+msgstr "！（也可留空，使用随机名称。）"
+
+msgid "! (Or leave it blank to use randomly chosen names.)"
+msgstr "！（也可留空，使用随机名称。）"
+
+msgid "Buy"
+msgstr "购买"
+
+msgid "(very low)"
+msgstr "（极低）"
+
+msgid "(low)"
+msgstr "（低）"
+
+msgid "(medium)"
+msgstr "（中等）"
+
+msgid "(high)"
+msgstr "（高）"
+
+msgid "(very high)"
+msgstr "（极高）"
+
+msgid "You sold "
+msgstr "你出售了 "
+
+msgid "cargo "
+msgstr "货物 "
+
+msgid "at a loss of "
+msgstr "，亏损 "
+
+msgid "for a total profit of "
+msgstr "，总利润为 "
+
+msgid " of "
+msgstr " "
+
+msgid "mission cargo and other items."
+msgstr "任务货物和其他物品。"
+
+msgid "outfits and mission cargo."
+msgstr "装备和任务货物。"
+
+msgid "outfits and minables."
+msgstr "装备和矿物。"
+
+msgid "outfits."
+msgstr "装备。"
+
+msgid "minables."
+msgstr "矿物。"
+
+msgid "mission cargo."
+msgstr "任务货物。"
+
+msgid "[buy]"
+msgstr "[购买]"
+
+msgid "[sell]"
+msgstr "[出售]"
+
+msgid "(not for sale)"
+msgstr "（非卖品）"
+
+msgid "unit"
+msgstr "件"
+
+msgid "Sell "
+msgstr "出售 "
+
+msgid " for "
+msgstr "，售价 "
+
+msgid "special commodities"
+msgstr "特殊商品"
+
+msgid "outfits"
+msgstr "装备"
+
+msgid "and "
+msgstr "和 "
+
+msgid " more."
+msgstr " 等其他物品。"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Principal"
+msgstr "本金"
+
+msgid "Interest"
+msgstr "利息"
+
+msgid "Term"
+msgstr "贷款期限"
+
+msgid "Payment"
+msgstr "还款额"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "[pay extra]"
+msgstr "[额外还款]"
+
+msgid "Crew Salaries"
+msgstr "船员薪资"
+
+msgid "(overdue)"
+msgstr "（逾期）"
+
+msgid "Maintenance"
+msgstr "维护费用"
+
+msgid "Your Salary Income"
+msgstr "你的薪资收入"
+
+msgid "Your Tribute Income"
+msgstr "你的贡金收入"
+
+msgid "Your Salary and Tribute Income"
+msgstr "你的薪资与贡金收入"
+
+msgid "Your Return on Assets Income"
+msgstr "你的资产收益"
+
+msgid "Your Salary and Return on Assets Income"
+msgstr "你的薪资与资产收益"
+
+msgid "Your Tribute and Return on Assets Income"
+msgstr "你的贡金与资产收益"
+
+msgid "Your Salary, Tribute, and Returns Income"
+msgstr "你的薪资、贡金与资产收益"
+
+msgid "total:"
+msgstr "合计："
+
+msgid "Your credit score is "
+msgstr "你的信用评分为 "
+
+msgid "[apply]"
+msgstr "[申请]"
+
+msgid "No outfit selected."
+msgstr "未选择装备。"
+
+msgid "You cannot "
+msgstr "你不能"
+
+msgid " maps. Once you buy one, it is yours permanently."
+msgstr "星图。购买后，它就永久归你所有。"
+
+msgid "You cannot place maps into "
+msgstr "你不能将星图放入 "
+
+msgid "You have already mapped all the systems shown by this map, so there is no reason to buy another."
+msgstr "你已经掌握这张星图中所有星系的信息，无需再购买。"
+
+msgid " licenses. Once you obtain one, it is yours permanently."
+msgstr "许可证。取得后，它就永久归你所有。"
+
+msgid "You cannot place licenses into "
+msgstr "你不能将许可证放入 "
+
+msgid "You already have one of these licenses, so there is no reason to buy another."
+msgstr "你已经拥有这种许可证，无需再购买。"
+
+msgid " licenses."
+msgstr "许可证。"
+
+msgid "No ship selected."
+msgstr "未选择飞船。"
+
+msgid "You cannot install this outfit, because it takes up "
+msgstr "你无法安装这件装备，因为它需要占用 "
+
+msgid "Cannot afford to buy this item and load into cargo."
+msgstr "信用点不足，无法购买此物品并装入货舱。"
+
+msgid "Show outfits for sale"
+msgstr "显示出售中的装备"
+
+msgid "Show outfits installed"
+msgstr "显示已安装的装备"
+
+msgid "Show outfits in cargo"
+msgstr "显示货舱中的装备"
+
+msgid "Show outfits in storage"
+msgstr "显示仓库中的装备"
+
+msgid "Cargo Free:"
+msgstr "空余货舱："
+
+msgid "_Install"
+msgstr "安装(_I)"
+
+msgid "_Cargo"
+msgstr "货舱(_C)"
+
+msgid "Sto_re"
+msgstr "存放(_r)"
+
+msgid "Friendly"
+msgstr "友好"
+
+msgid "Hostile"
+msgstr "敌对"
+
+msgid "Restricted"
+msgstr "限制进入"
+
+msgid "Dominated"
+msgstr "已征服"
+
+msgid "None"
+msgstr "无"
+
+msgid "Minimal"
+msgstr "极低"
+
+msgid "Low"
+msgstr "低"
+
+msgid "Moderate"
+msgstr "中等"
+
+msgid "High"
+msgstr "高"
+
+msgid "Uninhabited"
+msgstr "无人居住"
+
+msgid "Unexplored"
+msgstr "未探索"
+
+msgid "You are here, with:"
+msgstr "你在此处，拥有："
+
+msgid "You are here."
+msgstr "你在此处。"
+
+msgid " active escort"
+msgstr " 艘随行中的飞船"
+
+msgid " active escorts"
+msgstr " 艘随行中的飞船"
+
+msgid " escort"
+msgstr " 艘随行船"
+
+msgid " escorts"
+msgstr " 艘随行船"
+
+msgid " parked escort"
+msgstr " 艘已停泊的随行船"
+
+msgid " parked escorts"
+msgstr " 艘已停泊的随行船"
+
+msgid " stored outfit"
+msgstr " 件已存放的装备"
+
+msgid " stored outfits"
+msgstr " 件已存放的装备"
+
+msgid "Search for:"
+msgstr "搜索："
+
+msgid "Selected system: unexplored system"
+msgstr "所选星系：未探索星系"
+
+msgid "Selected system: "
+msgstr "所选星系："
+
+msgid " (1 jump away)"
+msgstr "（相距 1 次跃迁）"
+
+msgid " ("
+msgstr "（相距 "
+
+msgid " jumps away)"
+msgstr " 次跃迁）"
+
+msgid "Filter out missions with a deadline"
+msgstr "排除有截止日期的任务"
+
+msgid "Filter out missions that you can't accept"
+msgstr "排除无法接受的任务"
+
+msgid "Sort alphabetically"
+msgstr "按字母顺序排序"
+
+msgid "Sort by payment"
+msgstr "按报酬排序"
+
+msgid "Sort by distance"
+msgstr "按距离排序"
+
+msgid "Sort by convenience: Prioritize missions going to a planet or system that is already a destination of one of your missions"
+msgstr "按顺路程度排序：优先显示前往现有任务目的行星或星系的任务"
+
+msgid "Sort direction"
+msgstr "排序方向"
+
+msgid "1 credit"
+msgstr "1 信用点"
+
+msgid " credits"
+msgstr " 信用点"
+
+msgid "1 ton"
+msgstr "1 吨"
+
+msgid " tons"
+msgstr " 吨"
+
+msgid "Main zoom factor"
+msgstr "主缩放比例"
+
+msgid "View zoom factor"
+msgstr "视图缩放比例"
+
+msgid "UI font size"
+msgstr "界面字号"
+
+msgid "Automatic aiming"
+msgstr "自动瞄准"
+
+msgid "Automatic firing"
+msgstr "自动开火"
+
+msgid "Screen mode"
+msgstr "屏幕模式"
+
+msgid "VSync"
+msgstr "垂直同步"
+
+msgid "Camera acceleration"
+msgstr "镜头加速度"
+
+msgid "Reduce large graphics"
+msgstr "缩减大型图像"
+
+msgid "Cloaked ship outlines"
+msgstr "隐形飞船轮廓"
+
+msgid "Texture filtering"
+msgstr "纹理过滤"
+
+msgid "Show status overlays"
+msgstr "显示状态叠加信息"
+
+msgid "   Show flagship overlay"
+msgstr "   显示旗舰叠加信息"
+
+msgid "   Show escort overlays"
+msgstr "   显示随行船叠加信息"
+
+msgid "   Show enemy overlays"
+msgstr "   显示敌方叠加信息"
+
+msgid "   Show neutral overlays"
+msgstr "   显示中立方叠加信息"
+
+msgid "Turret overlays"
+msgstr "炮塔叠加信息"
+
+msgid "Highlight ships"
+msgstr "高亮飞船"
+
+msgid "Escorts expend ammo"
+msgstr "随行船消耗弹药"
+
+msgid "Flotsam collection"
+msgstr "漂浮物收集"
+
+msgid "Turret tracking"
+msgstr "炮塔跟踪"
+
+msgid "Turrets focus fire"
+msgstr "炮塔集中火力"
+
+msgid "Reactivate first-time help"
+msgstr "重新启用首次帮助"
+
+msgid "Scroll speed"
+msgstr "滚动速度"
+
+msgid "Tooltip activation time"
+msgstr "提示显示延迟"
+
+msgid "Repair fighters in"
+msgstr "战斗机维修位置"
+
+msgid "Prioritize flagship use"
+msgstr "优先供旗舰使用"
+
+msgid "Ship outlines in shops"
+msgstr "商店中的飞船轮廓"
+
+msgid "Date format"
+msgstr "日期格式"
+
+msgid "Notify on destination"
+msgstr "抵达目的地时通知"
+
+msgid "Boarding target priority"
+msgstr "登船目标优先级"
+
+msgid "Asteroid targeting"
+msgstr "小行星选取"
+
+msgid "Parallax background"
+msgstr "视差背景"
+
+msgid "Extended jump effects"
+msgstr "扩展跃迁效果"
+
+msgid "Alert indicator"
+msgstr "警报指示器"
+
+msgid "Show mini-map"
+msgstr "显示小地图"
+
+msgid "Ship outlines in HUD"
+msgstr "平视显示界面中的飞船轮廓"
+
+msgid "Block screen saver"
+msgstr "阻止屏幕保护程序"
+
+msgid "Tribute confirmation"
+msgstr "贡金确认"
+
+msgid "Auto refill ammo"
+msgstr "自动补充弹药"
+
+msgid "Sync FF to CapsLock"
+msgstr "快进与 CapsLock 同步"
+
+msgid "Text alignment"
+msgstr "文本对齐"
+
+msgid "Title bar theme"
+msgstr "标题栏主题"
+
+msgid "Window rounding"
+msgstr "窗口圆角"
+
+msgid "Keyboard Navigation"
+msgstr "键盘导航"
+
+msgid "Fleet"
+msgstr "舰队"
+
+msgid "Targeting"
+msgstr "目标选取"
+
+msgid "Interface"
+msgstr "界面"
+
+msgid "Key"
+msgstr "按键"
+
+msgid "Display"
+msgstr "显示"
+
+msgid "Graphics"
+msgstr "画面"
+
+msgid "Render motion blur"
+msgstr "渲染动态模糊"
+
+msgid "Draw background haze"
+msgstr "绘制背景薄雾"
+
+msgid "Draw starfield"
+msgstr "绘制星空背景"
+
+msgid "Fixed starfield zoom"
+msgstr "固定星空背景缩放"
+
+msgid "Animate main menu background"
+msgstr "主菜单动态背景"
+
+msgid "Show hyperspace flash"
+msgstr "显示超空间闪光"
+
+msgid "Performance"
+msgstr "性能"
+
+msgid "Show CPU / GPU load"
+msgstr "显示 CPU／GPU 负载"
+
+msgid "Defer loading images"
+msgstr "延迟加载图像"
+
+msgid "Map"
+msgstr "地图"
+
+msgid "Deadline blink by distance"
+msgstr "按距离闪烁提示截止日期"
+
+msgid "Hide unexplored map regions"
+msgstr "隐藏未探索的地图区域"
+
+msgid "Show escort systems on map"
+msgstr "在地图上显示随行船所在星系"
+
+msgid "Show stored outfits on map"
+msgstr "在地图上显示已存放的装备"
+
+msgid "Parenthesize trade profits"
+msgstr "用括号显示交易利润"
+
+msgid "Trading"
+msgstr "交易"
+
+msgid "Sell outfits without outfitter"
+msgstr "允许在无装备商店时出售装备"
+
+msgid "Confirm selling outfits"
+msgstr "出售装备前确认"
+
+msgid "Confirm selling minables"
+msgstr "出售矿物前确认"
+
+msgid "Gameplay"
+msgstr "游戏玩法"
+
+msgid "Flagship Behavior"
+msgstr "旗舰行为"
+
+msgid "Control ship with mouse"
+msgstr "用鼠标控制飞船"
+
+msgid "Aim turrets with mouse"
+msgstr "用鼠标瞄准炮塔"
+
+msgid "Rehire extra crew when lost"
+msgstr "损失额外船员后重新雇佣"
+
+msgid "Automatically unpark flagship"
+msgstr "自动解除旗舰停泊"
+
+msgid "Fleet Behavior"
+msgstr "舰队行为"
+
+msgid "Damaged fighters retreat"
+msgstr "受损战斗机撤退"
+
+msgid "Fighters transfer cargo"
+msgstr "战斗机转移货物"
+
+msgid "HUD"
+msgstr "平视显示界面"
+
+msgid "Show missile overlays"
+msgstr "显示导弹叠加信息"
+
+msgid "Show asteroid scanner overlay"
+msgstr "显示小行星扫描叠加信息"
+
+msgid "Rotate flagship in HUD"
+msgstr "在平视显示界面中旋转旗舰"
+
+msgid "Show planet labels"
+msgstr "显示行星标签"
+
+msgid "Clickable radar display"
+msgstr "可点击的雷达显示"
+
+msgid "Extra fleet status messages"
+msgstr "额外舰队状态消息"
+
+msgid "Always underline shortcuts"
+msgstr "始终为快捷键加下划线"
+
+msgid "Interrupt fast-forward"
+msgstr "中断快进"
+
+msgid "Landing zoom"
+msgstr "着陆缩放"
+
+msgid "Save message log"
+msgstr "保存消息记录"
+
+msgid "Windows Options"
+msgstr "Windows 选项"
+
+msgid "Accept"
+msgstr "接受"
+
+msgid "OK"
+msgstr "确定"
+
+msgid "Decline"
+msgstr "拒绝"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Show main menu"
+msgstr "显示主菜单"
+
+msgid "Forward thrust"
+msgstr "向前推进"
+
+msgid "Turn left"
+msgstr "左转"
+
+msgid "Turn right"
+msgstr "右转"
+
+msgid "Reverse"
+msgstr "反向推进"
+
+msgid "Mouse turning (hold)"
+msgstr "鼠标转向（按住）"
+
+msgid "Turret aim override (hold)"
+msgstr "手动控制炮塔瞄准（按住）"
+
+msgid "Fire primary weapon"
+msgstr "发射主武器"
+
+msgid "Toggle turret tracking"
+msgstr "切换炮塔跟踪"
+
+msgid "Fire secondary weapon"
+msgstr "发射副武器"
+
+msgid "Select secondary weapon"
+msgstr "选择副武器"
+
+msgid "Land on planet / station"
+msgstr "在行星／空间站着陆"
+
+msgid "Board selected ship"
+msgstr "登上选中的飞船"
+
+msgid "Talk to selected ship"
+msgstr "与选中的飞船通信"
+
+msgid "Scan selected ship"
+msgstr "扫描选中的飞船"
+
+msgid "Initiate hyperspace jump"
+msgstr "启动超空间跃迁"
+
+msgid "Initiate fleet jump"
+msgstr "启动舰队跃迁"
+
+msgid "Select next ship"
+msgstr "选择下一艘飞船"
+
+msgid "Select nearest hostile ship"
+msgstr "选择最近的敌方飞船"
+
+msgid "Select nearest asteroid"
+msgstr "选择最近的小行星"
+
+msgid "Deploy / recall fighters"
+msgstr "部署／召回战斗机"
+
+msgid "Fire afterburner"
+msgstr "启动加力燃烧器"
+
+msgid "Toggle cloaking device"
+msgstr "切换隐形装置"
+
+msgid "View star map"
+msgstr "查看星图"
+
+msgid "View player info"
+msgstr "查看玩家信息"
+
+msgid "View message log"
+msgstr "查看消息记录"
+
+msgid "Toggle fullscreen"
+msgstr "切换全屏"
+
+msgid "Toggle fast-forward"
+msgstr "切换快进"
+
+msgid "Show help"
+msgstr "显示帮助"
+
+msgid "Pause"
+msgstr "暂停"
+
+msgid "Toggle performance info"
+msgstr "切换性能信息"
+
+msgid "Fleet: Fight my target"
+msgstr "舰队：攻击我的目标"
+
+msgid "Fleet: Toggle hold fire"
+msgstr "舰队：切换停止开火"
+
+msgid "Fleet: Gather around me"
+msgstr "舰队：向我集结"
+
+msgid "Fleet: Hold position"
+msgstr "舰队：保持位置"
+
+msgid "Fleet: Harvest flotsam"
+msgstr "舰队：收集漂浮物"
+
+msgid "Fleet: Scan my target"
+msgstr "舰队：扫描我的目标"
+
+msgid "Fleet: Toggle ammo usage"
+msgstr "舰队：切换弹药使用"
+
+msgid "Auto steer"
+msgstr "自动转向"
+
+msgid "Stop your ship"
+msgstr "停止飞船"
+
+msgid "You do not qualify for further loans at this time."
+msgstr "你目前不符合进一步贷款的条件。"
+
+msgid "You qualify for a new loan of up to "
+msgstr "你可以申请的新贷款最高为 "
+
+msgid "Paying off part of this debt will reduce your daily payments and the interest that it costs you. How many extra credits will you pay?"
+msgstr "提前偿还部分债务，可以降低每日还款额与利息支出。你打算额外偿还多少信用点？"
+
+msgid "Borrow how many credits?"
+msgstr "借多少信用点？"
+
+msgid "energy"
+msgstr "能量"
+
+msgid "heat"
+msgstr "热量"
+
+msgid "model:"
+msgstr "型号："
+
+msgid "category:"
+msgstr "类别："
+
+msgid "license:"
+msgstr "许可证："
+
+msgid "cost:"
+msgstr "价格："
+
+msgid "fleet cost:"
+msgstr "舰队容量占用："
+
+msgid "shields (charge):"
+msgstr "护盾（充能）："
+
+msgid "shields:"
+msgstr "护盾："
+
+msgid "hull (repair):"
+msgstr "船体（修复）："
+
+msgid "hull:"
+msgstr "船体："
+
+msgid "mass with no cargo:"
+msgstr "空载质量："
+
+msgid "mass:"
+msgstr "质量："
+
+msgid "cargo space:"
+msgstr "货舱空间："
+
+msgid "cargo:"
+msgstr "货物："
+
+msgid "required crew / bunks:"
+msgstr "所需船员／床位："
+
+msgid "fuel capacity:"
+msgstr "燃料容量："
+
+msgid "fuel:"
+msgstr "燃料："
+
+msgid "movement (full - no cargo):"
+msgstr "机动性能（满载－空载）："
+
+msgid "movement:"
+msgstr "机动性能："
+
+msgid "max speed:"
+msgstr "最大速度："
+
+msgid "   w/ afterburner:"
+msgstr "   使用加力燃烧器时："
+
+msgid "acceleration:"
+msgstr "加速度："
+
+msgid "    w/ afterburner:"
+msgstr "    使用加力燃烧器时："
+
+msgid "turning:"
+msgstr "转向："
+
+msgid " bays:"
+msgstr " 机库："
+
+msgid "idle:"
+msgstr "待机："
+
+msgid "thrusting:"
+msgstr "向前推进："
+
+msgid "reversing:"
+msgstr "反向推进："
+
+msgid "afterburner:"
+msgstr "加力燃烧器："
+
+msgid "moving:"
+msgstr "移动："
+
+msgid "firing:"
+msgstr "开火："
+
+msgid "shields / hull:"
+msgstr "护盾／船体："
+
+msgid "net change:"
+msgstr "净变化："
+
+msgid "capacity:"
+msgstr "容量："
+
+msgid "surge:"
+msgstr "瞬时峰值："
+
+msgid "This ship will sell for:"
+msgstr "这艘飞船的出售价格："
+
+msgid "empty hull:"
+msgstr "空船体："
+
+msgid "  + outfits:"
+msgstr "  + 装备："
+
+msgid "outfit space free:"
+msgstr "空余装备空间："
+
+msgid "    weapon capacity:"
+msgstr "    武器容量："
+
+msgid "    engine capacity:"
+msgstr "    引擎容量："
+
+msgid "gun ports free:"
+msgstr "空闲固定武器挂点："
+
+msgid "turret mounts free:"
+msgstr "空闲炮塔挂点："
+
+msgid "cost ("
+msgstr "价格（"
+
+msgid "%):"
+msgstr "%）："
+
+msgid "repairing hull:"
+msgstr "船体修复："
+
+msgid "charging shields:"
+msgstr "护盾充能："
+
+msgid "Unknown Government"
+msgstr "未知政府"
+
+msgid "Mortgage"
+msgstr "船贷"
+
+msgid "You have reached "
+msgstr "你已经到达"
+
+msgid " As a lifelong textile worker, you automatically note that the suit is made of real wool, very finely woven, and that it has been tailored to fit him."
+msgstr " 你干了一辈子纺织，自然一眼就看出，这套西装用的是真羊毛，织工精细，而且是为他量身定做的。"
+
+msgid "meet"
+msgstr "满足"
+
+msgid "do not meet"
+msgstr "不满足"
+
+msgid "another bunk"
+msgstr "再多一个床位"
+
+msgid " more bunks"
+msgstr " 个额外床位"
+
+msgid " and "
+msgstr " 和 "
+
+msgid "another ton"
+msgstr "再多一吨"
+
+msgid " more tons"
+msgstr " 吨额外"
+
+msgid " of cargo space"
+msgstr "货舱空间"
+
+msgid "no additional space"
+msgstr "无需额外空间"
+
+msgid "passenger"
+msgstr "乘客"
+
+msgid "a passenger"
+msgstr "一名乘客"
+
+msgid " passengers"
+msgstr " 名乘客"
+
+msgid " in the "
+msgstr "，位于 "
+
+msgid " system"
+msgstr " 星系"
+
+msgid "Jan"
+msgstr "1月"
+
+msgid "Feb"
+msgstr "2月"
+
+msgid "Mar"
+msgstr "3月"
+
+msgid "Apr"
+msgstr "4月"
+
+msgid "May"
+msgstr "5月"
+
+msgid "Jun"
+msgstr "6月"
+
+msgid "Jul"
+msgstr "7月"
+
+msgid "Aug"
+msgstr "8月"
+
+msgid "Sep"
+msgstr "9月"
+
+msgid "Oct"
+msgstr "10月"
+
+msgid "Nov"
+msgstr "11月"
+
+msgid "Dec"
+msgstr "12月"
+
+msgid "January"
+msgstr "一月"
+
+msgid "February"
+msgstr "二月"
+
+msgid "March"
+msgstr "三月"
+
+msgid "April"
+msgstr "四月"
+
+msgid "June"
+msgstr "六月"
+
+msgid "July"
+msgstr "七月"
+
+msgid "August"
+msgstr "八月"
+
+msgid "September"
+msgstr "九月"
+
+msgid "October"
+msgstr "十月"
+
+msgid "November"
+msgstr "十一月"
+
+msgid "December"
+msgstr "十二月"
+
+msgid "Sat"
+msgstr "周六"
+
+msgid "Sun"
+msgstr "周日"
+
+msgid "Mon"
+msgstr "周一"
+
+msgid "Tue"
+msgstr "周二"
+
+msgid "Wed"
+msgstr "周三"
+
+msgid "Thu"
+msgstr "周四"
+
+msgid "Fri"
+msgstr "周五"
+
+msgid "Unexplored System"
+msgstr "未探索星系"
+
+msgid "[done]"
+msgstr "[完成]"
+
+msgid "[ok]"
+msgstr "[确定]"
+
+msgid "Your Ships:"
+msgstr "你的飞船："
+
+msgid "Shipyard"
+msgstr "造船厂"
+
+msgid "Outfitter"
+msgstr "装备商店"
+
+msgid "(has been visited)"
+msgstr "（已造访）"
+
+msgid "(not yet visited)"
+msgstr "（尚未造访）"
+
+msgid "fancy"
+msgstr "精细"
+
+msgid "fast"
+msgstr "快速"
+
+msgid "linear"
+msgstr "线性"
+
+msgid "nearest"
+msgstr "最近"
+
+msgid "focused"
+msgstr "集中"
+
+msgid "opportunistic"
+msgstr "择机"
+
+msgid "parallel"
+msgstr "并行"
+
+msgid "series"
+msgstr "串行"
+
+msgid "done"
+msgstr "完成"
+
+msgid "N/A"
+msgstr "不适用"
+
+msgid "on"
+msgstr "开启"
+
+msgid "off"
+msgstr "关闭"
+
+msgid "Enter Ship"
+msgstr "登船"
+
+msgid "New Pilot."
+msgstr "新建驾驶员。"
+
+msgid "The pilot you currently have loaded is playing with restricted save loading. You cannot load another save unless you are landed."
+msgstr "当前加载的驾驶员启用了存档加载限制。只有着陆后，才能加载其他存档。"
+
+msgid "Warning: \""
+msgstr "警告：“"
+
+msgid "Error: unable to create the file \""
+msgstr "错误：无法创建文件“"
+
+msgid "\"."
+msgstr "”。"
+
+msgid "Deleting snapshot file failed."
+msgstr "删除存档快照文件失败。"
+
+msgid "ui/wide button"
+msgstr "ui/wide button"
+
+msgid "Random"
+msgstr "随机"
