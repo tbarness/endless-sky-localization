@@ -19,6 +19,9 @@ uniform vec2 scale;
 uniform vec2 position;
 // The glyph to draw. (ASCII value - 32).
 uniform int glyph;
+// The glyphs are laid out in a grid of this many columns and rows. The font's own
+// image is a single row of 98 glyphs; pages of glyphs from font files have many rows.
+uniform vec2 grid;
 // Aspect ratio of rendered glyph (unity by default).
 uniform float aspect;
 // Glyph size (in pixels).
@@ -33,7 +36,9 @@ out vec2 texCoord;
 
 // Pick the proper glyph out of the texture.
 void main() {
-	texCoord = vec2((float(glyph) + corner.x) / 98.f, corner.y);
+	float column = mod(float(glyph), grid.x);
+	float row = floor(float(glyph) / grid.x);
+	texCoord = vec2(column + corner.x, row + corner.y) / grid;
 	vec2 pos = vert * glyphSize;
 	gl_Position = vec4((aspect * pos.x + position.x) * scale.x, (pos.y + position.y) * scale.y, 0.f, 1.f);
 }
