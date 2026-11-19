@@ -36,9 +36,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "MainPanel.h"
 #include "MenuPanel.h"
 #include "Panel.h"
-#include "PilotProfile.h"
 #include "PlayerInfo.h"
-#include "PluginManager.h"
+#include "Plugins.h"
 #include "Preferences.h"
 #include "PrintData.h"
 #include "Random.h"
@@ -48,8 +47,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "TaskQueue.h"
 #include "test/Test.h"
 #include "test/TestContext.h"
+#include "Translations.h"
 #include "UI.h"
-
 #ifdef _WIN32
 #include "windows/TimerResolutionGuard.h"
 #include "windows/WinConsole.h"
@@ -169,7 +168,8 @@ int main(int argc, char *argv[])
 	try {
 		// Load plugin settings and preferences before game data.
 		Preferences::Load();
-		PluginManager::LoadSettings();
+		Translations::Init();
+		Plugins::LoadSettings();
 
 		TaskQueue queue;
 
@@ -223,7 +223,6 @@ int main(int argc, char *argv[])
 
 			// Reference check the universe, as known to the player. If no player found,
 			// then check the default state of the universe.
-			PilotProfile::LoadProfiles();
 			if(!player.LoadRecent())
 				GameData::CheckReferences();
 			cout << "Parse completed with " << (hasErrors ? "at least one" : "no") << " error(s)." << endl;
@@ -281,7 +280,7 @@ int main(int argc, char *argv[])
 	Preferences::Set("fullscreen", GameWindow::IsFullscreen());
 	Screen::SetRaw(GameWindow::Width(), GameWindow::Height(), true);
 	Preferences::Save();
-	PluginManager::Save();
+	Plugins::Save();
 
 	Audio::Quit();
 	GameWindow::Quit();
@@ -330,10 +329,6 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 	auto ProcessEvents = [&menuPanels, &gamePanels, &player, &cursorTime, &toggleTimeout, &debugMode, &isDebugPaused,
 			&isFastForward]
 	{
-		const Preferences::FastForwardCapsLockSync fastforwardCapsLockSync = Preferences::GetFastForwardCapsLockSync();
-		const bool fastForwardSyncToCapsLock = fastforwardCapsLockSync == Preferences::FastForwardCapsLockSync::ALWAYS
-			|| (fastforwardCapsLockSync == Preferences::FastForwardCapsLockSync::DEFAULT
-				&& Command(SDLK_CAPSLOCK).Has(Command::FASTFORWARD));
 		SDL_Event event;
 		while(SDL_PollEvent(&event))
 		{
@@ -343,14 +338,7 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 			if(event.type == SDL_MOUSEMOTION)
 				cursorTime = 0;
 
-#ifdef ES_USE_SDL3
-			SDL_Keycode eventKeyCode = event.key.key;
-			SDL_Keymod eventKeyMod = event.key.mod;
-#else
-			SDL_Keycode eventKeyCode = event.key.keysym.sym;
-			Uint16 eventKeyMod = event.key.keysym.mod;
-#endif
-			if(debugMode && event.type == SDL_KEYDOWN && eventKeyCode == SDLK_BACKQUOTE)
+			if(debugMode && event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKQUOTE)
 			{
 				isDebugPaused = !isDebugPaused;
 				if(isDebugPaused)
@@ -359,7 +347,7 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 					Audio::Resume();
 			}
 			else if(event.type == SDL_KEYDOWN && menuPanels.IsEmpty()
-					&& Command(eventKeyCode).Has(Command::MENU)
+					&& Command(event.key.keysym.sym).Has(Command::MENU)
 					&& !gamePanels.IsEmpty() && gamePanels.Top()->IsInterruptible())
 			{
 				// User pressed the Menu key.
@@ -369,11 +357,7 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 			}
 			else if(event.type == SDL_QUIT)
 				menuPanels.Quit();
-#ifdef ES_USE_SDL3
-			else if(event.type == SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED)
-#else
 			else if(event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-#endif
 				// The window has been resized. Adjust the raw screen size and the OpenGL viewport to match.
 				GameWindow::AdjustViewport();
 			else if(event.type == CustomEvents::GetResize())
@@ -387,21 +371,21 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 				gamePanels.AdjustTextDisplay();
 			}
 			else if(event.type == SDL_KEYDOWN && !toggleTimeout
-					&& (Command(eventKeyCode).Has(Command::FULLSCREEN)
-					|| (eventKeyCode == SDLK_RETURN && (eventKeyMod & KMOD_ALT))))
+					&& (Command(event.key.keysym.sym).Has(Command::FULLSCREEN)
+					|| (event.key.keysym.sym == SDLK_RETURN && (event.key.keysym.mod & KMOD_ALT))))
 			{
 				toggleTimeout = 30;
 				Preferences::ToggleScreenMode();
 			}
-			else if(event.type == SDL_KEYDOWN && Command(eventKeyCode).Has(Command::PERFORMANCE_DISPLAY))
+			else if(event.type == SDL_KEYDOWN && Command(event.key.keysym.sym).Has(Command::PERFORMANCE_DISPLAY))
 				Preferences::Set("Show CPU / GPU load", !Preferences::Has("Show CPU / GPU load"));
 			else if(activeUI.Handle(event))
 			{
 				// The UI handled the event.
 			}
 			else if(event.type == SDL_KEYDOWN && !event.key.repeat
-					&& (Command(eventKeyCode).Has(Command::FASTFORWARD))
-					&& !fastForwardSyncToCapsLock)
+					&& (Command(event.key.keysym.sym).Has(Command::FASTFORWARD))
+					&& !Command(SDLK_CAPSLOCK).Has(Command::FASTFORWARD))
 			{
 				isFastForward = !isFastForward;
 			}
@@ -409,7 +393,7 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 
 		// Special case: If fastforward is on capslock, update on mod state and not
 		// on keypress.
-		if(fastForwardSyncToCapsLock)
+		if(Command(SDLK_CAPSLOCK).Has(Command::FASTFORWARD))
 			isFastForward = SDL_GetModState() & KMOD_CAPS;
 	};
 
@@ -448,14 +432,7 @@ void GameLoop(PlayerInfo &player, TaskQueue &queue, const Conversation &conversa
 			if(shouldShowCursor != showCursor)
 			{
 				showCursor = shouldShowCursor;
-#ifdef ES_USE_SDL3
-				if(shouldShowCursor)
-					SDL_ShowCursor();
-				else
-					SDL_HideCursor();
-#else
 				SDL_ShowCursor(showCursor);
-#endif
 			}
 
 			// Switch off fast-forward if the player is not in flight or flight-related screen
@@ -660,8 +637,9 @@ void PrintHelp()
 	cerr << "    --nomute: don't mute the game while running tests." << endl;
 	cerr << "    --rng-seed <seed>: every time the pseudo-random number generator is seeded,"
 		" it will be given this value." << endl;
-	cerr << "    --tq-threads <number>: sets the number of threads used for the internal queue of tasks."
-		" Not specifying this will use a default depending on your system. Has to be at least 1." << endl;
+	cerr << "    --tq-threads: sets the number of threads used for the internal queue of tasks."
+		" Not specifying this will use a default depending on your system. This is only useful for debugging."
+		" Has to be at least 1." << endl;
 	PrintData::Help();
 	cerr << endl;
 	cerr << "Report bugs to: <https://github.com/endless-sky/endless-sky/issues>" << endl;

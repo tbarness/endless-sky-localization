@@ -34,6 +34,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "image/Sprite.h"
 #include "image/SpriteSet.h"
 #include "shader/SpriteShader.h"
+#include "Translations.h"
 #include "UI.h"
 
 #include <algorithm>
@@ -620,7 +621,7 @@ void Interface::TextElement::FinishLoadingColors()
 // Get text contents of this element.
 string Interface::TextElement::GetString(const Information &info) const
 {
-	return isDynamic ? info.GetString(str) : str;
+	return Translations::Get(isDynamic ? info.GetString(str) : str);
 }
 
 

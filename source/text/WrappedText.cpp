@@ -17,10 +17,44 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "DisplayText.h"
 #include "Font.h"
+#include "Utf8.h"
 
+#include <cctype>
 #include <cstring>
 
 using namespace std;
+
+namespace {
+	// Characters of scripts that are written without spaces (Chinese, Japanese): a line may end
+	// after any of them. Korean is not included, because it has spaces between words.
+	bool IsUnspaced(char32_t c)
+	{
+		return (c >= 0x2E80 && c <= 0xA4CF) || (c >= 0xF900 && c <= 0xFAFF)
+			|| (c >= 0xFE30 && c <= 0xFE4F) || (c >= 0xFF00 && c <= 0xFFEF)
+			|| (c >= 0x20000 && c <= 0x3FFFF);
+	}
+
+	// Closing marks, small kana and the prolonged sound mark may not start a line.
+	const u32string_view NO_BREAK_BEFORE = U"\u3001\u3002\uFF0C\uFF0E\u30FB\uFF1A\uFF1B\uFF01\uFF1F\uFF09\uFF3D\uFF5D\u3015\u3009\u300B"
+		U"\u300D\u300F\u3011\u309D\u309E\u30FC\u30FD\u30FE\u3005\u2026\u2025\u301C\uFF5E\u2010"
+		U"\u3041\u3043\u3045\u3047\u3049\u3063\u3083\u3085\u3087\u308E\u3095\u3096"
+		U"\u30A1\u30A3\u30A5\u30A7\u30A9\u30C3\u30E3\u30E5\u30E7\u30EE\u30F5\u30F6";
+	// Opening brackets may not end a line.
+	const u32string_view NO_BREAK_AFTER = U"\uFF08\uFF3B\uFF5B\u3014\u3008\u300A\u300C\u300E\u3010";
+
+	// Whether a line may end between these two characters, where there is no space.
+	bool CanBreakBetween(char32_t previous, char32_t c)
+	{
+		if(!previous || !(IsUnspaced(previous) || IsUnspaced(c)))
+			return false;
+		// Whitespace already allows a break. Plain punctuation stays with the character beside it.
+		if(previous <= ' ' || c <= ' ')
+			return false;
+		if((previous < 0x80 && !isalnum(static_cast<int>(previous))) || (c < 0x80 && !isalnum(static_cast<int>(c))))
+			return false;
+		return NO_BREAK_BEFORE.find(c) == u32string_view::npos && NO_BREAK_AFTER.find(previous) == u32string_view::npos;
+	}
+}
 
 
 
@@ -121,30 +155,21 @@ void WrappedText::SetParagraphBreak(int height)
 
 
 
+// Get the word positions when wrapping the given text. The coordinates
+// always begin at (0, 0).
 void WrappedText::Wrap(const string &str)
 {
-	original = str;
-	Rewrap();
+	SetText(str.data(), str.length());
+
+	Wrap();
 }
 
 
 
 void WrappedText::Wrap(const char *str)
 {
-	original.assign(str, strlen(str));
-	Rewrap();
-}
+	SetText(str, strlen(str));
 
-
-
-void WrappedText::Rewrap()
-{
-	// Copy the original text into a string that will be worked on to determine
-	// the spacing for the chosen text alignment.
-	text = original;
-	// Clear any previous word-wrapping data. It becomes invalid as soon as the
-	// underlying text buffer changes.
-	words.clear();
 	Wrap();
 }
 
@@ -210,6 +235,32 @@ Point WrappedText::Word::Pos() const
 
 
 
+void WrappedText::SetText(const char *it, size_t length)
+{
+	// Clear any previous word-wrapping data. It becomes invalid as soon as the
+	// underlying text buffer changes.
+	words.clear();
+
+	// Reallocate that buffer. Japanese and Chinese have no spaces, so wherever a line may end in
+	// the middle of such text, add a control character. It counts as whitespace, so it ends the
+	// word and allows a line break, but it has no width.
+	text.clear();
+	text.reserve(length);
+	const string source(it, length);
+	char32_t previous = 0;
+	for(size_t pos = 0; pos < source.size(); )
+	{
+		const size_t begin = pos;
+		const char32_t c = Utf8::DecodeCodePoint(source, pos);
+		if(CanBreakBetween(previous, c))
+			text += '\x01';
+		text.append(source, begin, pos - begin);
+		previous = c;
+	}
+}
+
+
+
 void WrappedText::Wrap()
 {
 	height = 0;
@@ -237,7 +288,8 @@ void WrappedText::Wrap()
 
 	for(string::iterator it = text.begin(); it != text.end(); ++it)
 	{
-		const char c = *it;
+		// Unsigned, so that the bytes of a UTF-8 character are not mistaken for whitespace.
+		const unsigned char c = *it;
 
 		// Whitespace signals a word end - mark it and wrap the text if needed.
 		if(c <= ' ' && traversingWord)

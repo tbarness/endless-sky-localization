@@ -16,13 +16,33 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "FontSet.h"
 
 #include "Font.h"
+#include "../Files.h"
 
+#include <algorithm>
 #include <map>
+#include <vector>
 
 using namespace std;
 
 namespace {
 	map<int, Font> fonts;
+	// The font files that are in use, so that they can be given to fonts that are added later.
+	vector<filesystem::path> preferred;
+	vector<filesystem::path> fallback;
+
+	// Add the font files in a folder to a list, in order of their names.
+	void Scan(const filesystem::path &directory, vector<filesystem::path> &list)
+	{
+		vector<filesystem::path> files = Files::List(directory);
+		sort(files.begin(), files.end());
+		for(const filesystem::path &file : files)
+		{
+			string extension = file.extension().string();
+			transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) { return tolower(c); });
+			if(extension == ".ttf" || extension == ".otf" || extension == ".ttc" || extension == ".otc")
+				list.push_back(file);
+		}
+	}
 }
 
 
@@ -30,7 +50,10 @@ namespace {
 void FontSet::Add(const filesystem::path &path, int size)
 {
 	if(!fonts.contains(size))
+	{
 		fonts[size].Load(path);
+		fonts[size].UseFiles(preferred, fallback);
+	}
 }
 
 
@@ -38,4 +61,24 @@ void FontSet::Add(const filesystem::path &path, int size)
 const Font &FontSet::Get(int size)
 {
 	return fonts[size];
+}
+
+
+
+void FontSet::UseLanguage(const string &language)
+{
+	preferred.clear();
+	fallback.clear();
+
+	const filesystem::path root = Files::Resources() / "fonts";
+	if(!language.empty() && language != "en")
+	{
+		Scan(root / language, preferred);
+		Scan(root / language / "fallback", fallback);
+	}
+	Scan(root, preferred);
+	Scan(root / "fallback", fallback);
+
+	for(auto &it : fonts)
+		it.second.UseFiles(preferred, fallback);
 }

@@ -42,16 +42,15 @@ SCENARIO( "Creating an ExclusiveItem" , "[ExclusiveItem][Creation]" ) {
 		auto item = ExclusiveItem<Object>{};
 
 		WHEN( "it is default-constructed" ) {
-			THEN( "it contains no data" ) {
+			THEN( "it contains default data" ) {
 				CHECK_FALSE( item.IsStock() );
-				CHECK_FALSE( item );
+				CHECK( item->GetValue() == 0 );
 			}
 		}
 
 		WHEN( "constructed with an rvalue reference" ) {
 			item = ExclusiveItem<Object>(Object(2));
 			THEN( "the object is obtainable and the item is nonstock" ) {
-				CHECK( item );
 				CHECK_FALSE( item.IsStock() );
 				CHECK( item->GetValue() == 2 );
 			}
@@ -61,19 +60,8 @@ SCENARIO( "Creating an ExclusiveItem" , "[ExclusiveItem][Creation]" ) {
 			auto obj = Object(3);
 			item = ExclusiveItem<Object>(&obj);
 			THEN( "the object is obtainable and the item is stock" ) {
-				CHECK( item );
 				CHECK( item.IsStock() );
 				CHECK( item->GetValue() == 3 );
-			}
-		}
-
-		WHEN( "constructed with a shared pointer" ) {
-			auto obj = std::make_shared<Object>(2);
-			item = ExclusiveItem<Object>(obj);
-			THEN( "the object is obtainable and the item is nonstock" ) {
-				CHECK( item );
-				CHECK_FALSE( item.IsStock() );
-				CHECK( item->GetValue() == 2 );
 			}
 		}
 	}

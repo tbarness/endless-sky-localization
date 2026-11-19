@@ -16,6 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #pragma once
 
 #include <filesystem>
+#include <string>
 
 class Font;
 
@@ -27,4 +28,9 @@ class FontSet {
 public:
 	static void Add(const std::filesystem::path &path, int size);
 	static const Font &Get(int size);
+
+	// Draw text from the font files in the "fonts" folder, as well as from the font images. Files that
+	// are in a folder named for the language ("fonts/ja") come first, for that language. A font in the
+	// "fallback" folder is only used for characters that the font image does not have.
+	static void UseLanguage(const std::string &language);
 };

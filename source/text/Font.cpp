@@ -21,10 +21,12 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "../GameData.h"
 #include "../image/ImageBuffer.h"
 #include "../image/ImageFileData.h"
+#include "../Logger.h"
 #include "../Point.h"
 #include "../Preferences.h"
 #include "../Screen.h"
 #include "Truncate.h"
+#include "Utf8.h"
 
 #include <algorithm>
 #include <cmath>
@@ -36,7 +38,16 @@ using namespace std;
 namespace {
 	bool showUnderlines = false;
 	const int KERN = 2;
-	const float UNDERLINE_OFFSET = 2.f;
+	// The cells that hold glyphs from font files are this many rows (of the doubled image, so keep it
+	// even) taller than the font, with the extra above, to leave room for accents and tall glyphs.
+	const int EXT_TOP = 8;
+	// Cells are gathered into pages, each of which is an image. This many fit in one.
+	const int PAGE_COLUMNS = 32;
+	const int PAGE_ROWS = 16;
+	const int PAGE_CELLS = PAGE_COLUMNS * PAGE_ROWS;
+	const int MAX_PAGES = 32;
+	// A value for the page in use, for when it must be chosen again.
+	const int UNKNOWN_PAGE = -2;
 
 	/// Shared VAO and VBO quad (0,0) -> (1,1)
 	GLuint vao = 0;
@@ -46,11 +57,30 @@ namespace {
 	GLint scaleI = 0;
 	GLint glyphSizeI = 0;
 	GLint glyphI = 0;
+	GLint gridI = 0;
 	GLint aspectI = 0;
 	GLint positionI = 0;
 
 	GLint vertI;
 	GLint cornerI;
+
+	// Find how wide the ink of a glyph cell is, and how far from the left of the cell it begins.
+	// A pixel counts as ink if it is at least 3/4 opaque, as when the kerning is calculated.
+	void Measure(const ImageBuffer &image, int x, int y, int w, int h, int &width, int &left)
+	{
+		width = 0;
+		left = w;
+		for(int row = y; row < y + h; ++row)
+		{
+			const uint32_t *pixels = image.Pixels() + row * image.Width() + x;
+			for(int i = 0; i < w; ++i)
+				if((pixels[i] & 0xFF000000) >= 0xC0000000)
+				{
+					left = min(left, i);
+					width = max(width, i + 1);
+				}
+		}
+	}
 
 	void EnableAttribArrays()
 	{
@@ -81,9 +111,34 @@ void Font::Load(const filesystem::path &imagePath)
 	if(!image.Read(ImageFileData(imagePath)))
 		return;
 
-	LoadTexture(image);
+	texture = CreateTexture(image.Width(), image.Height(), image.Pixels());
 	CalculateAdvances(image);
 	SetUpShader(image.Width() / GLYPHS, image.Height());
+
+	// Measure the ink of each glyph, which is how glyphs from font files are spaced after them.
+	const int glyphPixels = image.Width() / GLYPHS;
+	inkWidth.assign(GLYPHS, 0);
+	inkLeft.assign(GLYPHS, 0);
+	fileAdvance.assign(GLYPHS, 0);
+	for(int i = 0; i < GLYPHS; ++i)
+		Measure(image, i * glyphPixels, 0, glyphPixels, image.Height(), inkWidth[i], inkLeft[i]);
+
+	// Glyphs from font files are drawn into cells that are as wide as the font is tall, with room above
+	// for accents. They are lined up with the font image by the baseline and the x-height of its "x".
+	cellWidth = image.Height();
+	cellHeight = image.Height() + EXT_TOP;
+	int top = image.Height();
+	int bottom = -1;
+	for(int row = 0; row < image.Height(); ++row)
+		for(int i = 0; i < glyphPixels; ++i)
+			if((image.Pixels()[row * image.Width() + ('x' - 32) * glyphPixels + i] & 0xFF000000) >= 0xC0000000)
+			{
+				top = min(top, row);
+				bottom = max(bottom, row);
+			}
+	baseline = bottom >= 0 ? bottom + 1 : image.Height() * 4 / 5;
+	xHeight = bottom >= 0 ? bottom - top + 1 : image.Height() / 2;
+
 	widthEllipses = WidthRawString("...");
 }
 
@@ -144,6 +199,7 @@ void Font::DrawAliased(const string &str, double x, double y, const Color &color
 	}
 	glUniform2fv(scaleI, 1, scale);
 	glUniform2f(glyphSizeI, glyphWidth, glyphHeight);
+	glUniform2f(gridI, GLYPHS, 1.f);
 
 	GLfloat textPos[2] = {
 		static_cast<float>(x - 1.),
@@ -151,53 +207,77 @@ void Font::DrawAliased(const string &str, double x, double y, const Color &color
 	int previous = 0;
 	bool isAfterSpace = true;
 	bool underlineChar = false;
-	bool doubleUnderlineChar = false;
 	const int underscoreGlyph = max(0, min(GLYPHS - 1, '_' - 32));
 
-	for(char c : str)
+	// Switch between the font image (page -1) and the pages of glyphs that come from font files.
+	int page = -1;
+	const auto Use = [&](int wanted)
 	{
+		if(wanted == page)
+			return;
+		page = wanted;
+		if(wanted < 0)
+		{
+			glBindTexture(GL_TEXTURE_2D, texture);
+			glUniform2f(glyphSizeI, glyphWidth, glyphHeight);
+			glUniform2f(gridI, GLYPHS, 1.f);
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_2D, pages[wanted]);
+			glUniform2f(glyphSizeI, cellWidth * .5f, cellHeight * .5f);
+			glUniform2f(gridI, PAGE_COLUMNS, PAGE_ROWS);
+		}
+	};
+
+	for(size_t pos = 0; pos < str.size(); )
+	{
+		const char32_t c = Utf8::DecodeCodePoint(str, pos);
 		if(c == '_')
 		{
-			if(underlineChar)
-				doubleUnderlineChar = true;
 			underlineChar = showUnderlines;
 			continue;
 		}
 
-		int glyph = Glyph(c, isAfterSpace);
+		const int glyph = Glyph(c, isAfterSpace);
+		// A glyph that was only just drawn must be put in its page before it can be used.
+		if(!pending.empty())
+		{
+			FlushGlyphs();
+			page = UNKNOWN_PAGE;
+		}
 		if(c != '"' && c != '\'')
 			isAfterSpace = !glyph;
 		if(!glyph)
 		{
+			if(c >= 0x80 && c != 0xA0)
+				ReportMissing(c);
 			textPos[0] += space;
 			continue;
 		}
 
-		glUniform1i(glyphI, glyph);
+		// Glyphs from font files are cells of a page, which is chosen first.
+		const bool fromFile = glyph >= GLYPHS;
+		Use(fromFile ? (glyph - GLYPHS) / PAGE_CELLS : -1);
+		glUniform1i(glyphI, fromFile ? (glyph - GLYPHS) % PAGE_CELLS : glyph);
 		glUniform1f(aspectI, 1.f);
 
-		textPos[0] += advance[previous * GLYPHS + glyph] + KERN;
-		glUniform2fv(positionI, 1, textPos);
+		textPos[0] += Advance(previous, glyph) + KERN;
+		// Those cells have extra room above them, so they are drawn that much higher.
+		glUniform2f(positionI, textPos[0], textPos[1] - (fromFile ? EXT_TOP / 2 : 0));
 
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		if(underlineChar)
 		{
+			Use(-1);
 			glUniform1i(glyphI, underscoreGlyph);
-			glUniform1f(aspectI, static_cast<float>(advance[glyph * GLYPHS] + KERN)
+			glUniform1f(aspectI, static_cast<float>(Advance(glyph, 0) + KERN)
 				/ (advance[underscoreGlyph * GLYPHS] + KERN));
 
-			glUniform2fv(positionI, 1, textPos);
+			glUniform2f(positionI, textPos[0], textPos[1]);
+
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-			if(doubleUnderlineChar)
-			{
-				GLfloat underlinePos[2] = {textPos[0], textPos[1] + UNDERLINE_OFFSET};
-				glUniform2fv(positionI, 1, underlinePos);
-				glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-				doubleUnderlineChar = false;
-			}
-
 			underlineChar = false;
 		}
 
@@ -219,7 +299,7 @@ void Font::DrawAliased(const string &str, double x, double y, const Color &color
 
 int Font::Width(const string &str, char after) const
 {
-	return WidthRawString(str.c_str(), after);
+	return WidthRawString(str, after);
 }
 
 
@@ -228,7 +308,7 @@ int Font::FormattedWidth(const DisplayText &text, char after) const
 {
 	int width = -1;
 	const string truncText = TruncateText(text, width);
-	return width < 0 ? WidthRawString(truncText.c_str(), after) : width;
+	return width < 0 ? WidthRawString(truncText, after) : width;
 }
 
 
@@ -254,31 +334,171 @@ void Font::ShowUnderlines(bool show) noexcept
 
 
 
-int Font::Glyph(char c, bool isAfterSpace) noexcept
+// Get the glyph number for a character. Glyphs from font files are numbered from GLYPHS.
+int Font::Glyph(char32_t c, bool isAfterSpace) const noexcept
 {
+	// Preferred fonts are asked first, for everything except spaces and control characters.
+	if(!preferredFiles.Empty() && c > ' ' && c != 0x7F && c != 0xA0)
+	{
+		// A quote after a space opens a quotation, so it has its curly form, if the font has one.
+		const char32_t opening = (c == '\'') ? 0x2018 : (c == '"') ? 0x201C : 0;
+		int glyph = (opening && isAfterSpace) ? FindGlyph(opening, false) : 0;
+		if(!glyph)
+			glyph = FindGlyph(c, false);
+		if(glyph)
+			return glyph;
+	}
+
+	if(c >= 0x80)
+	{
+		// Curly quotes and the no-break space use glyphs that the font image already has.
+		switch(c)
+		{
+			case 0x00A0: return 0;
+			case 0x2018: return 96;
+			case 0x2019: return '\'' - 32;
+			case 0x201C: return 97;
+			case 0x201D: return '"' - 32;
+		}
+		// Anything else can only come from a fallback font. If there is none, it is a space.
+		return FindGlyph(c, true);
+	}
+
 	// Curly quotes.
 	if(c == '\'' && isAfterSpace)
 		return 96;
 	if(c == '"' && isAfterSpace)
 		return 97;
 
-	return max(0, min(GLYPHS - 3, c - 32));
+	return max(0, min(GLYPHS - 3, static_cast<int>(c) - 32));
 }
 
 
 
-void Font::LoadTexture(ImageBuffer &image)
+// Get the glyph for a character from the preferred or the fallback fonts, drawing it if this is the
+// first time it was wanted. This is 0 if no font has it.
+int Font::FindGlyph(char32_t c, bool fallback) const noexcept
 {
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	unordered_map<char32_t, int> &known = fallback ? fallbackGlyphs : preferredGlyphs;
+	const auto it = known.find(c);
+	if(it != known.end())
+		return it->second;
+
+	FontFiles &files = fallback ? fallbackFiles : preferredFiles;
+	int glyph = 0;
+	FontFiles::Glyph drawn;
+	if(!files.Empty() && cells < MAX_PAGES * PAGE_CELLS && files.Render(c, drawn))
+	{
+		glyph = GLYPHS + cells++;
+		inkWidth.push_back(drawn.inkWidth);
+		inkLeft.push_back(drawn.inkLeft);
+		fileAdvance.push_back(drawn.advance);
+		pending.emplace_back(glyph - GLYPHS, std::move(drawn.pixels));
+	}
+	known.emplace(c, glyph);
+	return glyph;
+}
+
+
+
+// Put the glyphs that were drawn into their pages. Pages are made when the first of their glyphs is.
+void Font::FlushGlyphs() const
+{
+	for(const auto &cell : pending)
+	{
+		const size_t page = cell.first / PAGE_CELLS;
+		if(page >= pages.size())
+			pages.resize(page + 1, 0);
+		if(!pages[page])
+		{
+			const vector<uint32_t> blank(static_cast<size_t>(PAGE_COLUMNS) * cellWidth * PAGE_ROWS * cellHeight, 0);
+			pages[page] = CreateTexture(PAGE_COLUMNS * cellWidth, PAGE_ROWS * cellHeight, blank.data());
+		}
+		const int index = cell.first % PAGE_CELLS;
+		glBindTexture(GL_TEXTURE_2D, pages[page]);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, (index % PAGE_COLUMNS) * cellWidth, (index / PAGE_COLUMNS) * cellHeight,
+			cellWidth, cellHeight, GL_RGBA, GL_UNSIGNED_BYTE, cell.second.data());
+	}
+	pending.clear();
+}
+
+
+
+// Say in the log (once for each character) that no font can draw a character. It is drawn as a space,
+// so without this it is hard to tell that a font is missing.
+void Font::ReportMissing(char32_t c) const
+{
+	// A language that has no font at all would otherwise fill the log.
+	static const size_t MAX_REPORTED = 20;
+	if(missing.size() >= MAX_REPORTED || !missing.insert(c).second)
+		return;
+
+	char code[16];
+	snprintf(code, sizeof(code), "U+%04X", static_cast<unsigned>(c));
+	Logger::Log(string("No font has a glyph for ") + code + ". Put a font file that has it in the \"fonts\" folder.",
+		Logger::Level::WARNING);
+	if(missing.size() == MAX_REPORTED)
+		Logger::Log("More characters than these have no font. They are not listed.", Logger::Level::WARNING);
+}
+
+
+
+// How far to move after drawing the glyph "previous" before drawing the glyph "next".
+int Font::Advance(int previous, int next) const noexcept
+{
+	// The font image has a table of pairs, which is tuned to look good.
+	if(previous < GLYPHS && next < GLYPHS)
+		return advance[previous * GLYPHS + next];
+	if(!previous)
+		return 0;
+	// A glyph from a font file moves by its own advance, less the KERN that follows every glyph.
+	if(previous >= GLYPHS)
+		return fileAdvance[previous] - KERN;
+	// A glyph of the font image, then one from a file. There is no table for this, but this is within
+	// a pixel of what the table says: the width of the first, less the space at the left of the next.
+	return (inkWidth[previous] - (next ? min(inkLeft[next], 4) : 0)) / 2;
+}
+
+
+
+GLuint Font::CreateTexture(int width, int height, const void *pixels)
+{
+	GLuint id = 0;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, image.Width(), image.Height(), 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, image.Pixels());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+	return id;
+}
+
+
+
+void Font::UseFiles(vector<filesystem::path> preferred, vector<filesystem::path> fallback)
+{
+	// The font image says how big the glyphs should be.
+	if(!texture)
+		return;
+
+	// Forget the glyphs that came from the previous fonts, and the pages that hold them.
+	if(!pages.empty())
+		glDeleteTextures(static_cast<GLsizei>(pages.size()), pages.data());
+	pages.clear();
+	pending.clear();
+	preferredGlyphs.clear();
+	fallbackGlyphs.clear();
+	missing.clear();
+	cells = 0;
+	inkWidth.resize(GLYPHS);
+	inkLeft.resize(GLYPHS);
+	fileAdvance.resize(GLYPHS);
+
+	preferredFiles.Set(std::move(preferred), cellWidth, cellHeight, baseline + EXT_TOP, xHeight);
+	fallbackFiles.Set(std::move(fallback), cellWidth, cellHeight, baseline + EXT_TOP, xHeight);
 }
 
 
@@ -389,6 +609,7 @@ void Font::SetUpShader(float glyphW, float glyphH)
 		colorI = shader->Uniform("color");
 		scaleI = shader->Uniform("scale");
 		glyphSizeI = shader->Uniform("glyphSize");
+		gridI = shader->Uniform("grid");
 		glyphI = shader->Uniform("glyph");
 		aspectI = shader->Uniform("aspect");
 		positionI = shader->Uniform("position");
@@ -401,29 +622,33 @@ void Font::SetUpShader(float glyphW, float glyphH)
 
 
 
-int Font::WidthRawString(const char *str, char after) const noexcept
+int Font::WidthRawString(const string &str, char after) const noexcept
 {
 	int width = 0;
 	int previous = 0;
 	bool isAfterSpace = true;
 
-	for( ; *str; ++str)
+	for(size_t pos = 0; pos < str.size(); )
 	{
-		if(*str == '_')
+		const char32_t c = Utf8::DecodeCodePoint(str, pos);
+		// Like a C string, the text ends at a null character.
+		if(!c)
+			break;
+		if(c == '_')
 			continue;
 
-		int glyph = Glyph(*str, isAfterSpace);
-		if(*str != '"' && *str != '\'')
+		const int glyph = Glyph(c, isAfterSpace);
+		if(c != '"' && c != '\'')
 			isAfterSpace = !glyph;
 		if(!glyph)
 			width += space;
 		else
 		{
-			width += advance[previous * GLYPHS + glyph] + KERN;
+			width += Advance(previous, glyph) + KERN;
 			previous = glyph;
 		}
 	}
-	width += advance[previous * GLYPHS + max(0, min(GLYPHS - 1, after - 32))];
+	width += Advance(previous, max(0, min(GLYPHS - 1, after - 32)));
 
 	return width;
 }
@@ -442,7 +667,7 @@ string Font::TruncateText(const DisplayText &text, int &width) const
 	switch(layout.truncate)
 	{
 		case Truncate::NONE:
-			width = WidthRawString(str.c_str());
+			width = WidthRawString(str);
 			return str;
 		case Truncate::FRONT:
 			return TruncateFront(str, width);
@@ -461,7 +686,7 @@ string Font::TruncateBack(const string &str, int &width) const
 	return TruncateEndsOrMiddle(str, width,
 		[](const string &str, int charCount)
 		{
-			return str.substr(0, charCount) + "...";
+			return str.substr(0, Utf8::CodePointStart(str, charCount)) + "...";
 		});
 }
 
@@ -472,7 +697,7 @@ string Font::TruncateFront(const string &str, int &width) const
 	return TruncateEndsOrMiddle(str, width,
 		[](const string &str, int charCount)
 		{
-			return "..." + str.substr(str.size() - charCount);
+			return "..." + str.substr(Utf8::CodePointStart(str, str.size() - charCount));
 		});
 }
 
@@ -483,7 +708,8 @@ string Font::TruncateMiddle(const string &str, int &width) const
 	return TruncateEndsOrMiddle(str, width,
 		[](const string &str, int charCount)
 		{
-			return str.substr(0, (charCount + 1) / 2) + "..." + str.substr(str.size() - charCount / 2);
+			return str.substr(0, Utf8::CodePointStart(str, (charCount + 1) / 2)) + "..."
+				+ str.substr(Utf8::CodePointStart(str, str.size() - charCount / 2));
 		});
 }
 
@@ -492,7 +718,7 @@ string Font::TruncateMiddle(const string &str, int &width) const
 string Font::TruncateEndsOrMiddle(const string &str, int &width,
 	function<string(const string &, int)> getResultString) const
 {
-	int firstWidth = WidthRawString(str.c_str());
+	int firstWidth = WidthRawString(str);
 	if(firstWidth <= width)
 	{
 		width = firstWidth;
@@ -507,7 +733,7 @@ string Font::TruncateEndsOrMiddle(const string &str, int &width,
 	{
 		// Think "how many chars to take from both ends, omitting in the middle".
 		int nextChars = (low + high) / 2;
-		int nextWidth = WidthRawString(getResultString(str, nextChars).c_str());
+		int nextWidth = WidthRawString(getResultString(str, nextChars));
 		if(nextWidth <= width)
 		{
 			if(nextChars > workingChars)

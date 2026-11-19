@@ -30,14 +30,16 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "MainPanel.h"
 #include "pi.h"
 #include "PilotProfile.h"
+#include "Planet.h"
 #include "PlayerInfo.h"
 #include "Point.h"
 #include "PreferencesPanel.h"
-#include "SavedGame.h"
 #include "Ship.h"
+#include "image/Sprite.h"
 #include "shader/StarField.h"
 #include "StartConditionsPanel.h"
 #include "System.h"
+#include "Translations.h"
 #include "UI.h"
 
 #include "opengl.h"
@@ -45,6 +47,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <stdexcept>
 
 using namespace std;
 
@@ -143,18 +146,25 @@ void MenuPanel::Draw()
 	Information info;
 	if(player.IsLoaded() && !player.IsDead())
 	{
-		if(!player.Pilot()->IsLocked() || !player.GetPlanet())
-			info.SetCondition("can load");
-		else
-			info.SetCondition("no pilot loaded");
-		SavedGame(player).PopulateInfo(info);
+		info.SetCondition("pilot loaded");
+		info.SetString("pilot", player.FirstName() + " " + player.LastName());
+		if(player.Flagship())
+		{
+			const Ship &flagship = *player.Flagship();
+			info.SetSprite("ship sprite", flagship.GetSprite());
+			info.SetString("ship", flagship.GivenName());
+		}
+		if(player.GetSystem())
+			info.SetString("system", player.GetSystem()->DisplayName());
+		if(player.GetPlanet())
+			info.SetString("planet", player.GetPlanet()->DisplayName());
+		info.SetString("credits", Format::AbbreviatedNumber(player.Accounts().Credits()));
+		info.SetString("date", player.GetDate().ToString());
+		info.SetString("playtime", Format::PlayTime(player.GetPlayTime()));
 	}
 	else if(player.IsLoaded())
 	{
-		if(player.Pilot()->IsLocked())
-			info.SetCondition("no pilot loaded");
-		else
-			info.SetCondition("pilot dead");
+		info.SetCondition("pilot dead");
 		info.SetString("pilot", player.FirstName() + " " + player.LastName());
 		info.SetString("ship", "You have died.");
 	}
@@ -163,9 +173,10 @@ void MenuPanel::Draw()
 		info.SetCondition("no pilot loaded");
 		info.SetString("pilot", "No Pilot Loaded");
 	}
-	if(player.IsLoaded() && !player.Pilot()->IsLocked() && !player.Pilot()->GetGamerules().LockGamerules())
+	if(player.Pilot() && !player.Pilot()->GetGamerules().LockGamerules())
 		info.SetCondition("gamerules unlocked");
 
+	info.SetString("language", Translations::Current());
 	GameData::Interfaces().Get("menu background")->Draw(info, this);
 	mainMenuUi->Draw(info, this);
 	GameData::Interfaces().Get("menu player info")->Draw(info, this);
@@ -178,15 +189,13 @@ void MenuPanel::Draw()
 
 bool MenuPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &command, bool isNewPress)
 {
-	bool canEnterPlayer = player.IsLoaded() && (!player.Pilot()->IsLocked()
-		|| (!player.IsDead() && !player.GetPlanet()));
-	if((key == 'e' || command.Has(Command::MENU)) && canEnterPlayer)
+	if(player.IsLoaded() && (key == 'e' || command.Has(Command::MENU)))
 	{
 		gamePanels.CanSave(true);
 		GetUI().PopThrough(this);
 		return true;
 	}
-	else if(key == 'r' && player.IsLoaded() && player.IsDead() && !player.Pilot()->IsLocked())
+	else if(key == 'r' && player.IsLoaded() && player.IsDead())
 	{
 		// First, make sure the previous MainPanel has been deleted.
 		gamePanels.Reset();
@@ -205,19 +214,21 @@ bool MenuPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &command, boo
 		GetUI().Push(new PreferencesPanel(player));
 	else if(key == 'l' || key == 'm')
 		GetUI().Push(new LoadPanel(player, gamePanels));
-	else if(key == 'n' && (!player.IsLoaded() || (player.Pilot()->IsLocked() && player.IsDead())))
+	else if(key == 'n' && !player.IsLoaded())
 	{
 		// If no player is loaded, the "Enter Ship" button becomes "New Pilot."
 		// Request that the player chooses a start scenario.
 		// StartConditionsPanel also handles the case where there's no scenarios.
 		GetUI().Push(new StartConditionsPanel(player, gamePanels, GameData::StartOptions(), nullptr));
 	}
-	else if(key == 'g' && canEnterPlayer && !player.Pilot()->GetGamerules().LockGamerules())
+	else if(key == 'g' && player.Pilot() && !player.Pilot()->GetGamerules().LockGamerules())
 	{
 		GamerulesPanel *panel = new GamerulesPanel(player.Pilot()->GetGamerules(), true);
 		panel->SetCallback(player.Pilot().get(), &PilotProfile::Save);
 		GetUI().Push(panel);
 	}
+	else if(key == 'a')
+		Translations::Next();
 	else if(key == 'q')
 	{
 		GetUI().Quit();
