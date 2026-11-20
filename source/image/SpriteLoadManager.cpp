@@ -15,7 +15,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "SpriteLoadManager.h"
 
-#include "../Drawable.h"
 #include "ImageSet.h"
 #include "../Preferences.h"
 #include "Sprite.h"
@@ -208,13 +207,6 @@ void SpriteLoadManager::LoadSprite(TaskQueue &queue, const shared_ptr<ImageSet> 
 bool SpriteLoadManager::IsDeferred(const Sprite *sprite)
 {
 	return deferred.contains(sprite);
-}
-
-
-
-void SpriteLoadManager::LoadDeferred(TaskQueue &queue, const Drawable &drawable)
-{
-	LoadDeferred(queue, drawable.GetSprite());
 }
 
 

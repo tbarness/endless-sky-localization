@@ -33,6 +33,7 @@ mission "Escort (Tiny, Northern, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 40
 		system destination
 		fleet
 			names "pirate"
@@ -47,6 +48,7 @@ mission "Escort (Tiny, Northern, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		system destination
 		fleet
 			names "pirate"
@@ -96,6 +98,7 @@ mission "Escort (Tiny, Northern, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		fleet
 			names "pirate"
 			variant
@@ -109,6 +112,7 @@ mission "Escort (Tiny, Northern, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		system
 			distance 1
 		fleet
@@ -156,16 +160,19 @@ mission "Escort (Small, Northern, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis entering harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Northern Pirates"
 	
@@ -201,16 +208,19 @@ mission "Escort (Small, Northern, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		system
 			distance 1
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		system
 			distance 1
 		fleet "Small Northern Pirates"
@@ -247,21 +257,25 @@ mission "Escort (Medium, Northern, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis entering harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Northern Pirates" 2
 	
@@ -297,21 +311,25 @@ mission "Escort (Medium, Northern, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		fleet "Small Northern Pirates" 2
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Northern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Northern Pirates"
 	
@@ -541,6 +559,7 @@ mission "Escort (Tiny, Core, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		system destination
 		fleet
 			names "pirate"
@@ -555,6 +574,7 @@ mission "Escort (Tiny, Core, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 40
 		system destination
 		fleet
 			names "pirate"
@@ -604,6 +624,7 @@ mission "Escort (Tiny, Core, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		system
 			distance 2 2
 		fleet
@@ -619,6 +640,7 @@ mission "Escort (Tiny, Core, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		fleet
 			names "pirate"
 			variant
@@ -664,16 +686,19 @@ mission "Escort (Small, Core, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis entering harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Core Pirates"
 	
@@ -709,18 +734,21 @@ mission "Escort (Small, Core, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		system
 			distance 1
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		system
 			distance 1 2
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		fleet "Small Core Pirates"
 	
 	npc accompany save
@@ -755,16 +783,19 @@ mission "Escort (Medium, Core, Dangerous Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Core Pirates" 2
 	npc
 		government "Pirate"
 		personality nemesis entering harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Core Pirates" 2
 	
@@ -800,24 +831,28 @@ mission "Escort (Medium, Core, Dangerous Origin)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system
 			distance 1
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system
 			distance 1
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Core Pirates"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		fleet "Small Core Pirates" 2
 	
 	npc accompany save
@@ -1047,6 +1082,7 @@ mission "Escort (Tiny, Southern, Dangerous Origin or Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 40
 		fleet
 			names "pirate"
 			variant
@@ -1060,6 +1096,7 @@ mission "Escort (Tiny, Southern, Dangerous Origin or Destination)"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 40
 		system destination
 		fleet
 			names "pirate"
@@ -1106,10 +1143,12 @@ mission "Escort (Small, Southern, Dangerous Origin or Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 30
 		fleet "Small Southern Pirates"
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 30
 		system destination
 		fleet "Small Southern Pirates"
 	
@@ -1145,10 +1184,12 @@ mission "Escort (Medium, Southern, Dangerous Origin or Destination)"
 	npc
 		government "Pirate"
 		personality nemesis harvests plunders
+			confusion 20
 		fleet "Small Southern Pirates" 2
 	npc
 		government "Pirate"
 		personality nemesis staying harvests plunders
+			confusion 20
 		system destination
 		fleet "Small Southern Pirates" 2
 	

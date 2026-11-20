@@ -227,7 +227,7 @@ namespace {
 	};
 
 	const map<string, string> BOOLEAN_ATTRIBUTES = {
-		{"unplunderable", "Cannot be plundered while installed."},
+		{"unplunderable", "This outfit cannot be plundered."},
 		{"installable", "This is not an installable item."},
 		{"hyperdrive", "Allows you to make hyperjumps."},
 		{"jump drive", "Lets you jump to any nearby system."},
@@ -240,8 +240,7 @@ namespace {
 		{"cloaked communication", "You may make hails while cloaked."},
 		{"cloaked deployment", "You may deploy from bays while cloaked."},
 		{"cloaked pickup", "You may pick up flotsam while cloaked."},
-		{"cloaked scanning", "You may scan other ships while cloaked."},
-		{"can jettison", "Can be jettisoned while installed."},
+		{"cloaked scanning", "You may scan other ships while cloaked."}
 	};
 
 	bool IsNotRequirement(const string &label)
@@ -379,9 +378,9 @@ void OutfitInfoDisplay::UpdateRequirements(const Outfit &outfit, const PlayerInf
 		requirementsHeight += 10;
 	}
 
-	for(const auto &[name, value] : outfit)
-		if(!count(BEFORE.begin(), BEFORE.end(), name))
-			AddRequirementAttribute(name, value);
+	for(const pair<const char *, double> &it : outfit.Attributes())
+		if(!count(BEFORE.begin(), BEFORE.end(), it.first))
+			AddRequirementAttribute(it.first, it.second);
 }
 
 
@@ -447,26 +446,26 @@ void OutfitInfoDisplay::UpdateAttributes(const Outfit &outfit)
 		hasNormalAttributes = true;
 	}
 
-	for(const auto &[name, value] : outfit)
+	for(const pair<const char *, double> &it : outfit.Attributes())
 	{
-		if(count(EXPECTED_NEGATIVE.begin(), EXPECTED_NEGATIVE.end(), name))
+		if(count(EXPECTED_NEGATIVE.begin(), EXPECTED_NEGATIVE.end(), it.first))
 			continue;
 
 		// Only show positive values here, with some exceptions.
 		// Negative values are usually handled as a "requirement"
-		if(name == "required crew")
+		if(static_cast<string>(it.first) == "required crew")
 		{
 			// 'required crew' is inverted - positive values are requirements.
-			if(value > 0)
+			if(it.second > 0)
 				continue;
 
 			// A negative 'required crew' would be a benefit, so it is listed here.
 		}
 		// If this attribute is not a requirement, it is always listed here, though it may be negative.
-		else if(value < 0 && !IsNotRequirement(name))
+		else if(it.second < 0 && !IsNotRequirement(it.first))
 			continue;
 
-		auto bit = BOOLEAN_ATTRIBUTES.find(name);
+		auto bit = BOOLEAN_ATTRIBUTES.find(it.first);
 		if(bit != BOOLEAN_ATTRIBUTES.end())
 		{
 			attributeLabels.emplace_back(bit->second);
@@ -475,8 +474,8 @@ void OutfitInfoDisplay::UpdateAttributes(const Outfit &outfit)
 		}
 		else
 		{
-			attributeLabels.emplace_back(name + ":");
-			attributeValues.emplace_back(FormatAttribute(name, value));
+			attributeLabels.emplace_back(static_cast<string>(it.first) + ":");
+			attributeValues.emplace_back(FormatAttribute(it.first, it.second));
 			attributesHeight += 20;
 		}
 		hasNormalAttributes = true;

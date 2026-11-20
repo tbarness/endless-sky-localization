@@ -16,7 +16,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "MissionAction.h"
 
 #include "CargoHold.h"
-#include "Conversation.h"
 #include "ConversationPanel.h"
 #include "DataNode.h"
 #include "DataWriter.h"
@@ -26,7 +25,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "GameData.h"
 #include "GameEvent.h"
 #include "Outfit.h"
-#include "Phrase.h"
 #include "PlayerInfo.h"
 #include "Ship.h"
 #include "TextReplacements.h"
@@ -166,7 +164,7 @@ void MissionAction::SaveBody(DataWriter &out) const
 		out.Write("can trigger after failure");
 	if(!dialog.IsEmpty())
 		dialog.Save(out);
-	if(conversation && !conversation->IsEmpty())
+	if(!conversation->IsEmpty())
 		conversation->Save(out);
 	for(const auto &it : requiredOutfits)
 		out.Write("require", it.first->TrueName(), it.second);
@@ -189,17 +187,14 @@ string MissionAction::Validate() const
 	// Dialogs must contain valid phrases.
 	if(!dialog.Validate())
 		return "stock phrase in dialog";
-	if(conversation)
-	{
-		// Stock conversations must be defined.
-		if(conversation.IsStock() && conversation->IsEmpty())
-			return "stock conversation";
+	// Stock conversations must be defined.
+	if(conversation.IsStock() && conversation->IsEmpty())
+		return "stock conversation";
 
-		// Conversations must have valid actions.
-		string reason = conversation->Validate();
-		if(!reason.empty())
-			return reason;
-	}
+	// Conversations must have valid actions.
+	string reason = conversation->Validate();
+	if(!reason.empty())
+		return reason;
 
 	// Required content must be defined & valid.
 	for(auto &&outfit : requiredOutfits)
@@ -211,7 +206,7 @@ string MissionAction::Validate() const
 
 
 
-string MissionAction::DialogText() const
+const string &MissionAction::DialogText() const
 {
 	return dialog.Text();
 }
@@ -220,8 +215,7 @@ string MissionAction::DialogText() const
 
 // Check if this action can be completed right now. It cannot be completed
 // if it takes away money or outfits that the player does not have.
-bool MissionAction::CanBeDone(const PlayerInfo &player, bool isFailed,
-	bool executeWhenLanded, const shared_ptr<Ship> &boardingShip) const
+bool MissionAction::CanBeDone(const PlayerInfo &player, bool isFailed, const shared_ptr<Ship> &boardingShip) const
 {
 	if(isFailed && !runsWhenFailed && trigger != "fail")
 		return false;
@@ -235,13 +229,12 @@ bool MissionAction::CanBeDone(const PlayerInfo &player, bool isFailed,
 		if(it.second > 0)
 			continue;
 
-		// Outfits may always be taken from the flagship, either installed or in cargo.
-		// If landed, they may also be taken from the player's pooled cargo.
-		// If in-flight, not boarding, and the action is to be executed while landed,
-		// show mission status by checking the cargo holds of ships that would
-		// contribute to pooled cargo if landed.
+		// Outfits may always be taken from the flagship. If landed, they may also be taken from
+		// the collective cargo hold of any in-system, non-disabled escorts (player.Cargo()). If
+		// boarding, consider only the flagship's cargo hold. If in-flight, show mission status
+		// by checking the cargo holds of ships that would contribute to player.Cargo if landed.
 		int available = flagship ? flagship->OutfitCount(it.first) : 0;
-		available += (boardingShip || !executeWhenLanded) ? flagship->Cargo().Get(it.first)
+		available += boardingShip ? flagship->Cargo().Get(it.first)
 				: CountInCargo(it.first, player);
 
 		if(available < -it.second)
@@ -319,7 +312,7 @@ void MissionAction::Do(PlayerInfo &player, UI *ui, const Mission *caller, const 
 	if(ui)
 	{
 		bool isOffer = (trigger == "offer");
-		if(conversation && !conversation->IsEmpty())
+		if(!conversation->IsEmpty())
 		{
 			// Conversations offered while boarding or assisting reference a ship,
 			// which may be destroyed depending on the player's choices.
@@ -378,7 +371,7 @@ MissionAction MissionAction::Instantiate(map<string, string> &subs, const System
 	// Create any associated dialog text from phrases, or use the directly specified text.
 	result.dialog = dialog.Instantiate(subs);
 
-	if(conversation && !conversation->IsEmpty())
+	if(!conversation->IsEmpty())
 		result.conversation = ExclusiveItem<Conversation>(conversation->Instantiate(subs, jumps, payload));
 
 	// Restore the "<payment>" and "<fine>" values from the "on complete" condition, for

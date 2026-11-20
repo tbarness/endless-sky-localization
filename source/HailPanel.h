@@ -29,7 +29,6 @@ class PlayerInfo;
 class Ship;
 class Sprite;
 class StellarObject;
-class TextArea;
 
 
 
@@ -67,7 +66,7 @@ private:
 	int step = 0;
 
 	std::string header;
-	std::shared_ptr<TextArea> message;
+	std::string message;
 
 	int64_t bribe = 0;
 	const Government *bribed = nullptr;

@@ -50,7 +50,8 @@ namespace {
 	// Check if the ship evades being outfit scanned.
 	bool EvadesOutfitScan(const Ship &ship)
 	{
-		return ship.Inscrutable() || Random::Real() > 1. / (1. + ship.Attributes().Get("scan interference"));
+		return ship.Attributes().Get("inscrutable") > 0. ||
+				Random::Real() > 1. / (1. + ship.Attributes().Get("scan interference"));
 	}
 }
 
@@ -277,7 +278,7 @@ pair<const Conversation *, string> Politics::Fine(PlayerInfo &player,
 			if((fine > maxFine && maxFine >= 0) || fine < 0)
 			{
 				maxFine = fine;
-				reason = " for carrying illegal passengers on the " + ship->GivenName() + ".";
+				reason = " for carrying illegal passengers.";
 
 				for(const Mission &mission : player.Missions())
 				{
@@ -307,7 +308,7 @@ pair<const Conversation *, string> Politics::Fine(PlayerInfo &player,
 			if((fine.first > maxFine && maxFine >= 0) || fine.first < 0)
 			{
 				maxFine = fine.first;
-				reason = " for carrying illegal cargo on the " + ship->GivenName() + ".";
+				reason = " for carrying illegal cargo.";
 
 				for(const Mission &mission : player.Missions())
 				{
@@ -332,29 +333,22 @@ pair<const Conversation *, string> Politics::Fine(PlayerInfo &player,
 		}
 		if((!scan || (scan & ShipEvent::SCAN_OUTFITS)) && !EvadesOutfitScan(*ship))
 		{
-			vector<const Outfit *> illegalOutfits;
-			for(const auto &[outfit, count] : ship->Outfits())
-				if(count)
+			for(const auto &it : ship->Outfits())
+				if(it.second)
 				{
-					int fine = gov->Fines(outfit);
-					Government::Atrocity atrocity = gov->Condemns(outfit);
+					int fine = gov->Fines(it.first);
+					Government::Atrocity atrocity = gov->Condemns(it.first);
 					if(atrocity.isAtrocity)
 					{
 						deathSentence = atrocity.customDeathSentence;
 						fine = -1;
 					}
-					if(fine)
+					if((fine > maxFine && maxFine >= 0) || fine < 0)
 					{
-						reason = " for having illegal outfits installed on the " + ship->GivenName() + ":";
-						illegalOutfits.push_back(outfit);
-						if((fine > maxFine && maxFine >= 0) || fine < 0)
-							maxFine = fine;
+						maxFine = fine;
+						reason = " for having illegal outfits installed on your ship.";
 					}
 				}
-
-			if(!illegalOutfits.empty())
-				reason += "\n" + Format::IndentedList(illegalOutfits,
-					[](const Outfit *outfit) -> string { return outfit->DisplayName(); }, 5);
 
 			int shipFine = gov->Fines(ship.get());
 			Government::Atrocity atrocity = gov->Condemns(ship.get());
@@ -366,7 +360,7 @@ pair<const Conversation *, string> Politics::Fine(PlayerInfo &player,
 			if((shipFine > maxFine && maxFine >= 0) || shipFine < 0)
 			{
 				maxFine = shipFine;
-				reason = " for flying an illegal ship, the " + ship->GivenName() + ".";
+				reason = " for flying an illegal ship.";
 			}
 		}
 		if(failedMissions && maxFine > 0)

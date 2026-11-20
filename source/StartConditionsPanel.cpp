@@ -40,7 +40,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "StartConditions.h"
 #include "System.h"
 #include "TaskQueue.h"
-#include "TextArea.h"
 #include "text/Truncate.h"
 #include "UI.h"
 
@@ -54,7 +53,8 @@ StartConditionsPanel::StartConditionsPanel(PlayerInfo &player, UI &gamePanels,
 	const StartConditionsList &allScenarios, const Panel *parent)
 	: player(player), gamePanels(gamePanels), parent(parent), gamerules(GameData::DefaultGamerules()),
 	bright(*GameData::Colors().Get("bright")), medium(*GameData::Colors().Get("medium")),
-	selectedBackground(*GameData::Colors().Get("faint"))
+	selectedBackground(*GameData::Colors().Get("faint")),
+	description(FontSet::Get(14))
 {
 	// Extract from all start scenarios those that are visible to the player.
 	for(const auto &scenario : allScenarios)
@@ -85,14 +85,8 @@ StartConditionsPanel::StartConditionsPanel(PlayerInfo &player, UI &gamePanels,
 	for(size_t i = 0; i < startCount; ++i)
 		startConditionsClickZones.emplace_back(firstRectangle + Point(0, i * entryBox.Height()), scenarios.begin() + i);
 
-	description = make_shared<TextArea>();
-	description->SetFont(FontSet::Get(Preferences::GetFontSize()));
-	description->SetColor(*GameData::Colors().Get("medium"));
-	description->SetAlignment(Preferences::GetTextAlignment());
-	description->SetRect(descriptionBox);
-	description->SetScrollbarOffset(10);
-	description->SetPointerOffset(10);
-	AddChild(description);
+	description.SetWrapWidth(descriptionBox.Width());
+	description.SetAlignment(Preferences::GetTextAlignment());
 
 	Select(startIt);
 
@@ -142,6 +136,9 @@ void StartConditionsPanel::Draw()
 		const auto name = DisplayText(it->GetDisplayName(), Truncate::BACK);
 		font.Draw(name, pos + entryTextPadding, (isHighlighted ? bright : medium).Transparent(opacity));
 	}
+
+	// TODO: Prevent lengthy descriptions from overflowing.
+	description.Draw(descriptionBox.TopLeft(), bright);
 }
 
 
@@ -181,7 +178,7 @@ bool StartConditionsPanel::KeyDown(SDL_Keycode key, Uint16 mod, const Command &c
 		pilot->New(gamerules);
 		player.New(*startIt, pilot);
 
-		ConversationPanel *panel = new ConversationPanel(player, *startIt->GetConversation());
+		ConversationPanel *panel = new ConversationPanel(player, startIt->GetConversation());
 		GetUI().Push(panel);
 		panel->SetCallback(this, &StartConditionsPanel::OnConversationEnd);
 		return true;
@@ -236,6 +233,12 @@ bool StartConditionsPanel::Drag(double /* dx */, double dy)
 	{
 		entriesScroll = max(0., min(entriesScroll - dy,
 			scenarios.size() * entryBox.Height() - entriesContainer.Height()));
+	}
+	else if(descriptionBox.Contains(hoverPoint))
+	{
+		descriptionScroll = 0.;
+		// TODO: When #4123 gets merged, re-add scrolling support to the description.
+		// Right now it's pointless because it would make the text overflow.
 	}
 	else
 		return false;
@@ -322,7 +325,7 @@ void StartConditionsPanel::Select(StartConditionsList::iterator it)
 	if(startIt == scenarios.end())
 	{
 		// The only time we should be here is if there are no scenarios at all.
-		description->SetText("No valid starting scenarios were defined!\n\n"
+		description.Wrap("No valid starting scenarios were defined!\n\n"
 			"Make sure you installed Endless Sky (and any plugins) properly.");
 		return;
 	}
@@ -342,8 +345,10 @@ void StartConditionsPanel::Select(StartConditionsList::iterator it)
 	info.SetString("credits", startIt->GetCredits());
 	info.SetString("debt", startIt->GetDebt());
 
+
 	// Update the displayed description text.
-	description->SetText(startIt->GetDescription());
+	descriptionScroll = 0;
+	description.Wrap(startIt->GetDescription());
 
 	// Scroll the selected scenario into view.
 	ScrollToSelected();

@@ -22,7 +22,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Logger.h"
 #include "Phrase.h"
 #include "Planet.h"
-#include "Point.h"
 #include "Random.h"
 #include "Ship.h"
 #include "ShipJumpNavigation.h"

@@ -15,7 +15,6 @@ ship "Venta"
 	"plural" "Ventae"
 	"sprite" ship/venta
 	"thumbnail" thumbnail/venta
-	"administrative cost" 6
 	"swizzle" 0
 	attributes
 		category "Heavy Warship"
@@ -73,7 +72,6 @@ ship "Nimbus"
 	"plural" "Nimbi"
 	"sprite" ship/nimbus
 	"thumbnail" thumbnail/nimbus
-	"administrative cost" 4
 	"swizzle" 0
 	attributes
 		category "Medium Warship"
@@ -147,7 +145,6 @@ ship "Nimbo Stratus"
 	"plural" "Nimbo Strati"
 	"sprite" ship/stratus
 	"thumbnail" thumbnail/stratus
-	"administrative cost" 2
 	"swizzle" 0
 	attributes
 		category "Utility"
@@ -190,7 +187,6 @@ ship "Nimbo Cirrus"
 	"plural" "Nimbo Cirri"
 	"sprite" ship/cirrus
 	"thumbnail" thumbnail/cirrus
-	"administrative cost" 2
 	"swizzle" 0
 	attributes
 		category "Light Freighter"
@@ -230,7 +226,6 @@ ship "Nimbo Cirrus"
 ship "Gero"
 	"sprite" ship/gero
 	"thumbnail" thumbnail/gero
-	"administrative cost" 2
 	"swizzle" 0
 	attributes
 		category "Transport"

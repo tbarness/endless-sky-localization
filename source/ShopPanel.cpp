@@ -24,6 +24,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "shader/FillShader.h"
 #include "text/Font.h"
 #include "text/FontSet.h"
+#include "text/Format.h"
 #include "GameData.h"
 #include "Gamerules.h"
 #include "Government.h"
@@ -47,7 +48,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "UI.h"
 
 #include "opengl.h"
-#include "SDL.h"
+#include <SDL2/SDL.h>
 
 #include <algorithm>
 
@@ -84,11 +85,11 @@ ShopPanel::ShopPanel(PlayerInfo &player, bool isOutfitter)
 	collapsed(player.Collapsed(isOutfitter ? "outfitter" : "shipyard")),
 	hasFleetCapacity(GameData::GetGamerules().GetFleetSizeLimitation() != Gamerules::FleetSizeLimitation::NONE),
 	shipsTooltip(250, Alignment::LEFT, Tooltip::Direction::DOWN_LEFT, Tooltip::Corner::TOP_LEFT,
-		GameData::Colors().Get("tooltip background"), GameData::Colors().Get("medium"), true),
+		GameData::Colors().Get("tooltip background"), GameData::Colors().Get("medium")),
 	creditsTooltip(250, Alignment::LEFT, Tooltip::Direction::UP_LEFT, Tooltip::Corner::TOP_RIGHT,
-		GameData::Colors().Get("tooltip background"), GameData::Colors().Get("medium"), true),
+		GameData::Colors().Get("tooltip background"), GameData::Colors().Get("medium")),
 	buttonsTooltip(250, Alignment::LEFT, Tooltip::Direction::DOWN_LEFT, Tooltip::Corner::TOP_LEFT,
-		GameData::Colors().Get("tooltip background"), GameData::Colors().Get("medium"), true),
+		GameData::Colors().Get("tooltip background"), GameData::Colors().Get("medium")),
 	loadingCircle(30.f, 10, 2.),
 	hover(*GameData::Colors().Get("hover")),
 	active(*GameData::Colors().Get("active")),
@@ -124,7 +125,6 @@ ShopPanel::ShopPanel(PlayerInfo &player, bool isOutfitter)
 
 void ShopPanel::Step()
 {
-	++step;
 	loadingCircle.Step();
 	if(!checkedHelp && GetUI().IsTop(this) && player.Ships().size() > 1)
 	{
@@ -194,7 +194,7 @@ void ShopPanel::Draw()
 		string text = shipName;
 		if(!warningType.empty())
 			text += "\n" + GameData::Tooltip(warningType);
-		shipsTooltip.SetText(text);
+		shipsTooltip.SetText(text, true);
 		shipsTooltip.SetBackgroundColor(GameData::Colors().Get(warningType.empty() ? "tooltip background"
 			: (warningType.back() == '!' ? "error back" : "warning back")));
 		shipsTooltip.Draw(true);
@@ -202,10 +202,20 @@ void ShopPanel::Draw()
 
 	if(dragShip && isDraggingShip && dragShip->GetSprite())
 	{
-		static const Color selected(.8f, 1.f);
-		const Swizzle *swizzle = dragShip->CustomSwizzle() ? dragShip->CustomSwizzle()
-			: GameData::PlayerGovernment()->GetSwizzle();
-		DrawShipIcon(*dragShip, dragPoint, selected, swizzle);
+		const Sprite *sprite = dragShip->GetSprite();
+		float scale = ICON_SIZE / max(sprite->Width(), sprite->Height());
+		if(Preferences::Has(SHIP_OUTLINES))
+		{
+			static const Color selected(.8f, 1.f);
+			Point size(sprite->Width() * scale, sprite->Height() * scale);
+			OutlineShader::Draw(sprite, dragPoint, size, selected);
+		}
+		else
+		{
+			const Swizzle *swizzle = dragShip->CustomSwizzle()
+				? dragShip->CustomSwizzle() : GameData::PlayerGovernment()->GetSwizzle();
+			SpriteShader::Draw(sprite, dragPoint, scale, swizzle);
+		}
 	}
 
 	// Check to see if we need to scroll things onto the screen.
@@ -229,33 +239,28 @@ void ShopPanel::UpdateTooltipActivation()
 
 
 
-void ShopPanel::DrawShip(const Ship &ship, const Point &center, bool isSelected) const
+void ShopPanel::DrawShip(const Ship &ship, const Point &center, bool isSelected)
 {
-	const Sprite *back = SpriteSet::Get(isSelected ? "ui/shipyard selected" : "ui/shipyard unselected");
+	const Sprite *back = SpriteSet::Get(
+		isSelected ? "ui/shipyard selected" : "ui/shipyard unselected");
 	SpriteShader::Draw(back, center);
 
-	const Drawable &thumbnail = ship.Thumbnail();
-	const Sprite *sprite = thumbnail.GetSprite();
+	const Sprite *thumbnail = ship.Thumbnail();
+	const Sprite *sprite = ship.GetSprite();
 	const Swizzle *swizzle = ship.CustomSwizzle() ? ship.CustomSwizzle() : GameData::PlayerGovernment()->GetSwizzle();
-	if(sprite)
+	if(thumbnail)
 	{
-		float zoom = 1.f;
-		Point nudge;
-		// If the thumbnail sprite matches the main sprite of the ship, then we need to make sure
-		// that the thumbnail doesn't overflow the area it's being drawn within.
-		if(sprite == ship.GetSprite())
-		{
-			// Make sure the ship sprite leaves 10 pixels padding all around.
-			float zoomSize = SHIP_SIZE - 60.f;
-			zoom = min(1.f, zoomSize / max(sprite->Width(), sprite->Height()));
-		}
-		else
-		{
-			// Dedicated thumbnails are expected to be sized to the shop UI.
-			// We just nudge them up slightly.
-			nudge += Point(0., 10.);
-		}
-		DrawThumbnail(thumbnail, isSelected, center + nudge, zoom, swizzle);
+		if(thumbnail->IsLoaded())
+			SpriteShader::Draw(thumbnail, center + Point(0., 10.), 1., swizzle);
+		else if(thumbnail->HasDimensions())
+			loadingCircle.Draw(center);
+	}
+	else if(sprite)
+	{
+		// Make sure the ship sprite leaves 10 pixels padding all around.
+		const float zoomSize = SHIP_SIZE - 60.f;
+		float zoom = min(1.f, zoomSize / max(sprite->Width(), sprite->Height()));
+		SpriteShader::Draw(sprite, center, zoom, swizzle);
 	}
 
 	// Draw the ship name.
@@ -264,49 +269,6 @@ void ShopPanel::DrawShip(const Ship &ship, const Point &center, bool isSelected)
 	Point offset(-SIDEBAR_CONTENT / 2, -.5f * SHIP_SIZE + 10.f);
 	font.Draw({name, {SIDEBAR_CONTENT, Alignment::CENTER, Truncate::MIDDLE}},
 		center + offset, *GameData::Colors().Get("bright"));
-}
-
-
-
-void ShopPanel::DrawShipIcon(const Drawable &thumbnail, const Point &center, const Color &color,
-	const Swizzle *swizzle) const
-{
-	const Sprite *sprite = thumbnail.GetSprite();
-	if(!sprite)
-		return;
-	if(sprite->IsLoaded())
-	{
-		float scale = ICON_SIZE / max(sprite->Width(), sprite->Height());
-		if(Preferences::Has(SHIP_OUTLINES))
-		{
-			Point size(sprite->Width() * scale, sprite->Height() * scale);
-			OutlineShader::Draw(sprite, center, size, color);
-		}
-		else
-			SpriteShader::Draw(sprite, center, scale, swizzle);
-	}
-	else if(sprite->HasDimensions())
-		loadingCircle.Draw(center, 1., ICON_SIZE);
-}
-
-
-
-void ShopPanel::DrawThumbnail(const Drawable &thumbnail, bool animate, const Point &center, float zoom,
-	const Swizzle *swizzle) const
-{
-	const Sprite *sprite = thumbnail.GetSprite();
-	if(!sprite)
-		return;
-	if(sprite->IsLoaded())
-	{
-		if(animate)
-			thumbnail.UnpauseAnimation();
-		else
-			thumbnail.PauseAnimation();
-		SpriteShader::Draw(sprite, center, zoom, swizzle, thumbnail.GetFrame(step));
-	}
-	else if(sprite->HasDimensions())
-		loadingCircle.Draw(center);
 }
 
 
@@ -855,9 +817,21 @@ void ShopPanel::DrawShipsSidebar()
 		if(isSelected && ShouldHighlight(ship.get()))
 			SpriteShader::Draw(background, point);
 
-		const Swizzle *swizzle = ship->CustomSwizzle() ? ship->CustomSwizzle()
-			: GameData::PlayerGovernment()->GetSwizzle();
-		DrawShipIcon(*ship, point, isSelected ? selected : unselected, swizzle);
+		const Sprite *sprite = ship->GetSprite();
+		if(sprite)
+		{
+			float scale = ICON_SIZE / max(sprite->Width(), sprite->Height());
+			if(Preferences::Has(SHIP_OUTLINES))
+			{
+				Point size(sprite->Width() * scale, sprite->Height() * scale);
+				OutlineShader::Draw(sprite, point, size, isSelected ? selected : unselected);
+			}
+			else
+			{
+				const Swizzle *swizzle = ship->CustomSwizzle() ? ship->CustomSwizzle() : GameData::PlayerGovernment()->GetSwizzle();
+				SpriteShader::Draw(sprite, point, scale, swizzle);
+			}
+		}
 
 		shipZones.emplace_back(point, Point(ICON_TILE, ICON_TILE), ship.get());
 
@@ -1253,19 +1227,14 @@ void ShopPanel::SideSelect(Ship *ship, int clicks)
 // If selected item is offscreen, scroll just enough to put it on.
 void ShopPanel::MainAutoScroll(const vector<Zone>::const_iterator &selected)
 {
-	int tileSize = TileSize();
-	int topY = selected->Top();
-	int offTop = topY + Screen::Bottom();
+	const int TILE_SIZE = TileSize();
+	const int topY = selected->Center().Y() - TILE_SIZE / 2;
+	const int offTop = topY + Screen::Bottom();
 	if(offTop < 0)
 		mainScroll += offTop;
 	else
 	{
-		int offBottom = topY + tileSize - Screen::Bottom();
-		// If the selected item is far enough to the left to overlap with the key,
-		// scroll it past the key.
-		optional<Rectangle> key = KeyArea();
-		if(key.has_value() && selected->Left() < key->Right())
-			offBottom += key->Height();
+		const int offBottom = topY + TILE_SIZE - Screen::Bottom();
 		if(offBottom > 0)
 			mainScroll += offBottom;
 	}

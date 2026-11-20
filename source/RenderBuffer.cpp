@@ -51,9 +51,6 @@ namespace {
 // Initialize the shaders.
 void RenderBuffer::Init()
 {
-	if(OpenGL::GetFboSupport() == OpenGL::FeatureSupport::NONE)
-		throw runtime_error("OpenGL framebuffer object support is required!");
-
 	shader = GameData::Shaders().Get("renderBuffer");
 	if(!shader->Object())
 		throw runtime_error("Could not find render buffer shader!");
@@ -120,18 +117,9 @@ RenderBuffer::RenderTargetGuard::RenderTargetGuard(RenderBuffer &b, int screenWi
 RenderBuffer::RenderBuffer(const Point &dimensions)
 	: size(dimensions)
 {
-	OpenGL::FeatureSupport fboSupport = OpenGL::GetFboSupport();
 	// Generate a framebuffer.
-	if(fboSupport == OpenGL::FeatureSupport::CORE)
-	{
-		glGenFramebuffers(1, &framebuffer);
-		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-	}
-	else
-	{
-		glGenFramebuffersEXT(1, &framebuffer);
-		glBindFramebufferEXT(GL_FRAMEBUFFER, framebuffer);
-	}
+	glGenFramebuffers(1, &framebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
 	// Generate the texture.
 	glGenTextures(1, &texid);
@@ -150,24 +138,16 @@ RenderBuffer::RenderBuffer(const Point &dimensions)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, scaledSize.X(), scaledSize.Y(), 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
 	// Attach the texture to the frame buffer.
-	if(fboSupport == OpenGL::FeatureSupport::CORE)
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texid, 0);
-	else
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texid, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texid, 0);
 	GLenum draw_buffers[] = {GL_COLOR_ATTACHMENT0};
 	glDrawBuffers(1, draw_buffers);
 
-	if(fboSupport == OpenGL::FeatureSupport::CORE ?
-			glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE
-			: glCheckFramebufferStatusEXT(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		Logger::Log("Failed to initialize framebuffer for RenderBuffer.", Logger::Level::WARNING);
 
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-	if(fboSupport == OpenGL::FeatureSupport::CORE)
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	else
-		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	// Default to the current viewport size at the time of construction.
 	glGetIntegerv(GL_VIEWPORT, lastViewport);
@@ -179,10 +159,7 @@ RenderBuffer::RenderBuffer(const Point &dimensions)
 RenderBuffer::~RenderBuffer()
 {
 	glDeleteTextures(1, &texid);
-	if(OpenGL::GetFboSupport() == OpenGL::FeatureSupport::CORE)
-		glDeleteFramebuffers(1, &framebuffer);
-	else
-		glDeleteFramebuffersEXT(1, &framebuffer);
+	glDeleteFramebuffers(1, &framebuffer);
 }
 
 
@@ -198,10 +175,7 @@ RenderBuffer::RenderTargetGuard RenderBuffer::SetTarget()
 	//       are done.
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, reinterpret_cast<int*>(&lastFramebuffer));
 	glGetIntegerv(GL_VIEWPORT, lastViewport);
-	if(OpenGL::GetFboSupport() == OpenGL::FeatureSupport::CORE)
-		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-	else
-		glBindFramebufferEXT(GL_FRAMEBUFFER, framebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
 	const Point scaledSize = size * multiplier * Screen::Zoom() / 100.0;
 	glViewport(0, 0, scaledSize.X(), scaledSize.Y());
@@ -227,10 +201,7 @@ void RenderBuffer::Deactivate()
 {
 	// Restore the old settings.
 	glViewport(lastViewport[0], lastViewport[1], lastViewport[2], lastViewport[3]);
-	if(OpenGL::GetFboSupport() == OpenGL::FeatureSupport::CORE)
-		glBindFramebuffer(GL_FRAMEBUFFER, lastFramebuffer);
-	else
-		glBindFramebufferEXT(GL_FRAMEBUFFER, lastFramebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, lastFramebuffer);
 }
 
 

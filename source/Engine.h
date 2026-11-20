@@ -24,7 +24,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "CollisionSet.h"
 #include "Color.h"
 #include "Command.h"
-#include "DamageProfile.h"
 #include "shader/DrawList.h"
 #include "EscortDisplay.h"
 #include "Information.h"
@@ -178,16 +177,6 @@ private:
 		double modifier = 1.;
 	};
 
-	class EntityCollision {
-	public:
-		explicit EntityCollision(const DamageProfile &damage, const Government *gov = nullptr, bool provokable = true)
-			: damage(damage), gov(gov), provokable(provokable) {}
-
-		DamageProfile damage;
-		const Government *gov;
-		bool provokable;
-	};
-
 
 private:
 	void EnterSystem();
@@ -208,13 +197,14 @@ private:
 
 	void FillCollisionSets();
 
-	void FindCollisions(Projectile &projectile, std::map<Entity *, std::vector<EntityCollision>> &entityCollisions);
-	void DoCollisions(std::map<Entity *, std::vector<EntityCollision>> &entityCollisions);
+	void DoCollisions(Projectile &projectile);
 	void DoWeather(Weather &weather);
 	void DoCollection(Flotsam &flotsam);
 	void DoScanning(const std::shared_ptr<Ship> &ship);
 
 	void FillRadar();
+
+	void DrawShipSprites(const Ship &ship);
 
 	void DoGrudge(const std::shared_ptr<Ship> &target, const Government *attacker);
 

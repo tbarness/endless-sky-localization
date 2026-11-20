@@ -15,10 +15,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "BatchDrawList.h"
 
-#include "../Angle.h"
 #include "BatchShader.h"
 #include "../Body.h"
-#include "../Drawable.h"
 #include "../Screen.h"
 #include "../image/Sprite.h"
 
@@ -70,15 +68,7 @@ bool BatchDrawList::Add(const Body &body, float clip)
 	// we want it to be drawn with its center halfway to the target. For longer-lived projectiles, we
 	// expect the position to be the actual location of the projectile at that point in time.
 	Point position = (body.Position() + .5 * body.Velocity() - center) * zoom;
-	return Add(body, position, body.Unit(), body.Alpha(center), clip);
-}
-
-
-
-bool BatchDrawList::Add(const Drawable &drawable, const Point &position, const Angle &facing, float clip)
-{
-	Point unit = facing.Unit() * (.5 * drawable.Zoom());
-	return Add(drawable, position, unit, drawable.Alpha(), clip);
+	return Add(body, position, clip);
 }
 
 
@@ -86,7 +76,7 @@ bool BatchDrawList::Add(const Drawable &drawable, const Point &position, const A
 // TODO: Once we have sprite reference positions, this method will not be needed.
 bool BatchDrawList::AddVisual(const Body &visual)
 {
-	return Add(visual, (visual.Position() - center) * zoom, visual.Unit(), visual.Alpha(center), 1.f);
+	return Add(visual, (visual.Position() - center) * zoom, 1.f);
 }
 
 
@@ -104,16 +94,17 @@ void BatchDrawList::Draw() const
 
 
 
-bool BatchDrawList::Cull(const Drawable &drawable, const Point &position, const Point &unit) const
+bool BatchDrawList::Cull(const Body &body, const Point &position) const
 {
-	if(!drawable.HasSprite() || !drawable.Zoom())
+	if(!body.HasSprite() || !body.Zoom())
 		return true;
 
+	Point unit = body.Unit();
 	// Cull sprites that are completely off screen, to reduce the number of draw
 	// calls that we issue (which may be the bottleneck on some systems).
 	Point size(
-		fabs(unit.X() * drawable.Height()) + fabs(unit.Y() * drawable.Width()),
-		fabs(unit.X() * drawable.Width()) + fabs(unit.Y() * drawable.Height()));
+		fabs(unit.X() * body.Height()) + fabs(unit.Y() * body.Width()),
+		fabs(unit.X() * body.Width()) + fabs(unit.Y() * body.Height()));
 	Point topLeft = position - size * zoom;
 	Point bottomRight = position + size * zoom;
 	if(bottomRight.X() < Screen::Left() || bottomRight.Y() < Screen::Top())
@@ -126,20 +117,20 @@ bool BatchDrawList::Cull(const Drawable &drawable, const Point &position, const 
 
 
 
-bool BatchDrawList::Add(const Drawable &drawable, Point position, Point unit, double alpha, float clip)
+bool BatchDrawList::Add(const Body &body, Point position, float clip)
 {
-	if(Cull(drawable, position, unit))
+	if(Cull(body, position))
 		return false;
 
 	// Get the data vector for this particular sprite.
-	vector<float> &v = data[drawable.GetSprite()];
+	vector<float> &v = data[body.GetSprite()];
 	// The sprite frame is the same for every vertex.
-	float frame = drawable.GetFrame(step);
+	float frame = body.GetFrame(step);
 
 	// Get unit vectors in the direction of the object's width and height.
-	unit *= zoom;
-	Point uw = Point(-unit.Y(), unit.X()) * drawable.Width();
-	Point uh = unit * drawable.Height();
+	Point unit = body.Unit() * zoom;
+	Point uw = Point(-unit.Y(), unit.X()) * body.Width();
+	Point uh = unit * body.Height();
 
 	// Get the "bottom" corner, the one that won't be clipped.
 	Point topLeft = position - (uw + uh);
@@ -151,6 +142,8 @@ bool BatchDrawList::Add(const Drawable &drawable, Point position, Point unit, do
 	Point topRight = topLeft + uw;
 	Point bottomLeft = topLeft + uh;
 	Point bottomRight = bottomLeft + uw;
+
+	float alpha = body.Alpha(center);
 
 	// Push two copies of the first and last vertices to mark the break between
 	// the sprites.

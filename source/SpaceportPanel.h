@@ -18,6 +18,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Panel.h"
 
 #include "Information.h"
+#include "text/WrappedText.h"
 
 class Interface;
 class News;
@@ -47,8 +48,6 @@ protected:
 
 
 private:
-	void InitNewsTextArea();
-	void ResizeNewsTextArea() const;
 	const News *PickNews() const;
 
 
@@ -60,6 +59,8 @@ private:
 	// Current news item (if any):
 	bool hasNews = false;
 	bool hasPortrait = false;
+	int portraitWidth;
+	int normalWidth;
 	Information newsInfo;
-	std::shared_ptr<TextArea> newsMessage;
+	WrappedText newsMessage;
 };

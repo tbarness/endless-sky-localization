@@ -14,7 +14,6 @@
 ship "Arach Courier"
 	sprite "ship/arach courier"
 	thumbnail "thumbnail/arach courier"
-	"administrative cost" 1
 	attributes
 		category "Light Freighter"
 		licenses
@@ -74,7 +73,6 @@ ship "Arach Courier" "Arach Courier (Miner)"
 ship "Arach Freighter"
 	sprite "ship/arach freighter"
 	thumbnail "thumbnail/arach freighter"
-	"administrative cost" 3
 	attributes
 		category "Light Freighter"
 		licenses
@@ -145,7 +143,6 @@ ship "Arach Freighter" "Arach Freighter (Miner)"
 ship "Arach Hulk"
 	sprite "ship/arach hulk"
 	thumbnail "thumbnail/arach hulk"
-	"administrative cost" 4
 	attributes
 		category "Heavy Freighter"
 		licenses
@@ -222,7 +219,6 @@ ship "Arach Hulk" "Arach Hulk (Miner)"
 ship "Arach Spindle"
 	sprite "ship/arach spindle"
 	thumbnail "thumbnail/arach spindle"
-	"administrative cost" 3
 	attributes
 		category "Heavy Freighter"
 		licenses
@@ -334,7 +330,6 @@ ship "Arach Spindle" "Arach Spindle (Jump Drive)"
 ship "Arach Transport"
 	sprite "ship/arach transport"
 	thumbnail "thumbnail/arach transport"
-	"administrative cost" 1
 	attributes
 		category "Light Freighter"
 		licenses
@@ -402,7 +397,6 @@ ship "Arach Transport" "Arach Transport (Miner)"
 ship "Heliarch Breacher"
 	sprite "ship/heliarch breacher"
 	thumbnail "thumbnail/heliarch breacher"
-	"administrative cost" 5
 	attributes
 		category "Light Warship"
 		licenses
@@ -524,7 +518,6 @@ ship "Heliarch Breacher" "Heliarch Breacher (Scrappy)"
 ship "Heliarch Hunter"
 	sprite "ship/heliarch hunter"
 	thumbnail "thumbnail/heliarch hunter"
-	"administrative cost" 8
 	attributes
 		category "Medium Warship"
 		licenses
@@ -716,7 +709,6 @@ ship "Heliarch Hunter" "Heliarch Hunter (Scrappy)"
 ship "Heliarch Interdictor"
 	sprite "ship/heliarch interdictor"
 	thumbnail "thumbnail/heliarch interdictor"
-	"administrative cost" 8
 	attributes
 		category "Medium Warship"
 		licenses
@@ -894,7 +886,6 @@ ship "Heliarch Interdictor" "Heliarch Interdictor (Scrappy)"
 ship "Heliarch Judicator"
 	sprite "ship/heliarch judicator"
 	thumbnail "thumbnail/heliarch judicator"
-	"administrative cost" 7
 	attributes
 		category "Medium Warship"
 		licenses
@@ -1083,7 +1074,6 @@ ship "Heliarch Judicator" "Heliarch Judicator (Scrappy)"
 ship "Heliarch Neutralizer"
 	sprite "ship/heliarch neutralizer"
 	thumbnail "thumbnail/heliarch neutralizer"
-	"administrative cost" 6
 	attributes
 		category "Light Warship"
 		licenses
@@ -1208,7 +1198,6 @@ ship "Heliarch Neutralizer" "Heliarch Neutralizer (Scrappy)"
 ship "Heliarch Punisher"
 	sprite "ship/heliarch punisher"
 	thumbnail "thumbnail/heliarch punisher"
-	"administrative cost" 11
 	attributes
 		category "Heavy Warship"
 		licenses
@@ -1461,7 +1450,6 @@ ship "Heliarch Punisher" "Heliarch Punisher (Scrappy)"
 ship "Heliarch Pursuer"
 	sprite "ship/heliarch pursuer"
 	thumbnail "thumbnail/heliarch pursuer"
-	"administrative cost" 0
 	attributes
 		category "Fighter"
 		licenses
@@ -1521,7 +1509,6 @@ ship "Heliarch Pursuer" "Heliarch Pursuer (Scrappy)"
 ship "Heliarch Rover"
 	sprite "ship/heliarch rover"
 	thumbnail "thumbnail/heliarch rover"
-	"administrative cost" 0
 	attributes
 		category "Fighter"
 		licenses
@@ -1580,7 +1567,6 @@ ship "Heliarch Rover" "Heliarch Rover (Ions)"
 ship "Heliarch Stalker"
 	sprite "ship/heliarch stalker"
 	thumbnail "thumbnail/heliarch stalker"
-	"administrative cost" 0
 	attributes
 		category "Fighter"
 		licenses
@@ -1637,7 +1623,6 @@ ship "Heliarch Stalker" "Heliarch Stalker (Scrappy)"
 ship "Kimek Briar"
 	sprite "ship/kimek briar"
 	thumbnail "thumbnail/kimek briar"
-	"administrative cost" 1
 	attributes
 		category "Transport"
 		licenses
@@ -1699,7 +1684,6 @@ ship "Kimek Briar" "Kimek Briar (Miner)"
 ship "Kimek Spire"
 	sprite "ship/kimek spire"
 	thumbnail "thumbnail/kimek spire"
-	"administrative cost" 5
 	attributes
 		category "Space Liner"
 		licenses
@@ -1772,7 +1756,6 @@ ship "Kimek Spire" "Kimek Spire (Miner)"
 ship "Kimek Thistle"
 	sprite "ship/kimek thistle"
 	thumbnail "thumbnail/kimek thistle"
-	"administrative cost" 3
 	attributes
 		category "Transport"
 		licenses
@@ -1858,7 +1841,6 @@ ship "Kimek Thistle" "Kimek Thistle (Torpedoes)"
 ship "Kimek Thorn"
 	sprite "ship/kimek thorn"
 	thumbnail "thumbnail/kimek thorn"
-	"administrative cost" 1
 	attributes
 		category "Transport"
 		licenses
@@ -1918,7 +1900,6 @@ ship "Kimek Thorn" "Kimek Thorn (Miner)"
 ship "Saryd Runabout"
 	sprite "ship/saryd runabout"
 	thumbnail "thumbnail/saryd runabout"
-	"administrative cost" 1
 	attributes
 		category "Transport"
 		licenses
@@ -1976,7 +1957,6 @@ ship "Saryd Runabout" "Saryd Runabout (Miner)"
 ship "Saryd Sojourner"
 	sprite "ship/saryd sojourner"
 	thumbnail "thumbnail/saryd sojourner"
-	"administrative cost" 5
 	attributes
 		category "Utility"
 		licenses
@@ -2071,7 +2051,6 @@ ship "Saryd Sojourner" "Saryd Sojourner (Bombardments)"
 ship "Saryd Traveler"
 	sprite "ship/saryd traveler"
 	thumbnail "thumbnail/saryd traveler"
-	"administrative cost" 3
 	attributes
 		category "Utility"
 		licenses
@@ -2147,7 +2126,6 @@ ship "Saryd Traveler" "Saryd Traveler (Miner)"
 ship "Saryd Visitor"
 	sprite "ship/saryd visitor"
 	thumbnail "thumbnail/saryd visitor"
-	"administrative cost" 2
 	attributes
 		category "Transport"
 		licenses

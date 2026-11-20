@@ -20,7 +20,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "DataWriter.h"
 #include "text/Format.h"
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 
 #include <algorithm>
 #include <cmath>
@@ -110,7 +110,7 @@ string Command::ReplaceNamesWithKeys(const string &text)
 
 
 // Create a command representing whatever is mapped to the given key code.
-Command::Command(SDL_Keycode keycode)
+Command::Command(int keycode)
 {
 	auto it = commandForKeycode.find(keycode);
 	if(it != commandForKeycode.end())
@@ -123,22 +123,13 @@ Command::Command(SDL_Keycode keycode)
 void Command::ReadKeyboard()
 {
 	Clear();
-#ifdef ES_USE_SDL3
-	const bool *keyDown = SDL_GetKeyboardState(nullptr);
-#else
 	const Uint8 *keyDown = SDL_GetKeyboardState(nullptr);
-#endif
 
 	// Each command can only have one keycode, but misconfigured settings can
 	// temporarily cause one keycode to be used for two commands. Also, more
 	// than one key can be held down at once.
 	for(const auto &it : keycodeForCommand)
-#ifdef ES_USE_SDL3
-		// Use no modifiers for the scancode.
-		if(keyDown[SDL_GetScancodeFromKey(it.second, 0)])
-#else
 		if(keyDown[SDL_GetScancodeFromKey(it.second)])
-#endif
 			*this |= it.first;
 
 	// Check whether the `Shift` modifier key was pressed for this step.

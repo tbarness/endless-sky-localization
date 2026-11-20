@@ -179,7 +179,6 @@ fleet "Vi Transport"
 	names "gegno vi"
 	cargo 3
 	personality
-		confusion "civilian"
 		timid plunders opportunistic
 	variant 14
 		"Slate"
@@ -213,7 +212,6 @@ fleet "Vi Cargo"
 	names "gegno vi"
 	cargo 3
 	personality
-		confusion "civilian"
 		plunders heroic opportunistic
 	variant 2
 		"Schist (Heavy Load)"
@@ -382,7 +380,6 @@ fleet "Scin Warfleet"
 	names "gegno scin"
 	cargo 0
 	personality
-		confusion "militia"
 		vindictive opportunistic harvests
 	variant 6
 		"Felsic"

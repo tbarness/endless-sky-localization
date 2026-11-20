@@ -22,7 +22,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "StellarObject.h"
 #include "WeightedList.h"
 
-#include <optional>
 #include <set>
 #include <string>
 #include <vector>
@@ -256,8 +255,7 @@ private:
 	const Sprite *haze = nullptr;
 	std::vector<RandomEvent<Fleet>> fleets;
 	std::vector<RandomEvent<Hazard>> hazards;
-	double habitable = 0.;
-	bool explicitHabitableDistanceSet = false;
+	double habitable = 1000.;
 	WeightedList<double> belts;
 	double invisibleFenceRadius = 10000.;
 	double jumpRange = 0.;
@@ -270,13 +268,13 @@ private:
 	// The amount of additional distance that ships will arrive away from the
 	// system center when entering this system through a hyperspace link.
 	// Negative values are allowed, causing ships to jump beyond their target.
-	std::optional<double> extraHyperArrivalDistance;
+	double extraHyperArrivalDistance = 0.;
 	// The amount of additional distance that ships will arrive away from the
 	// system center when entering this system through a jumpdrive jump.
 	// Jump drives use a circle around the target for targeting, so a value below
 	// 0 doesn't have the same meaning as for hyperdrives. Negative values will
 	// be interpreted as positive values.
-	std::optional<double> extraJumpArrivalDistance;
+	double extraJumpArrivalDistance = 0.;
 
 	// The minimum distances from the system center to jump out of the system.
 	double jumpDepartureDistance = 0.;

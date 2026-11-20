@@ -24,9 +24,8 @@ using namespace std;
 
 
 // Generate a visual based on the given Effect.
-Visual::Visual(const Effect &effect, Point pos, Point vel, Angle facing, Point hitVelocity, double inheritedZoom,
-		double parentZoom)
-	: Body(effect, pos, vel, effect.hasAbsoluteAngle ? effect.absoluteAngle : facing, parentZoom),
+Visual::Visual(const Effect &effect, Point pos, Point vel, Angle facing, Point hitVelocity, double inheritedZoom)
+	: Body(effect, pos, vel, effect.hasAbsoluteAngle ? effect.absoluteAngle : facing),
 	lifetime(effect.lifetime)
 {
 	if(effect.randomLifetime > 0)

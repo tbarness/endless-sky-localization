@@ -15,12 +15,11 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "NPC.h"
 
-#include "Conversation.h"
 #include "ConversationPanel.h"
 #include "DataNode.h"
 #include "DataWriter.h"
 #include "DialogPanel.h"
-#include "Fleet.h"
+#include "text/Format.h"
 #include "GameData.h"
 #include "Government.h"
 #include "Logger.h"
@@ -207,7 +206,8 @@ void NPC::Load(const DataNode &node, const ConditionsStore *playerConditions,
 			else if(hasValue)
 			{
 				// Loading a ship managed by GameData, i.e. "base models" and variants.
-				factory.Load(child, playerConditions);
+				stockShips.push_back(GameData::Ships().Get(child.Token(1)));
+				shipNames.push_back(child.Token(1 + (child.Size() > 2)));
 			}
 			else
 			{
@@ -316,7 +316,7 @@ void NPC::Save(DataWriter &out) const
 
 		if(!dialog.IsEmpty())
 			dialog.Save(out);
-		if(conversation && !conversation->IsEmpty())
+		if(!conversation->IsEmpty())
 			conversation->Save(out);
 
 		for(const shared_ptr<Ship> &ship : ships)
@@ -382,7 +382,7 @@ string NPC::Validate(bool asTemplate) const
 	for(auto &&ship : ships)
 		if(!ship->IsValid())
 			return "ship \"" + ship->GivenName() + "\"";
-	for(auto &&ship : factory.GetShips())
+	for(auto &&ship : stockShips)
 		if(!ship->IsValid())
 			return "stock model \"" + ship->VariantName() + "\"";
 
@@ -434,7 +434,7 @@ const Personality &NPC::GetPersonality() const
 
 
 // Get the ships associated with this set of NPCs.
-const list<shared_ptr<Ship>> &NPC::Ships() const
+const list<shared_ptr<Ship>> NPC::Ships() const
 {
 	return ships;
 }
@@ -508,7 +508,7 @@ bool NPC::Do(const ShipEvent &event, PlayerInfo &player, UI &ui, const Mission *
 	{
 		// If "completing" this NPC displays a conversation, reference
 		// it, to allow the completing event's target to be destroyed.
-		if(conversation && !conversation->IsEmpty())
+		if(!conversation->IsEmpty())
 			ui.Push(new ConversationPanel(player, *conversation, caller, nullptr, ship));
 		if(!dialog.IsEmpty())
 			ui.Push(DialogPanel::Info(dialog.Text()));
@@ -667,11 +667,16 @@ NPC NPC::Instantiate(const PlayerInfo &player, map<string, string> &subs, const 
 		result.ships.push_back(make_shared<Ship>(*ship));
 		ship->FinishLoading(true);
 	}
+	auto shipIt = stockShips.begin();
+	auto nameIt = shipNames.begin();
 	map<string, string> playerSubs;
 	player.AddPlayerSubstitutions(playerSubs);
-	playerSubs.insert(subs.begin(), subs.end());
-	auto nameFunc = [](const shared_ptr<Ship> &ship) -> string { return ship->DisplayModelName(); };
-	factory.Instantiate(result.ships, nameFunc, &subs);
+	for( ; shipIt != stockShips.end() && nameIt != shipNames.end(); ++shipIt, ++nameIt)
+	{
+		result.ships.push_back(make_shared<Ship>(**shipIt));
+		result.ships.back()->SetGivenName(Format::Replace(Format::Replace(
+			Phrase::ExpandPhrases(*nameIt), subs), playerSubs));
+	}
 	for(const ExclusiveItem<Fleet> &fleet : fleets)
 		fleet->Place(*result.system, result.ships, false, !overrideFleetCargo);
 	// Ships should either "enter" the system or start out there.
@@ -708,7 +713,7 @@ NPC NPC::Instantiate(const PlayerInfo &player, map<string, string> &subs, const 
 	}
 	// Do string replacement on any dialog or conversation.
 	result.dialog = dialog.Instantiate(subs);
-	if(conversation && !conversation->IsEmpty())
+	if(!conversation->IsEmpty())
 		result.conversation = ExclusiveItem<Conversation>(conversation->Instantiate(subs));
 
 	// Instantiate the actions.

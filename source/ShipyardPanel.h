@@ -34,7 +34,7 @@ class Ship;
 // a government that is particularly repressive of independent pilots.)
 class ShipyardPanel : public ShopPanel {
 public:
-	ShipyardPanel(PlayerInfo &player, const Sale<Ship> &stock);
+	explicit ShipyardPanel(PlayerInfo &player, Sale<Ship> stock);
 
 	virtual void Step() override;
 

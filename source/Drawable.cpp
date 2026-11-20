@@ -112,21 +112,7 @@ float Drawable::GetFrame(int step) const
 	if(step >= 0)
 		SetStep(step);
 
-	return noFrameTweening ? floor(frame) : frame;
-}
-
-
-
-void Drawable::PauseAnimation() const
-{
-	++pause;
-}
-
-
-
-void Drawable::UnpauseAnimation() const
-{
-	pause = 0;
+	return frame;
 }
 
 
@@ -190,8 +176,6 @@ void Drawable::LoadSprite(const DataNode &node)
 			center = Point(child.Value(1), child.Value(2));
 		else if(key == "inherits parent swizzle")
 			inheritsParentSwizzle = true;
-		else if(key == "no frame tweening")
-			noFrameTweening = true;
 		else
 			child.PrintTrace("Skipping unrecognized attribute:");
 	}
@@ -226,8 +210,6 @@ void Drawable::SaveSprite(DataWriter &out, const string &tag) const
 			out.Write("center", center.X(), center.Y());
 		if(inheritsParentSwizzle)
 			out.Write("inherits parent swizzle");
-		if(noFrameTweening)
-			out.Write("no frame tweening");
 	}
 	out.EndChild();
 }
@@ -271,6 +253,13 @@ void Drawable::SetFrameRate(float framesPerSecond)
 void Drawable::AddFrameRate(float framesPerSecond)
 {
 	frameRate += framesPerSecond / 60.f;
+}
+
+
+
+void Drawable::PauseAnimation()
+{
+	++pause;
 }
 
 

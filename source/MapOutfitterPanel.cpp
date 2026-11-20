@@ -68,16 +68,16 @@ void MapOutfitterPanel::LoadCatalogThumbnails() const
 
 
 
-const Drawable &MapOutfitterPanel::SelectedSprite() const
+const Sprite *MapOutfitterPanel::SelectedSprite() const
 {
-	return selected->Thumbnail();
+	return selected ? selected->Thumbnail() : nullptr;
 }
 
 
 
-const Drawable &MapOutfitterPanel::CompareSprite() const
+const Sprite *MapOutfitterPanel::CompareSprite() const
 {
-	return compare->Thumbnail();
+	return compare ? compare->Thumbnail() : nullptr;
 }
 
 
@@ -176,14 +176,14 @@ int MapOutfitterPanel::FindItem(const string &text) const
 
 
 
-void MapOutfitterPanel::DrawSalesKey(Information &info) const
+void MapOutfitterPanel::DrawKey(Information &info) const
 {
 	const string condition = (selected && selected->Get("minable") > 0.)
 		? "is outfitters w/ minerals" : "is outfitters";
 
 	info.SetCondition(condition);
 
-	MapSalesPanel::DrawSalesKey(info);
+	MapSalesPanel::DrawKey(info);
 }
 
 

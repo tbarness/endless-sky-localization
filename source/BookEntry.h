@@ -16,7 +16,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #pragma once
 
 #include <map>
-#include <optional>
 #include <set>
 #include <string>
 #include <variant>
@@ -27,7 +26,6 @@ class DataNode;
 class DataWriter;
 class Point;
 class Sprite;
-class System;
 class WrappedText;
 
 
@@ -40,7 +38,7 @@ public:
 
 public:
 	bool IsEmpty() const;
-	void Load(const DataNode &node, std::optional<int> startAt = std::nullopt);
+	void Load(const DataNode &node, int startAt = 0);
 	void Add(const BookEntry &other);
 
 	// When a GameAction is instantiated, substitutions are performed.
@@ -53,27 +51,12 @@ public:
 	// Returns height.
 	int Draw(const Point &topLeft, WrappedText &wrap, const Color &color) const;
 
-	const System *SourceSystem() const;
-	void SetSourceSystem(const System *system);
-	const std::set<const System *> &MarkSystems() const;
-	const std::set<const System *> &CircleSystems() const;
-	bool HasSystems() const;
+
+private:
+	void LoadSingle(const DataNode &node, int startAt = 0);
 
 
 private:
-	void LoadContents(const DataNode &node, int startAt = 0);
-
-
-private:
-	// The contents of the entry.
 	std::vector<Item> items;
-	// A set of the scenes from the contents. For use in easily ensuring that all scenes are loaded.
 	std::set<const Sprite *> scenes;
-
-	// The source of a book entry is the system it was written in.
-	// Only applies to dated entries.
-	const System *source = nullptr;
-	// Any entry can mark or circle systems on the map.
-	std::set<const System *> markSystems;
-	std::set<const System *> circleSystems;
 };

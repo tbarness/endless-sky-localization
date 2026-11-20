@@ -168,7 +168,6 @@ fleet "Incipias Standard Mining"
 	names "incipias civilian"
 	cargo 0
 	personality
-		confusion "miner"
 		timid mining harvests coward
 	variant 5
 		"Nimbus (Mining)"
@@ -185,6 +184,7 @@ fleet "Incipias Standard Trade"
 	names "incipias civilian"
 	cargo 50
 	personality
+		confusion 40
 		timid appeasing
 	variant 5
 		"Nimbo Cirrus"

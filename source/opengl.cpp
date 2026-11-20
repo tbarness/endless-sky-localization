@@ -27,13 +27,14 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 namespace {
 	bool hasOpenGL3Support = true;
-	OpenGL::FeatureSupport fboSupport = OpenGL::FeatureSupport::NONE;
 
+#if defined(ES_GLES) || defined(_WIN32)
 	bool HasOpenGLExtension(const char *name)
 	{
 		auto extensions = reinterpret_cast<const char *>(glGetString(GL_EXTENSIONS));
 		return strstr(extensions, name);
 	}
+#endif
 }
 
 
@@ -82,18 +83,4 @@ bool OpenGL::HasTexture2DArraySupport()
 bool OpenGL::HasClearBufferSupport()
 {
 	return hasOpenGL3Support;
-}
-
-
-
-OpenGL::FeatureSupport OpenGL::GetFboSupport()
-{
-	if(fboSupport == OpenGL::FeatureSupport::NONE)
-	{
-		if(hasOpenGL3Support || HasOpenGLExtension("_ARB_framebuffer_object"))
-			fboSupport = FeatureSupport::CORE;
-		else if(HasOpenGLExtension("_framebuffer_object"))
-			fboSupport = FeatureSupport::EXT;
-	}
-	return fboSupport;
 }

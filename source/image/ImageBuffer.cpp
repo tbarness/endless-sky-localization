@@ -128,27 +128,6 @@ int ImageBuffer::Frames() const
 
 
 
-double ImageBuffer::CalculateArea() const
-{
-	if(!pixels)
-		return 0.;
-	double area = 0.;
-	for(int i = 0; i < frames; ++i)
-		for(int y = 0; y < height; ++y)
-		{
-			const uint32_t *it = Begin(y, i);
-			for(const uint32_t *end = it + width; it != end; ++it)
-			{
-				uint64_t alpha = (*it & 0xFF000000) >> 24;
-				if(alpha)
-					++area;
-			}
-		}
-	return area / frames;
-}
-
-
-
 const uint32_t *ImageBuffer::Pixels() const
 {
 	return pixels;
@@ -177,11 +156,8 @@ uint32_t *ImageBuffer::Begin(int y, int frame)
 
 
 
-bool ImageBuffer::ShrinkToHalfSize()
+void ImageBuffer::ShrinkToHalfSize()
 {
-	if(width < 2 || height < 2)
-		return false;
-
 	ImageBuffer result(frames);
 	result.Allocate(width / 2, height / 2);
 
@@ -203,7 +179,6 @@ bool ImageBuffer::ShrinkToHalfSize()
 	swap(width, result.width);
 	swap(height, result.height);
 	swap(pixels, result.pixels);
-	return true;
 }
 
 

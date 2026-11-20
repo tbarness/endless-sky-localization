@@ -15,12 +15,10 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "Personality.h"
 
-#include "Confusion.h"
+#include "Angle.h"
 #include "DataNode.h"
 #include "DataWriter.h"
-#include "GameData.h"
 
-#include <cmath>
 #include <map>
 #include <vector>
 
@@ -120,13 +118,15 @@ namespace {
 	const map<string, vector<PersonalityTrait>> COMPOSITE_TOKEN = {
 		{"heroic", {DARING, HUNTING}}
 	};
+
+	const double DEFAULT_CONFUSION = 10.;
 }
 
 
 
 // Default settings for player's ships.
 Personality::Personality() noexcept
-	: flags(1LL << DISABLES)
+	: flags(1LL << DISABLES), confusionMultiplier(DEFAULT_CONFUSION), aimMultiplier(1.)
 {
 	static_assert(LAST_ITEM_IN_PERSONALITY_TRAIT_ENUM == PERSONALITY_COUNT,
 		"PERSONALITY_COUNT must match the length of PersonalityTraits");
@@ -147,11 +147,12 @@ void Personality::Load(const DataNode &node)
 	{
 		if(child.Token(0) == "confusion")
 		{
-			// Accept the old method of defining confusion with a single value.
-			if(child.HasChildren() || (child.Size() >= 2 && child.IsNumber(1)))
-				confusion = ExclusiveItem<Confusion>(Confusion(child));
-			else if(child.Size() >= 2)
-				confusion = ExclusiveItem<Confusion>(GameData::Confusions().Get(child.Token(1)));
+			if(add || remove)
+				child.PrintTrace("Cannot \"" + node.Token(0) + "\" a confusion value:");
+			else if(child.Size() < 2)
+				child.PrintTrace("Skipping \"confusion\" tag with no value specified:");
+			else
+				confusionMultiplier = child.Value(1);
 		}
 		else
 		{
@@ -169,8 +170,7 @@ void Personality::Save(DataWriter &out) const
 	out.Write("personality");
 	out.BeginChild();
 	{
-		if(confusion)
-			confusion->Save(out);
+		out.Write("confusion", confusionMultiplier);
 		for(const auto &it : TOKEN)
 			if(flags.test(it.second))
 				out.Write(it.first);
@@ -460,9 +460,28 @@ bool Personality::IsQuiet() const
 
 
 
-const Confusion *Personality::GetConfusion() const
+const Point &Personality::Confusion() const
 {
-	return confusion.Ptr();
+	return confusion;
+}
+
+
+
+void Personality::UpdateConfusion(bool isFiring)
+{
+	// If you're firing weapons, aiming accuracy should slowly improve until it
+	// is 4 times more precise than it initially was.
+	aimMultiplier = .99 * aimMultiplier + .01 * (isFiring ? .5 : 2.);
+
+	// Try to correct for any error in the aim, but constantly introduce new
+	// error and overcompensation so it oscillates around the origin. Apply
+	// damping to the position and velocity to avoid extreme outliers, though.
+	if(confusion.X() || confusion.Y())
+		confusionVelocity -= .001 * confusion.Unit();
+	confusionVelocity += .001 * Angle::Random().Unit();
+	confusionVelocity *= .999;
+	confusion += confusionVelocity * (confusionMultiplier * aimMultiplier);
+	confusion *= .9999;
 }
 
 

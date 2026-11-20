@@ -63,7 +63,6 @@ fleet "Bunrodea Defense"
 	government "Bunrodea"
 	names "bunrodea"
 	personality
-		confusion "militia"
 		heroic
 	variant 6
 		"Tekkan" 3

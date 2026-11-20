@@ -99,7 +99,7 @@ private:
 		// Draw this paragraph at the given point, and return the point that the
 		// next paragraph below this one should be drawn at.
 		Point Draw(Point point, const Color &color) const;
-		void UpdateTextDisplay();
+		void SetAlignment(Alignment alignment);
 
 	private:
 		const Sprite *scene = nullptr;

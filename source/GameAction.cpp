@@ -88,10 +88,13 @@ namespace {
 		while(count)
 		{
 			int moved = (count > 0) ? 1 : -1;
-			if((moved < 0 && !flagship->OutfitCount(outfit)) || !flagship->Attributes().CanAdd(*outfit, moved))
+			if(flagship->Attributes().CanAdd(*outfit, moved))
+			{
+				flagship->AddOutfit(outfit, moved);
+				didShip = true;
+			}
+			else
 				break;
-			flagship->AddOutfit(outfit, moved);
-			didShip = true;
 			count -= moved;
 		}
 		if(count > 0)

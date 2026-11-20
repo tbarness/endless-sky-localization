@@ -21,7 +21,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "text/Format.h"
 #include "GameData.h"
 #include "Messages.h"
-#include "Phrase.h"
 #include "PlayerInfo.h"
 #include "Ship.h"
 

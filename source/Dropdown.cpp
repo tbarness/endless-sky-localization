@@ -26,7 +26,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "shader/SpriteShader.h"
 #include "UI.h"
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 
 using namespace std;
 

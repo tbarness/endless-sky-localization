@@ -158,11 +158,10 @@ namespace {
 
 
 Tooltip::Tooltip(int width, Alignment alignment, Direction direction, Corner corner,
-		const Color *backColor, const Color *fontColor, bool shrinkToFit)
-	: width(width), direction(direction), corner(corner), backColor(backColor), fontColor(fontColor),
-	shrinkToFit(shrinkToFit)
+		const Color *backColor, const Color *fontColor)
+	: width(width), direction(direction), corner(corner), backColor(backColor), fontColor(fontColor)
 {
-	text.SetFont(FontSet::Get(Preferences::GetFontSize()));
+	text.SetFont(FontSet::Get(14));
 	// 10 pixels of padding will be left on either side of the tooltip box.
 	text.SetWrapWidth(width - 20);
 	text.SetAlignment(alignment);
@@ -215,13 +214,22 @@ void Tooltip::SetZone(const Rectangle &zone)
 
 
 
-void Tooltip::SetText(const string &newText)
+void Tooltip::SetText(const string &newText, bool shrink)
 {
 	// Reset the wrap width each time we set text in case the WrappedText
 	// was previously shrunk to the size of the text.
 	text.SetWrapWidth(width - 20);
 	text.Wrap(newText);
-	Shrink();
+	if(shrink)
+	{
+		// Shrink the tooltip width to fit the length of the text.
+		int longest = text.LongestLineWidth();
+		if(longest < text.WrapWidth())
+		{
+			text.SetWrapWidth(longest);
+			text.Wrap(newText);
+		}
+	}
 }
 
 
@@ -273,30 +281,4 @@ void Tooltip::Draw(bool forceDraw) const
 void Tooltip::UpdateActivationCount()
 {
 	activationHover = Preferences::TooltipActivation();
-}
-
-
-
-void Tooltip::UpdateFontSize()
-{
-	text.SetFont(FontSet::Get(Preferences::GetFontSize()));
-	text.SetWrapWidth(width - 20);
-	text.Rewrap();
-	Shrink();
-}
-
-
-
-void Tooltip::Shrink()
-{
-	if(shrinkToFit)
-	{
-		// Shrink the tooltip width to fit the length of the text.
-		int longest = text.LongestLineWidth();
-		if(longest < text.WrapWidth())
-		{
-			text.SetWrapWidth(longest);
-			text.Rewrap();
-		}
-	}
 }

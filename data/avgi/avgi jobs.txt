@@ -883,12 +883,14 @@ mission "Avgi: Special Nuclear Material Shipment 1"
 	npc
 		government "Avgi"
 		personality coward harvests timid secretive surveillance
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Avgi Merchants"
 	npc
 		government "Avgi"
 		personality coward harvests timid secretive surveillance
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Avgi Merchants"
@@ -917,12 +919,14 @@ mission "Avgi: Special Nuclear Material Shipment 2"
 	npc
 		government "Avgi"
 		personality coward harvests timid secretive surveillance
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Avgi Merchants"
 	npc
 		government "Avgi"
 		personality coward harvests timid secretive surveillance
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Avgi Merchants"
@@ -951,12 +955,14 @@ mission "Avgi: Special Nuclear Material Shipment 3"
 	npc
 		government "Avgi (Dissonance)"
 		personality coward harvests timid secretive surveillance
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Dissonance Merchants"
 	npc
 		government "Avgi (Dissonance)"
 		personality coward harvests timid secretive surveillance
+			confusion 20
 		system
 			distance 1 2
 		fleet "Small Dissonance Merchants"

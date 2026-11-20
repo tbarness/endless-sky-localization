@@ -71,15 +71,12 @@ public:
 	bool IsStation() const;
 	// Check if this is a moon.
 	bool IsMoon() const;
-	// Get this object's own index or parent index (in the System's vector of objects).
-	int Index() const;
+	// Get this object's parent index (in the System's vector of objects).
 	int Parent() const;
 	// This object's system hazards.
 	const std::vector<RandomEvent<Hazard>> &Hazards() const;
 	// Find out how far this object is from its parent.
 	double Distance() const;
-	double Period() const;
-	double Offset() const;
 
 
 private:
@@ -87,10 +84,8 @@ private:
 
 	double distance;
 	double speed;
-	bool explicitPeriodSet = false;
 	double offset;
 	std::vector<RandomEvent<Hazard>> hazards;
-	int index;
 	int parent;
 
 	const std::string *message;

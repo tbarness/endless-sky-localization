@@ -15,11 +15,10 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "ExclusiveItem.h"
+#include "Point.h"
 
 #include <bitset>
 
-class Confusion;
 class DataNode;
 class DataWriter;
 
@@ -88,7 +87,8 @@ public:
 	bool IsQuiet() const;
 
 	// Current inaccuracy in this ship's targeting:
-	const Confusion *GetConfusion() const;
+	const Point &Confusion() const;
+	void UpdateConfusion(bool isFiring);
 
 	// Personality to use for ships defending a planet from domination:
 	static Personality Defender();
@@ -107,5 +107,8 @@ private:
 	bool isDefined = false;
 
 	std::bitset<PERSONALITY_COUNT> flags;
-	ExclusiveItem<Confusion> confusion;
+	double confusionMultiplier;
+	double aimMultiplier;
+	Point confusion;
+	Point confusionVelocity;
 };

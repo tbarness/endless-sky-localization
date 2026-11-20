@@ -49,8 +49,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "Person.h"
 #include "Phrase.h"
 #include "Planet.h"
-#include "Plugin.h"
-#include "PluginManager.h"
+#include "Plugins.h"
 #include "shader/PointerShader.h"
 #include "Politics.h"
 #include "RenderBuffer.h"
@@ -61,7 +60,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include "shader/SpriteShader.h"
 #include "shader/StarField.h"
 #include "StartConditions.h"
-#include "StellarObjectSpriteData.h"
 #include "System.h"
 #include "TaskQueue.h"
 #include "test/Test.h"
@@ -71,8 +69,8 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include <algorithm>
 #include <cassert>
 #include <filesystem>
+#include <iostream>
 #include <queue>
-#include <ranges>
 #include <utility>
 #include <vector>
 
@@ -108,7 +106,7 @@ namespace {
 
 	void LoadPlugin(TaskQueue &queue, const filesystem::path &path)
 	{
-		const auto *plugin = PluginManager::Load(path);
+		const auto *plugin = Plugins::Load(path);
 		if(!plugin)
 			return;
 
@@ -516,15 +514,6 @@ void GameData::DestroyPersons(vector<string> &names)
 
 
 
-void GameData::HandleEvent(const ShipEvent &event)
-{
-	for(Person &person : objects.persons | views::values)
-		if(person.Do(event))
-			break;
-}
-
-
-
 const Set<Color> &GameData::Colors()
 {
 	return objects.colors;
@@ -535,13 +524,6 @@ const Set<Color> &GameData::Colors()
 const Set<Swizzle> &GameData::Swizzles()
 {
 	return objects.swizzles;
-}
-
-
-
-const Set<Confusion> &GameData::Confusions()
-{
-	return objects.confusions;
 }
 
 
@@ -784,11 +766,45 @@ const vector<Trade::Commodity> &GameData::SpecialCommodities()
 
 
 
-const StellarObjectSpriteData &GameData::ObjectSpriteData(const Sprite *sprite)
+// Custom messages to be shown when trying to land on certain stellar objects.
+bool GameData::HasLandingMessage(const Sprite *sprite)
 {
-	static const StellarObjectSpriteData EMPTY;
-	auto it = objects.objectSpriteData.find(sprite);
-	return (it == objects.objectSpriteData.end() ? EMPTY : it->second);
+	return objects.landingMessages.contains(sprite);
+}
+
+
+
+const string &GameData::LandingMessage(const Sprite *sprite)
+{
+	static const string EMPTY;
+	auto it = objects.landingMessages.find(sprite);
+	return (it == objects.landingMessages.end() ? EMPTY : it->second);
+}
+
+
+
+// Get the solar power and wind output of the given stellar object sprite.
+double GameData::SolarPower(const Sprite *sprite)
+{
+	auto it = objects.solarPower.find(sprite);
+	return (it == objects.solarPower.end() ? 0. : it->second);
+}
+
+
+
+double GameData::SolarWind(const Sprite *sprite)
+{
+	auto it = objects.solarWind.find(sprite);
+	return (it == objects.solarWind.end() ? 0. : it->second);
+}
+
+
+
+// Get the map icon of the given stellar object sprite.
+const Sprite *GameData::StarIcon(const Sprite *sprite)
+{
+	const auto it = objects.starIcons.find(sprite);
+	return (it == objects.starIcons.end() ? nullptr : it->second);
 }
 
 
@@ -926,21 +942,21 @@ void GameData::LoadSources(TaskQueue &queue)
 
 	vector<filesystem::path> globalPlugins = Files::ListDirectories(Files::GlobalPlugins());
 	for(const auto &path : globalPlugins)
-		if(PluginManager::IsPlugin(path))
+		if(Plugins::IsPlugin(path))
 			LoadPlugin(queue, path);
 	// Load unzipped plugins first to give them precedence, then load the zipped plugins.
 	globalPlugins = Files::List(Files::GlobalPlugins());
 	for(const auto &path : globalPlugins)
-		if(path.extension() == ".zip" && PluginManager::IsPlugin(path))
+		if(path.extension() == ".zip" && Plugins::IsPlugin(path))
 			LoadPlugin(queue, path);
 
 	vector<filesystem::path> localPlugins = Files::ListDirectories(Files::UserPlugins());
 	for(const auto &path : localPlugins)
-		if(PluginManager::IsPlugin(path))
+		if(Plugins::IsPlugin(path))
 			LoadPlugin(queue, path);
 	localPlugins = Files::List(Files::UserPlugins());
 	for(const auto &path : localPlugins)
-		if(path.extension() == ".zip" && PluginManager::IsPlugin(path))
+		if(path.extension() == ".zip" && Plugins::IsPlugin(path))
 			LoadPlugin(queue, path);
 }
 

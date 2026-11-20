@@ -70,16 +70,16 @@ void MapShipyardPanel::LoadCatalogThumbnails() const
 
 
 
-const Drawable &MapShipyardPanel::SelectedSprite() const
+const Sprite *MapShipyardPanel::SelectedSprite() const
 {
-	return selected->Thumbnail();
+	return selected ? selected->Thumbnail() ? selected->Thumbnail() : selected->GetSprite() : nullptr;
 }
 
 
 
-const Drawable &MapShipyardPanel::CompareSprite() const
+const Sprite *MapShipyardPanel::CompareSprite() const
 {
-	return compare->Thumbnail();
+	return compare ? compare->Thumbnail() ? compare->Thumbnail() : compare->GetSprite() : nullptr;
 }
 
 
@@ -193,11 +193,11 @@ int MapShipyardPanel::FindItem(const string &text) const
 
 
 
-void MapShipyardPanel::DrawSalesKey(Information &info) const
+void MapShipyardPanel::DrawKey(Information &info) const
 {
 	info.SetCondition("is shipyards");
 
-	MapSalesPanel::DrawSalesKey(info);
+	MapSalesPanel::DrawKey(info);
 }
 
 
@@ -253,13 +253,17 @@ void MapShipyardPanel::DrawItems()
 			if(!parkedInSystem && onlyShowStorageHere)
 				continue;
 
+			const Sprite *sprite = ship->Thumbnail();
+			if(!sprite)
+				sprite = ship->GetSprite();
+
 			const string parking_details =
 				onlyShowSoldHere || parkedInSystem == 0
 				? ""
 				: parkedInSystem == 1
 				? "1 ship parked"
 				: Format::Number(parkedInSystem) + " ships parked";
-			Draw(corner, ship->Thumbnail(), ship->CustomSwizzle(), isForSale, ship == selected,
+			Draw(corner, sprite, ship->CustomSwizzle(), isForSale, ship == selected,
 					ship->DisplayModelName(), ship->VariantMapShopName(), price, info, parking_details);
 			list.push_back(ship);
 		}

@@ -15,17 +15,17 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 #include "Sprite.h"
 
-#include "../text/Format.h"
 #include "ImageBuffer.h"
-#include "../Logger.h"
 #include "../Preferences.h"
 
 #include "../opengl.h"
 
+#include <SDL2/SDL.h>
+
 using namespace std;
 
 namespace {
-	void AddBuffer(const string &name, ImageBuffer &buffer, uint32_t *target, bool noReduction)
+	void AddBuffer(ImageBuffer &buffer, uint32_t *target, bool noReduction)
 	{
 		// Check whether this sprite is large enough to require size reduction.
 		Preferences::LargeGraphicsReduction setting = Preferences::GetLargeGraphicsReduction();
@@ -48,49 +48,10 @@ namespace {
 		if(type == GL_TEXTURE_3D)
 			glTexParameteri(type, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-#ifndef ES_GLES
-		// Check if the texture can be uploaded by using a proxy target,
-		// and shrink the buffer if the current texture size is too large.
-		unsigned forcedShrinkCount = 0;
-		int proxySuccess = 0;
-		int proxyType = type == GL_TEXTURE_3D ? GL_PROXY_TEXTURE_3D : GL_PROXY_TEXTURE_2D_ARRAY;
-		auto doProxyCheck = [&proxySuccess, proxyType, &buffer]() -> void {
-			glTexImage3D(proxyType, 0, GL_RGBA8, // target, mipmap level, internal format,
-				buffer.Width(), buffer.Height(), buffer.Frames(), // width, height, depth,
-				0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr); // border, input format, data type, data.
-			glGetTexLevelParameteriv(proxyType, 0, GL_TEXTURE_WIDTH, &proxySuccess);
-		};
-		doProxyCheck();
-		while(!proxySuccess)
-		{
-			// TODO: We can implement a separate algorithm for shrinking by arbitrary factors,
-			// but the main use case is, considering the common sprite sizes in current vanilla data,
-			// weak and old hardware, where highest quality isn't to be expected anyway.
-			if(!buffer.ShrinkToHalfSize())
-				// Since the proxy upload failed and we can't shrink any more, give up.
-				break;
-			++forcedShrinkCount;
-			doProxyCheck();
-		}
-
-		if(proxySuccess)
-		{
-			if(forcedShrinkCount)
-				Logger::Log("Shrank sprite \"" + name + "\" " + Format::SimplePluralization(forcedShrinkCount, "time")
-					+ " to fit within hardware limits. The new dimensions: W = " + to_string(buffer.Width())
-					+ ", H = " + to_string(buffer.Height()) + '.', Logger::Level::INFO);
-#endif
-			// Upload the image data.
-			glTexImage3D(type, 0, GL_RGBA8, // target, mipmap level, internal format,
-				buffer.Width(), buffer.Height(), buffer.Frames(), // width, height, depth,
-				0, GL_RGBA, GL_UNSIGNED_BYTE, buffer.Pixels()); // border, input format, data type, data.
-#ifndef ES_GLES
-		}
-		else
-			Logger::Log("Sprite \"" + name + "\" could not be uploaded to the GPU. Dimensions: W = "
-				+ to_string(buffer.Width()) + ", H = " + to_string(buffer.Height())
-				+ ", D = " + to_string(buffer.Frames()) + '.', Logger::Level::WARNING);
-#endif
+		// Upload the image data.
+		glTexImage3D(type, 0, GL_RGBA8, // target, mipmap level, internal format,
+			buffer.Width(), buffer.Height(), buffer.Frames(), // width, height, depth,
+			0, GL_RGBA, GL_UNSIGNED_BYTE, buffer.Pixels()); // border, input format, data type, data.
 
 		// Unbind the texture.
 		glBindTexture(type, 0);
@@ -137,10 +98,7 @@ bool Sprite::HasDimensions() const
 void Sprite::AddFrames(ImageBuffer &buffer1x, ImageBuffer &buffer2x, bool noReduction)
 {
 	isLoaded = true;
-	// The 1x image determines the dimensions of the sprite's size
-	// and its number of frames. ImageSet should ensure that either 1x
-	// and 2x buffers contain the same number of frames, or the 2x buffer
-	// is empty.
+	// The 1x image determines the dimensions of the sprite's size.
 	width = buffer1x.Width();
 	height = buffer1x.Height();
 	frames = buffer1x.Frames();
@@ -149,14 +107,14 @@ void Sprite::AddFrames(ImageBuffer &buffer1x, ImageBuffer &buffer2x, bool noRedu
 	if(!buffer1x.Pixels())
 		return;
 
-	// Use only the 2x resolution image if it is provided.
+	// Only use the 2x resolution image if it is provided.
 	if(buffer2x.Pixels())
 	{
-		AddBuffer(name, buffer2x, &texture, noReduction);
+		AddBuffer(buffer2x, &texture, noReduction);
 		buffer1x.Clear();
 	}
 	else
-		AddBuffer(name, buffer1x, &texture, noReduction);
+		AddBuffer(buffer1x, &texture, noReduction);
 }
 
 
@@ -175,14 +133,14 @@ void Sprite::AddSwizzleMaskFrames(ImageBuffer &buffer1x, ImageBuffer &buffer2x, 
 	if(!buffer1x.Pixels())
 		return;
 
-	// Use only the 2x resolution image if it is provided.
+	// Only use the 2x resolution image if it is provided.
 	if(buffer2x.Pixels())
 	{
-		AddBuffer(name, buffer2x, &swizzleMask, noReduction);
+		AddBuffer(buffer2x, &swizzleMask, noReduction);
 		buffer1x.Clear();
 	}
 	else
-		AddBuffer(name, buffer1x, &swizzleMask, noReduction);
+		AddBuffer(buffer1x, &swizzleMask, noReduction);
 }
 
 
@@ -240,20 +198,6 @@ int Sprite::Frames() const
 int Sprite::SwizzleMaskFrames() const
 {
 	return swizzleMaskFrames;
-}
-
-
-
-void Sprite::SetArea(double area)
-{
-	this->area = area;
-}
-
-
-
-double Sprite::Area() const
-{
-	return area;
 }
 
 

@@ -19,7 +19,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #include <chrono>
 #include <condition_variable>
 #include <exception>
-#include <thread>
 
 using namespace std;
 

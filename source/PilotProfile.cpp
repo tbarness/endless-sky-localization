@@ -147,14 +147,20 @@ shared_ptr<PilotProfile> &PilotProfile::NewProfile()
 std::string PilotProfile::GetIdentifier(const std::string &pilotName)
 {
 	string name = pilotName;
-	map<string, shared_ptr<PilotProfile>> existingProfiles = GetProfileMap();
+	string basePath = (Files::Pilots() / name).string();
 	int index = 0;
 	while(true)
 	{
+		string path = basePath;
 		if(index++)
-			name = pilotName + " " + to_string(index);
+		{
+			string suffix = " " + to_string(index);
+			path += suffix;
+			name = pilotName + suffix;
+		}
+		path += ".txt";
 
-		if(!existingProfiles.contains(name))
+		if(!Files::Exists(path))
 			break;
 	}
 
@@ -163,7 +169,7 @@ std::string PilotProfile::GetIdentifier(const std::string &pilotName)
 
 
 
-void PilotProfile::DeleteProfile(const std::shared_ptr<PilotProfile> &pilot, UI *ui, bool onlySaves)
+void PilotProfile::DeleteProfile(const std::shared_ptr<PilotProfile> &pilot, UI *ui)
 {
 	bool failed = false;
 	for(const std::string &file : pilot->Files() | views::keys)
@@ -172,18 +178,15 @@ void PilotProfile::DeleteProfile(const std::shared_ptr<PilotProfile> &pilot, UI 
 		Files::Delete(path);
 		failed |= Files::Exists(path);
 	}
-	if(!onlySaves)
-	{
-		Files::Delete(pilot->Path());
-		failed |= Files::Exists(pilot->Path());
-	}
-	if(!failed && !onlySaves)
+	Files::Delete(pilot->Path());
+	failed |= Files::Exists(pilot->Path());
+	if(!failed)
 	{
 		auto it = ranges::find(pilots, pilot);
 		if(it != pilots.end())
 			pilots.erase(it);
 	}
-	else if(failed && ui)
+	else if(ui)
 		ui->Push(DialogPanel::Info("Deleting pilot files failed."));
 }
 
@@ -210,11 +213,7 @@ void PilotProfile::Load()
 		const string &key = child.Token(0);
 		bool hasValue = child.Size() >= 2;
 
-		if(key == "locked")
-			isLocked = true;
-		else if(key == "moment of death")
-			momentOfDeath.Load(child);
-		else if(key == "conditions")
+		if(key == "conditions")
 			conditions.Load(child);
 		else if(key == "gamerules" && hasValue)
 		{
@@ -253,18 +252,6 @@ void PilotProfile::Save()
 		return;
 	DataWriter out(filePath);
 
-	if(isLocked)
-		out.Write("locked");
-
-	if(!momentOfDeath.IsEmpty())
-	{
-		out.Write("moment of death");
-		out.BeginChild();
-		{
-			momentOfDeath.Save(out);
-		}
-		out.EndChild();
-	}
 	conditions.Save(out);
 
 	// Only save gamerules that were customized to be different from the defaults of the chosen preset.
@@ -309,56 +296,6 @@ vector<pair<string, filesystem::file_time_type>> &PilotProfile::Files()
 const vector<pair<string, filesystem::file_time_type>> &PilotProfile::Files() const
 {
 	return files;
-}
-
-
-
-bool PilotProfile::HasFile(const string &fileName) const
-{
-	if(fileName.empty())
-		return false;
-
-	auto FindFile = [&](const pair<string, filesystem::file_time_type> &file) -> bool {
-		return file.first == fileName;
-	};
-	return ranges::any_of(files, FindFile);
-}
-
-
-
-void PilotProfile::AddSave(const string &fileName)
-{
-	filesystem::path filePath = Files::Saves() / fileName;
-	if(!HasFile(fileName) && Files::Exists(filePath))
-		files.emplace_back(fileName, Files::Timestamp(filePath));
-}
-
-
-
-void PilotProfile::SetLock(bool lock)
-{
-	isLocked = lock;
-}
-
-
-
-bool PilotProfile::IsLocked() const
-{
-	return isLocked;
-}
-
-
-
-void PilotProfile::SetMomentOfDeath(const PlayerInfo &player)
-{
-	momentOfDeath = SavedGame(player);
-}
-
-
-
-const SavedGame &PilotProfile::MomentOfDeath() const
-{
-	return momentOfDeath;
 }
 
 

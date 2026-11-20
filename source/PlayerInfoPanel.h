@@ -27,7 +27,6 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 class PlayerInfo;
 class Rectangle;
-class TableArea;
 
 
 
@@ -61,9 +60,6 @@ private:
 	// Draw the two subsections of this panel.
 	void DrawPlayer(const Rectangle &bounds);
 	void DrawFleet(const Rectangle &bounds);
-	// Draw a list of details about the player, such as the player's licenses or salaries.
-	void DrawList(const std::vector<std::pair<std::string, int64_t>> &list, std::shared_ptr<TableArea> &area,
-		Point &topLeft, int width, const std::string &title, int64_t titleValue, int height, bool drawValues = true);
 
 	// Handle mouse hover (also including hover during drag actions):
 	bool Hover(const Point &point);
@@ -85,7 +81,6 @@ private:
 		InfoPanelState::ShipComparator *shipSort = nullptr;
 	};
 
-
 private:
 	PlayerInfo &player;
 
@@ -105,10 +100,6 @@ private:
 
 	// When reordering ships, the names of ships being moved are displayed alongside the cursor.
 	bool isDragging = false;
-
-	std::shared_ptr<TableArea> salaryArea;
-	std::shared_ptr<TableArea> tributeArea;
-	std::shared_ptr<TableArea> licenseArea;
 
 	bool checkedHelp = false;
 };

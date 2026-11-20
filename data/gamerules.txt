@@ -28,9 +28,6 @@
 	"universal ramscoop" true
 	"system arrival min" unset
 	"system departure min" 0.
-	"habitable based arrival distance" true
-	"habitable arrival min" 500
-	"habitable arrival max" 5000
 	"fleet multiplier" 1.
 	
 	"lock gamerules" true
@@ -42,7 +39,3 @@
 	"default max escort count" 6
 	"default max escort crew" 1000
 	"default admin cap" 25
-	
-	"permadeath mode" off
-	"single save file" false
-	"restricted save loading" false
